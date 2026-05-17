@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -15,11 +16,11 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; backgr
 .nav-item:hover { background: #2a3448; color: #fff; }
 .nav-item.active { background: #2d3f5c; color: #fff; border-left-color: #4a90d9; }
 .nav-new { font-size: 9px; background: #10b981; color: #fff; border-radius: 3px; padding: 1px 4px; vertical-align: middle; margin-left: 2px; }
-#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
 #toolbar { background: #fff; border-bottom: 1px solid #ddd; padding: 10px 20px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 #toolbar .screen-title { font-weight: 600; font-size: 15px; }
 .badge { padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; }
-#content { flex: 1; overflow-y: auto; padding: 24px; background: #f0f2f5; }
+#content { flex: 1; overflow-y: auto; padding: 24px; background: #f0f2f5; min-height: 0; }
 .screen { display: none; max-width: 980px; margin: 0 auto; }
 .screen.active { display: block; }
 .card { background: #fff; border: 1px solid #dde; border-radius: 6px; padding: 20px; margin-bottom: 16px; }
@@ -134,9 +135,8 @@ tr:hover td { background: #f9fafb; }
   <div class="nav-group">
     <div class="nav-group-title">管理者</div>
     <div class="nav-item" onclick="show('a-dashboard')">S16 管理者ダッシュボード</div>
-    <div class="nav-item" onclick="show('review')">S17 事業者審査</div>
     <div class="nav-item" onclick="show('user-payment')">S18 ユーザー・決済管理</div>
-    <div class="nav-item" onclick="show('archive')">S19 条件・契約アーカイブ</div>
+    <div class="nav-item" onclick="show('archive')">S19 案件・契約アーカイブ</div>
     <div class="nav-item" onclick="show('master')">S20 システムマスタ設定</div>
     <div class="nav-item" onclick="show('trouble')">S28 トラブル対応・審査管理 <span class="nav-new">NEW</span></div>
   </div>
@@ -179,13 +179,7 @@ tr:hover td { background: #f9fafb; }
             <div class="input-box" style="color:#aaa;">••••••••</div>
           </div>
           <button class="btn btn-primary" style="width:100%;justify-content:center;">ログイン</button>
-          <hr class="divider">
-          <div class="card" style="background:#f9fafb;border-color:#e5e7eb;padding:14px;">
-            <div class="card-title" style="margin-bottom:10px;">2段階認証コード（SMS）</div>
-            <div class="form-group">
-              <label>認証コード（6桁）</label>
-              <div class="input-box" style="color:#aaa;letter-spacing:8px;font-family:monospace;">000000</div>
-            </div>
+
           </div>
           <div style="text-align:center;margin-top:14px;font-size:13px;">
             <span style="color:#2563eb;cursor:pointer;" onclick="show('pw-reset')">パスワードをお忘れの方</span>
@@ -210,16 +204,21 @@ tr:hover td { background: #f9fafb; }
         </div>
         <div class="card">
           <div class="card-title">STEP 1 — ユーザー区分選択</div>
-          <div class="grid-2">
-            <div style="border:2.5px solid #2563eb;border-radius:8px;padding:20px;text-align:center;background:#eff6ff;cursor:pointer;">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:140px;border:2.5px solid #2563eb;border-radius:8px;padding:16px;text-align:center;background:#eff6ff;cursor:pointer;">
               <div style="font-size:26px;margin-bottom:8px;">🏭</div>
-              <div style="font-weight:700;color:#1d4ed8;font-size:15px;">発注者</div>
-              <div style="font-size:12px;color:#555;margin-top:4px;">廃棄物を排出する企業</div>
+              <div style="font-weight:700;color:#1d4ed8;font-size:14px;">発注者</div>
+              <div style="font-size:11px;color:#555;margin-top:4px;">廃棄物を排出する企業</div>
             </div>
-            <div style="border:2px solid #ddd;border-radius:8px;padding:20px;text-align:center;cursor:pointer;">
+            <div style="flex:1;min-width:140px;border:2px solid #ddd;border-radius:8px;padding:16px;text-align:center;cursor:pointer;">
               <div style="font-size:26px;margin-bottom:8px;">🚛</div>
-              <div style="font-weight:700;color:#555;font-size:15px;">受注者</div>
-              <div style="font-size:12px;color:#777;margin-top:4px;">収集運搬業・処分業者</div>
+              <div style="font-weight:700;color:#555;font-size:14px;">受注者</div>
+              <div style="font-size:11px;color:#777;margin-top:4px;">収集運搬業・処分業者</div>
+            </div>
+            <div style="flex:1;min-width:140px;border:2px solid #ddd;border-radius:8px;padding:16px;text-align:center;cursor:pointer;">
+              <div style="font-size:26px;margin-bottom:8px;">🔄</div>
+              <div style="font-weight:700;color:#555;font-size:14px;">発注者 + 受注者</div>
+              <div style="font-size:11px;color:#777;margin-top:4px;">両方の機能を利用する</div>
             </div>
           </div>
         </div>
@@ -227,10 +226,6 @@ tr:hover td { background: #f9fafb; }
           <div class="card-title">STEP 2 — 基本情報入力</div>
           <div class="form-row">
             <div class="form-group full"><label>会社名<span class="req">*</span></label><div class="input-box" style="color:#aaa;">株式会社〇〇</div></div>
-          </div>
-          <div class="form-row">
-            <div class="form-group"><label>担当者名<span class="req">*</span></label><div class="input-box" style="color:#aaa;">山田 太郎</div></div>
-            <div class="form-group"><label>電話番号<span class="req">*</span></label><div class="input-box" style="color:#aaa;">03-0000-0000</div></div>
           </div>
           <div class="form-row">
             <div class="form-group" style="max-width:140px;"><label>郵便番号<span class="req">*</span></label><div class="input-box" style="color:#aaa;">000-0000</div></div>
@@ -246,6 +241,29 @@ tr:hover td { background: #f9fafb; }
           <div class="form-row">
             <div class="form-group"><label>パスワード<span class="req">*</span></label><div class="input-box" style="color:#aaa;">••••••••</div></div>
             <div class="form-group"><label>パスワード（確認）<span class="req">*</span></label><div class="input-box" style="color:#aaa;">••••••••</div></div>
+          </div>
+          <!-- 担当者セクション（最大3名） -->
+          <div style="margin-top:16px;">
+            <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">担当者情報（最大3名）</div>
+            <!-- 担当者1 -->
+            <div style="border:1px solid #d1d5db;border-radius:8px;padding:14px;margin-bottom:10px;background:#fafafa;">
+              <div style="font-size:12px;font-weight:700;color:#2563eb;margin-bottom:10px;">担当者 1</div>
+              <div class="form-row">
+                <div class="form-group full"><label>担当者名<span class="req">*</span></label><div class="input-box" style="color:#aaa;">山田 太郎</div></div>
+              </div>
+              <div style="font-size:11px;color:#6b7280;margin-bottom:6px;font-weight:600;">連絡先</div>
+              <div class="form-group full" style="margin-bottom:0;"><div class="input-box" style="color:#aaa;">03-0000-0000</div></div>
+            </div>
+            <!-- 担当者2 -->
+            <div style="border:1px solid #d1d5db;border-radius:8px;padding:14px;margin-bottom:10px;background:#fafafa;">
+              <div style="font-size:12px;font-weight:700;color:#2563eb;margin-bottom:10px;">担当者 2</div>
+              <div class="form-row">
+                <div class="form-group full"><label>担当者名</label><div class="input-box" style="color:#aaa;">鈴木 次郎</div></div>
+              </div>
+              <div style="font-size:11px;color:#6b7280;margin-bottom:6px;font-weight:600;">連絡先</div>
+              <div class="form-group full" style="margin-bottom:0;"><div class="input-box" style="color:#aaa;">090-0000-0000</div></div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:100%;justify-content:center;border-style:dashed;">＋ 担当者を追加（あと1名追加可能）</button>
           </div>
         </div>
         <div class="card" style="border-color:#fbbf24;">
@@ -271,54 +289,112 @@ tr:hover td { background: #f9fafb; }
 
     <!-- ========== S03 サブスク決済 ========== -->
     <div class="screen" id="s-billing">
-      <div class="grid-2" style="align-items:start;">
-        <div>
-          <div class="card">
-            <div class="card-title">現在のプラン・決済状況</div>
-            <div class="stripe-card">
-              <div style="font-size:11px;opacity:0.7;">VISA</div>
-              <div class="card-num">**** **** **** 4242</div>
-              <div class="card-meta"><span>山田 太郎</span><span>有効期限: 09/28</span></div>
+
+      <!-- ① プラン比較 -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title">プラン選択</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+
+          <!-- 無料プラン -->
+          <div style="flex:1;min-width:220px;border:2px solid #e5e7eb;border-radius:10px;padding:20px;">
+            <div style="font-size:13px;font-weight:700;color:#6b7280;margin-bottom:4px;">無料プラン</div>
+            <div style="font-size:22px;font-weight:700;margin-bottom:14px;">¥0</div>
+            <div style="font-size:12px;color:#374151;margin-bottom:10px;font-weight:600;">できること</div>
+            <div style="font-size:12px;color:#374151;line-height:2;">
+              ✅ 案件閲覧（一覧のみ）<br>
+              ✅ 業者検索<br>
+              ✅ プロフィール作成
             </div>
-            <table style="margin-bottom:12px;">
-              <tbody>
-                <tr><td style="color:#888;">プラン</td><td style="font-weight:700;">月額 ¥10,000</td></tr>
-                <tr><td style="color:#888;">次回請求日</td><td>2026-05-01</td></tr>
-                <tr><td style="color:#888;">ステータス</td><td><span class="status status-green">有効（Active）</span></td></tr>
-              </tbody>
-            </table>
-            <div class="btn-group">
-              <button class="btn btn-secondary btn-sm">カード情報を変更</button>
-              <button class="btn btn-danger btn-sm">解約する</button>
+            <div style="font-size:12px;color:#374151;margin-top:10px;margin-bottom:6px;font-weight:600;">できないこと</div>
+            <div style="font-size:12px;color:#9ca3af;line-height:2;">
+              ✗ 案件詳細の閲覧<br>
+              ✗ 案件応募・掲載<br>
+              ✗ 連絡先の開示
             </div>
-          </div>
-          <div class="card">
-            <div class="card-title">新規カード登録（Stripe埋め込みUI）</div>
-            <div style="border:1px solid #e5e7eb;border-radius:6px;padding:14px;background:#f9fafb;">
-              <div class="form-group" style="margin-bottom:10px;"><label>カード番号</label><div class="input-box" style="color:#aaa;">1234 5678 9012 3456</div></div>
-              <div class="form-row">
-                <div class="form-group"><label>有効期限</label><div class="input-box" style="color:#aaa;">MM / YY</div></div>
-                <div class="form-group"><label>CVC</label><div class="input-box" style="color:#aaa;">•••</div></div>
-              </div>
-              <div class="annotation">PCI DSS準拠のStripeフォームが埋め込まれます。</div>
-              <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:12px;">カードを登録して決済開始</button>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid #f3f4f6;font-size:11px;color:#6b7280;">
+              業者を集める入口として無料でご利用いただけます。
             </div>
           </div>
+
+          <!-- 基本会員（有料） -->
+          <div style="flex:1;min-width:220px;border:2.5px solid #2563eb;border-radius:10px;padding:20px;background:#eff6ff;position:relative;">
+            <div style="position:absolute;top:-1px;right:14px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:0 0 6px 6px;">現在のプラン</div>
+            <div style="font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:4px;">基本会員（有料）</div>
+            <div style="font-size:22px;font-weight:700;margin-bottom:14px;">¥11,000<span style="font-size:12px;font-weight:400;color:#6b7280;">（税込）/ 月</span></div>
+            <div style="font-size:12px;color:#374151;margin-bottom:10px;font-weight:600;">できること（すべて）</div>
+            <div style="font-size:12px;color:#374151;line-height:2;">
+              ✅ 案件閲覧（詳細含む）<br>
+              ✅ 業者検索<br>
+              ✅ プロフィール作成<br>
+              ✅ 案件応募・掲載<br>
+              ✅ 連絡先の開示
+            </div>
+            <div style="margin-top:14px;">
+              <button class="btn btn-danger btn-sm">解約して無料プランへ</button>
+            </div>
+          </div>
+
         </div>
-        <div>
-          <div class="card">
-            <div class="card-title">請求・領収書履歴</div>
-            <table>
-              <thead><tr><th>請求日</th><th>金額</th><th>状態</th><th></th></tr></thead>
-              <tbody>
-                <tr><td>2026-04-01</td><td>¥10,000</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
-                <tr><td>2026-03-01</td><td>¥10,000</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
-                <tr><td>2026-02-01</td><td>¥10,000</td><td><span class="status status-red">失敗</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
-              </tbody>
-            </table>
+      </div>
+
+      <!-- ② サマリーバー（有料会員時） -->
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">現在のプラン</div>
+          <div style="font-size:15px;font-weight:700;color:#1d4ed8;">基本会員</div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">月額料金</div>
+          <div style="font-size:15px;font-weight:700;">¥11,000<span style="font-size:11px;font-weight:400;color:#6b7280;">（税込）</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">次回請求日</div>
+          <div style="font-size:15px;font-weight:700;">2026-06-01</div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">ステータス</div>
+          <span class="status status-green">有効</span>
+        </div>
+      </div>
+
+      <!-- ③ 登録カード情報 -->
+      <div class="card" style="margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div class="card-title" style="margin:0;">登録クレジットカード</div>
+          <button class="btn btn-secondary btn-sm">カード情報を変更</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <div class="stripe-card" style="margin:0;flex-shrink:0;">
+            <div style="font-size:11px;opacity:0.7;">VISA</div>
+            <div class="card-num">**** **** **** 4242</div>
+            <div class="card-meta"><span>山田 太郎</span><span>有効期限: 09/28</span></div>
+          </div>
+          <div style="flex:1;min-width:260px;border:1px solid #e5e7eb;border-radius:8px;padding:14px;background:#f9fafb;">
+            <div style="font-size:12px;color:#6b7280;margin-bottom:10px;">新しいカード情報を入力（Stripe埋め込みUI）</div>
+            <div class="form-group" style="margin-bottom:8px;"><label>カード番号</label><div class="input-box" style="color:#aaa;">1234 5678 9012 3456</div></div>
+            <div class="form-row" style="margin-bottom:8px;">
+              <div class="form-group"><label>有効期限</label><div class="input-box" style="color:#aaa;">MM / YY</div></div>
+              <div class="form-group"><label>CVC</label><div class="input-box" style="color:#aaa;">•••</div></div>
+            </div>
+            <div class="annotation" style="margin-bottom:10px;">PCI DSS準拠のStripeフォームが埋め込まれます。</div>
+            <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">カード情報を更新する</button>
           </div>
         </div>
       </div>
+
+      <!-- ④ 請求・領収書履歴 -->
+      <div class="card">
+        <div class="card-title">請求・領収書履歴</div>
+        <table>
+          <thead><tr><th>請求日</th><th>金額</th><th>状態</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>2026-04-01</td><td>¥11,000（税込）</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+            <tr><td>2026-03-01</td><td>¥11,000（税込）</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+            <tr><td>2026-02-01</td><td>¥11,000（税込）</td><td><span class="status status-red">失敗</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
 
     <!-- ========== S16 管理者ダッシュボード ========== -->
@@ -326,7 +402,8 @@ tr:hover td { background: #f9fafb; }
       <div class="kpi-grid">
         <div class="kpi-card"><div class="kpi-label">登録（発注者）</div><div class="kpi-value">48</div><div class="kpi-sub">社</div></div>
         <div class="kpi-card"><div class="kpi-label">登録（受注者）</div><div class="kpi-value">123</div><div class="kpi-sub">社</div></div>
-        <div class="kpi-card"><div class="kpi-label">進行中条件</div><div class="kpi-value" style="color:#f59e0b;">34</div><div class="kpi-sub">件</div></div>
+        <div class="kpi-card"><div class="kpi-label">無料会員</div><div class="kpi-value" style="color:#6b7280;">214</div><div class="kpi-sub">社</div></div>
+        <div class="kpi-card"><div class="kpi-label">進行中案件</div><div class="kpi-value" style="color:#f59e0b;">34</div><div class="kpi-sub">件</div></div>
         <div class="kpi-card"><div class="kpi-label">今月成約</div><div class="kpi-value" style="color:#16a34a;">89</div><div class="kpi-sub">件</div></div>
         <div class="kpi-card"><div class="kpi-label">決済失敗中</div><div class="kpi-value" style="color:#dc2626;">3</div><div class="kpi-sub">社</div></div>
         <div class="kpi-card"><div class="kpi-label">審査待ち</div><div class="kpi-value" style="color:#7c3aed;">7</div><div class="kpi-sub">件</div></div>
@@ -334,76 +411,19 @@ tr:hover td { background: #f9fafb; }
       <div class="card">
         <div class="card-title">システムアラート</div>
         <div class="alert alert-danger">🔴 決済失敗 — 3社のアカウントがロック状態です。<span style="color:#2563eb;cursor:pointer;margin-left:8px;font-weight:700;" onclick="show('user-payment')">対応する →</span></div>
-        <div class="alert alert-warning">⚠️ 審査待ち — 7件の受注者申請が未処理です（最長3日経過）。<span style="color:#2563eb;cursor:pointer;margin-left:8px;font-weight:700;" onclick="show('review')">審査画面へ →</span></div>
+        <div class="alert alert-warning">⚠️ 審査待ち — 7件の受注者申請が未処理です（最長3日経過）。</div>
         <div class="alert alert-warning">⚠️ 報告遅延 — 2案件の完了報告が期限を超過しています。</div>
         <div class="alert alert-info">ℹ️ 5年保存期限 — 8件の契約書が期限アーカイブ期限です。</div>
       </div>
     </div>
 
-    <!-- ========== S17 事業者審査 ========== -->
-    <div class="screen" id="s-review">
-      <div class="section-header">
-        <h2>事業者審査</h2>
-        <span class="status status-yellow">審査待ち 7件</span>
-      </div>
-      <div class="grid-2" style="align-items:start;">
-        <div>
-          <div class="card">
-            <div class="card-title">申請一覧</div>
-            <table>
-              <thead><tr><th>会社名</th><th>申請日</th><th>経過日数</th><th></th></tr></thead>
-              <tbody>
-                <tr style="background:#eff6ff;cursor:pointer;">
-                  <td><strong>ケット運搬</strong><br><span style="font-size:11px;color:#888;">担当: 山田 太郎</span></td>
-                  <td>04/20</td><td><span style="color:#dc2626;font-weight:700;">3日</span></td>
-                  <td><button class="btn btn-secondary btn-sm">確認</button></td>
-                </tr>
-                <tr>
-                  <td><strong>△△産廃け</strong><br><span style="font-size:11px;color:#888;">担当: 佐藤 花子</span></td>
-                  <td>04/22</td><td>1日</td>
-                  <td><button class="btn btn-secondary btn-sm">確認</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div>
-          <div class="card">
-            <div class="card-title">審査詳細 — ケット運搬</div>
-            <table style="margin-bottom:12px;"><tbody>
-              <tr><td style="color:#888;width:90px;">会社名</td><td>ケット運搬</td></tr>
-              <tr><td style="color:#888;">担当者</td><td>山田 太郎</td></tr>
-              <tr><td style="color:#888;">電話</td><td>03-0000-0000</td></tr>
-              <tr><td style="color:#888;">住所</td><td>東京都〇〇区…</td></tr>
-            </tbody></table>
-            <div class="pdf-preview" style="margin-bottom:12px;">
-              <span style="font-size:22px;">📄</span>
-              <span>産業廃棄物収集運搬業許可証.pdf</span>
-              <button class="btn btn-secondary btn-sm">開く</button>
-            </div>
-            <div class="form-row" style="margin-bottom:8px;">
-              <div class="form-group"><label>許可証 有効期限入力・確認<span class="req">*</span></label><div class="input-box" style="color:#aaa;">2028-03-31</div></div>
-            </div>
-            <div style="margin-bottom:14px;">
-              <div style="font-size:11px;font-weight:700;color:#555;margin-bottom:8px;text-transform:uppercase;">許可品目確認チェック</div>
-              <div class="check-row"><div class="check-box checked"></div><span>木くず</span></div>
-              <div class="check-row"><div class="check-box checked"></div><span>金属くず</span></div>
-              <div class="check-row"><div class="check-box"></div><span>汚泥</span></div>
-              <div class="check-row"><div class="check-box"></div><span>特別管理産業廃棄物</span></div>
-            </div>
-            <div class="btn-group">
-              <button class="btn btn-success">✅ 承認（機能解放）</button>
-              <button class="btn btn-danger">✗ 却下（再申請依頼）</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- ========== S18 ユーザー・決済管理 ========== -->
     <div class="screen" id="s-user-payment">
-      <div class="tabs">
+      <div class="tabs" style="margin-bottom:16px;">
         <div class="tab active">全ユーザー</div>
+        <div class="tab">有料会員（171）</div>
+        <div class="tab">無料会員（214）</div>
         <div class="tab">決済異常（3）</div>
         <div class="tab">ロック中（3）</div>
       </div>
@@ -413,26 +433,144 @@ tr:hover td { background: #f9fafb; }
           <div class="input-box" style="width:220px;color:#aaa;">会社名・メールで検索...</div>
         </div>
         <table>
-          <thead><tr><th>会社名</th><th>区分</th><th>登録日</th><th>Stripe状態</th><th>アカウント</th><th>操作</th></tr></thead>
+          <thead><tr><th>会社名</th><th>区分</th><th>プラン</th><th>登録日</th><th>Stripe状態</th><th>アカウント</th><th>操作</th></tr></thead>
           <tbody>
-            <tr>
-              <td>ケット製造</td>
+            <tr style="cursor:pointer;" onclick="show('user-detail')">
+              <td><strong>ケット製造</strong></td>
               <td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">発注者</span></td>
-              <td>2026-01-15</td><td><span class="status status-green">有効</span></td><td><span class="status status-green">有効</span></td>
-              <td><button class="btn btn-danger btn-sm">停止</button></td>
+              <td><span class="tag" style="background:#ede9fe;color:#6d28d9;">基本会員</span></td>
+              <td>2026-01-15</td>
+              <td><span class="status status-green">有効</span></td>
+              <td><span class="status status-green">有効</span></td>
+              <td style="white-space:nowrap;">
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('user-detail')">詳細</button>
+                <button class="btn btn-danger btn-sm" onclick="event.stopPropagation()">停止</button>
+              </td>
             </tr>
-            <tr style="background:#fff7f7;">
-              <td>△△産廃け</td>
+            <tr style="background:#fff7f7;cursor:pointer;" onclick="show('user-detail')">
+              <td><strong>△△産廃け</strong></td>
               <td><span class="tag" style="background:#dcfce7;color:#15803d;">受注者</span></td>
-              <td>2026-02-20</td><td><span class="status status-red">支払い遅延</span></td><td><span class="status status-red">ロック中</span></td>
-              <td><button class="btn btn-secondary btn-sm">制限解除</button></td>
+              <td><span class="tag" style="background:#ede9fe;color:#6d28d9;">基本会員</span></td>
+              <td>2026-02-20</td>
+              <td><span class="status status-red">支払い遅延</span></td>
+              <td><span class="status status-red">ロック中</span></td>
+              <td style="white-space:nowrap;">
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('user-detail')">詳細</button>
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation()">制限解除</button>
+              </td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('user-detail')">
+              <td><strong>ケット運搬</strong></td>
+              <td><span class="tag" style="background:#dcfce7;color:#15803d;">受注者</span></td>
+              <td><span class="tag" style="background:#ede9fe;color:#6d28d9;">基本会員</span></td>
+              <td>2026-03-05</td>
+              <td><span class="status status-green">有効</span></td>
+              <td><span class="status status-green">有効</span></td>
+              <td style="white-space:nowrap;">
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('user-detail')">詳細</button>
+                <button class="btn btn-danger btn-sm" onclick="event.stopPropagation()">停止</button>
+              </td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('user-detail')">
+              <td><strong>〇〇商事</strong></td>
+              <td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">発注者</span></td>
+              <td><span class="tag" style="background:#f3f4f6;color:#6b7280;">無料</span></td>
+              <td>2026-04-10</td>
+              <td style="color:#9ca3af;">—</td>
+              <td><span class="status status-green">有効</span></td>
+              <td style="white-space:nowrap;">
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('user-detail')">詳細</button>
+                <button class="btn btn-danger btn-sm" onclick="event.stopPropagation()">停止</button>
+              </td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('user-detail')">
+              <td><strong>△△建材</strong></td>
+              <td><span class="tag" style="background:#dcfce7;color:#15803d;">受注者</span></td>
+              <td><span class="tag" style="background:#f3f4f6;color:#6b7280;">無料</span></td>
+              <td>2026-04-18</td>
+              <td style="color:#9ca3af;">—</td>
+              <td><span class="status status-green">有効</span></td>
+              <td style="white-space:nowrap;">
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('user-detail')">詳細</button>
+                <button class="btn btn-danger btn-sm" onclick="event.stopPropagation()">停止</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== S18-詳細 会員詳細情報 ========== -->
+    <div class="screen" id="s-user-detail">
+      <!-- 戻るヘッダー -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <button class="btn btn-secondary btn-sm" onclick="show('user-payment')" style="display:flex;align-items:center;gap:4px;">← ユーザー一覧に戻る</button>
+        <span style="font-size:16px;font-weight:700;color:#1e2535;">会員詳細情報 — 株式会社ケット製造</span>
+      </div>
+
+      <!-- サマリーバー -->
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <div style="flex:2;min-width:160px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 18px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">会社名</div>
+          <div style="font-size:15px;font-weight:700;">株式会社ケット製造</div>
+        </div>
+        <div style="flex:1;min-width:100px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 18px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">区分</div>
+          <span class="tag" style="background:#dbeafe;color:#1d4ed8;">発注者</span>
+        </div>
+        <div style="flex:1;min-width:100px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 18px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">Stripe状態</div>
+          <span class="status status-green">有効</span>
+        </div>
+        <div style="flex:1;min-width:100px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 18px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">アカウント</div>
+          <span class="status status-green">有効</span>
+        </div>
+        <div style="flex:1;min-width:100px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 18px;display:flex;flex-direction:column;justify-content:center;">
+          <button class="btn btn-danger btn-sm">アカウント停止</button>
+        </div>
+      </div>
+
+      <!-- 基本情報 / 担当者情報 -->
+      <div class="grid-2" style="align-items:start;margin-bottom:16px;">
+        <div class="card">
+          <div class="card-title">基本情報</div>
+          <table style="font-size:13px;width:100%;border-collapse:collapse;"><tbody>
+            <tr><td style="color:#888;width:100px;padding:6px 0;">登録日</td><td>2026-01-15</td></tr>
+            <tr><td style="color:#888;padding:6px 0;">メール</td><td>contact@kett-mfg.co.jp</td></tr>
+            <tr><td style="color:#888;padding:6px 0;">電話番号</td><td>03-0000-0000</td></tr>
+            <tr><td style="color:#888;padding:6px 0;">郵便番号</td><td>150-0001</td></tr>
+            <tr><td style="color:#888;padding:6px 0;">住所</td><td>東京都渋谷区〇〇1-2-3</td></tr>
+            <tr><td style="color:#888;padding:6px 0;">プラン</td><td>月額 ¥11,000（税込）</td></tr>
+            <tr><td style="color:#888;padding:6px 0;">次回請求日</td><td>2026-06-01</td></tr>
+          </tbody></table>
+        </div>
+        <div class="card">
+          <div class="card-title">担当者情報</div>
+          <table style="font-size:13px;width:100%;border-collapse:collapse;"><tbody>
+            <tr style="background:#f9fafb;">
+              <td style="color:#888;width:80px;padding:8px;">担当者 1</td>
+              <td style="padding:8px;">山田 太郎</td>
+              <td style="padding:8px;color:#6b7280;">03-0000-0000</td>
             </tr>
             <tr>
-              <td>ケット運搬</td>
-              <td><span class="tag" style="background:#dcfce7;color:#15803d;">受注者</span></td>
-              <td>2026-03-05</td><td><span class="status status-green">有効</span></td><td><span class="status status-green">有効</span></td>
-              <td><button class="btn btn-danger btn-sm">停止</button></td>
+              <td style="color:#888;padding:8px;">担当者 2</td>
+              <td style="padding:8px;">鈴木 次郎</td>
+              <td style="padding:8px;color:#6b7280;">090-0000-0000</td>
             </tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <!-- 請求履歴 -->
+      <div class="card">
+        <div class="card-title">請求・領収書履歴</div>
+        <table>
+          <thead><tr><th>請求日</th><th>金額</th><th>状態</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>2026-04-01</td><td>¥11,000（税込）</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+            <tr><td>2026-03-01</td><td>¥11,000（税込）</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+            <tr><td>2026-02-01</td><td>¥11,000（税込）</td><td><span class="status status-red">失敗</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
           </tbody>
         </table>
       </div>
@@ -451,11 +589,11 @@ tr:hover td { background: #f9fafb; }
       </div>
       <div class="card">
         <div class="section-header">
-          <h2>条件・契約一覧（全247件）</h2>
+          <h2>案件・契約一覧（全247件）</h2>
           <button class="btn btn-secondary btn-sm">📥 一括ダウンロード（ZIP）</button>
         </div>
         <table>
-          <thead><tr><th>条件ID</th><th>発注者</th><th>受注者</th><th>品目</th><th>完了日</th><th>状態</th><th>書類</th><th>監督通知</th></tr></thead>
+          <thead><tr><th>案件ID</th><th>発注者</th><th>受注者</th><th>品目</th><th>完了日</th><th>状態</th><th>書類</th><th>監督通知</th></tr></thead>
           <tbody>
             <tr>
               <td>#021</td><td>ケット製造</td><td>ケット運搬</td><td>廃プラ</td><td>2026-04-21</td>
@@ -586,16 +724,16 @@ tr:hover td { background: #f9fafb; }
             <div class="notif-text">「廃プラスチック 東京・月2回」に2社からエントリーがありました。内容を確認してください。</div>
             <div class="notif-time">2026-04-28 09:15</div>
           </div>
-          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('entry-list')">確認する</button>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('archive')">確認する</button>
         </div>
         <div class="notif-row unread">
           <div class="unread-dot"></div>
           <div class="notif-body">
-            <div class="notif-title">契約書に署名が必要です</div>
-            <div class="notif-text">「廃油 大阪・週1回」の契約書が作成されました。電子署名をお願いします。</div>
+            <div class="notif-title">契約書が送付されました</div>
+            <div class="notif-text">「廃油 大阪・週1回」の契約書PDFが発注者から受注者へ送付されました。</div>
             <div class="notif-time">2026-04-27 17:42</div>
           </div>
-          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('contract-create')">署名する</button>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('archive')">確認する</button>
         </div>
         <div class="notif-row unread">
           <div class="unread-dot"></div>
@@ -609,8 +747,8 @@ tr:hover td { background: #f9fafb; }
         <!-- 既読 -->
         <div class="notif-row" style="opacity:0.65;">
           <div class="notif-body">
-            <div class="notif-title">条件が公開されました</div>
-            <div class="notif-text">「廃棄物（混合） 福岡・随時」の条件が公開されました。エントリー可能です。</div>
+            <div class="notif-title">案件が公開されました</div>
+            <div class="notif-text">「廃棄物（混合） 福岡・随時」の案件が公開されました。エントリー可能です。</div>
             <div class="notif-time">2026-04-26 11:30</div>
           </div>
           <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;opacity:0.6;" onclick="show('search')">詳細</button>
@@ -628,186 +766,121 @@ tr:hover td { background: #f9fafb; }
     <!-- S24 アカウント設定 -->
     <div class="screen" id="s-account">
       <div class="section-header"><h2>アカウント設定</h2></div>
-      <div class="grid-2">
-        <!-- 左: 基本情報 -->
-        <div>
-          <div class="card" style="margin-bottom:16px;">
-            <h3 style="margin-bottom:12px;">現在の登録情報</h3>
-            <table style="width:100%;font-size:13px;border-collapse:collapse;">
-              <tr><td style="color:#6b7280;padding:6px 0;width:110px;">会社名</td><td>株式会社サンプル産業</td></tr>
-              <tr><td style="color:#6b7280;padding:6px 0;">担当者名</td><td>山田 太郎</td></tr>
-              <tr><td style="color:#6b7280;padding:6px 0;">電話番号</td><td>03-1234-5678</td></tr>
-              <tr><td style="color:#6b7280;padding:6px 0;">メールアドレス</td><td>yamada@sample.co.jp</td></tr>
-              <tr><td style="color:#6b7280;padding:6px 0;">登録日</td><td>2025-10-01</td></tr>
-              <tr><td style="color:#6b7280;padding:6px 0;">プラン</td><td><span class="status status-active">スタンダード</span></td></tr>
-            </table>
-          </div>
-          <div class="card">
-            <h3 style="margin-bottom:12px;">基本情報の変更</h3>
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">担当者名</label>
-            <input type="text" value="山田 太郎" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">電話番号</label>
-            <input type="tel" value="03-1234-5678" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">メールアドレス</label>
-            <input type="email" value="yamada@sample.co.jp" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:16px;">
-            <button class="btn btn-primary">変更を保存する</button>
-          </div>
+
+      <!-- ① 登録情報サマリーバー -->
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <div style="flex:2;min-width:160px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">会社名</div>
+          <div style="font-size:15px;font-weight:700;">株式会社サンプル産業</div>
         </div>
-        <!-- 右: PW変更 + 2FA -->
-        <div>
-          <div class="card" style="margin-bottom:16px;">
-            <h3 style="margin-bottom:12px;">パスワードの変更</h3>
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">現在のパスワード</label>
-            <input type="password" placeholder="現在のパスワード" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">新しいパスワード</label>
-            <input type="password" placeholder="8文字以上" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">新しいパスワード（確認）</label>
-            <input type="password" placeholder="再入力" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:16px;">
-            <button class="btn btn-primary">パスワードを変更する</button>
-          </div>
-          <div class="card">
-            <h3 style="margin-bottom:8px;">二段階認証（2FA）</h3>
-            <p style="font-size:13px;color:#6b7280;margin-bottom:12px;">SMS認証またはGoogle Authenticatorによる二段階認証を設定できます。</p>
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-              <span class="status status-pending">未設定</span>
-              <span style="font-size:13px;">現在: 2FA無効</span>
-            </div>
-            <button class="btn btn-outline" style="margin-right:8px;">SMS認証を設定</button>
-            <button class="btn btn-outline">認証アプリを設定</button>
-          </div>
+        <div style="flex:1;min-width:100px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">区分</div>
+          <div><span class="tag" style="background:#dbeafe;color:#1d4ed8;">発注者</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">プラン</div>
+          <div style="font-size:14px;font-weight:700;">スタンダード</div>
+          <div style="font-size:11px;color:#6b7280;">¥11,000（税込）/ 月</div>
+        </div>
+        <div style="flex:1;min-width:110px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">登録日</div>
+          <div style="font-size:14px;font-weight:700;">2025-10-01</div>
         </div>
       </div>
+
+      <!-- ② 基本情報変更 / PW変更 -->
+      <div class="grid-2" style="align-items:start;">
+        <!-- 左: 基本情報の変更 -->
+        <div class="card">
+          <h3 style="margin-bottom:16px;">基本情報の変更</h3>
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">担当者名</label>
+          <input type="text" value="山田 太郎" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">電話番号</label>
+          <input type="tel" value="03-1234-5678" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">メールアドレス</label>
+          <input type="email" value="yamada@sample.co.jp" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:20px;">
+          <button class="btn btn-primary">変更を保存する</button>
+        </div>
+        <!-- 右: パスワードの変更 -->
+        <div class="card">
+          <h3 style="margin-bottom:16px;">パスワードの変更</h3>
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">現在のパスワード</label>
+          <input type="password" placeholder="現在のパスワード" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">新しいパスワード</label>
+          <input type="password" placeholder="8文字以上" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">新しいパスワード（確認）</label>
+          <input type="password" placeholder="再入力" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:20px;">
+          <button class="btn btn-primary">パスワードを変更する</button>
+        </div>
+      </div>
+
     </div>
 
     <!-- S28 トラブル対応・審査管理 -->
     <div class="screen" id="s-trouble">
       <div class="section-header"><h2>トラブル対応・審査管理</h2></div>
-      <div class="tabs" style="margin-bottom:16px;">
-        <div class="tab active">① トラブル一覧</div>
-        <div class="tab">② 審査中管理</div>
+      <div class="card">
+        <h3 style="margin-bottom:12px;">トラブル一覧</h3>
+        <table style="width:100%;font-size:13px;border-collapse:collapse;">
+          <thead>
+            <tr style="background:#f9fafb;">
+              <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">ID</th>
+              <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">種別</th>
+              <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">ステータス</th>
+              <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">発生日</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="cursor:pointer;background:#fff7ed;" onclick="show('trouble-detail')">
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-031</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">未回収</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-pending">対応中</span></td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-25</td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('trouble-detail')">
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-030</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">請求相違</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-pending">対応中</span></td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-23</td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('trouble-detail')">
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-029</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">品目相違</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-active">解決済</span></td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-20</td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('trouble-detail')">
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-028</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">遅延</td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-active">解決済</span></td>
+              <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-18</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
 
-      <!-- ① トラブル一覧 -->
-      <div style="border-left:4px solid #f97316;padding-left:16px;margin-bottom:20px;">
-        <div class="grid-2">
-          <div class="card">
-            <h3 style="margin-bottom:12px;">トラブル一覧</h3>
-            <table style="width:100%;font-size:13px;border-collapse:collapse;">
-              <thead>
-                <tr style="background:#f9fafb;">
-                  <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">ID</th>
-                  <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">種別</th>
-                  <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">ステータス</th>
-                  <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">発生日</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="cursor:pointer;background:#fff7ed;">
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-031</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">未回収</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-pending">対応中</span></td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-25</td>
-                </tr>
-                <tr style="cursor:pointer;">
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-030</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">請求相違</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-pending">対応中</span></td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-23</td>
-                </tr>
-                <tr style="cursor:pointer;">
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-029</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">品目相違</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-active">解決済</span></td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-20</td>
-                </tr>
-                <tr style="cursor:pointer;">
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">#T-028</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">遅延</td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-active">解決済</span></td>
-                  <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-18</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="card">
-            <h3 style="margin-bottom:12px;">#T-031 詳細 — 未回収トラブル</h3>
-            <table style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:12px;">
-              <tr><td style="color:#6b7280;padding:4px 0;width:90px;">発注者</td><td>株式会社サンプル産業</td></tr>
-              <tr><td style="color:#6b7280;padding:4px 0;">受注者</td><td>廃棄物回収㈱</td></tr>
-              <tr><td style="color:#6b7280;padding:4px 0;">契約</td><td>#C-0892</td></tr>
-              <tr><td style="color:#6b7280;padding:4px 0;">発生日</td><td>2026-04-25</td></tr>
-              <tr><td style="color:#6b7280;padding:4px 0;">内容</td><td>予定日に未回収。連絡なし。</td></tr>
-            </table>
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">対応メモ（内部）</label>
-            <textarea rows="3" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px;font-size:13px;margin-bottom:10px;">受注者に電話連絡済。折返し待ち。</textarea>
-            <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">通知文（当事者送付用）</label>
-            <textarea rows="3" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px;font-size:13px;margin-bottom:12px;">件名：未回収に関するご連絡
+    <!-- S28-01 トラブル詳細 -->
+    <div class="screen" id="s-trouble-detail">
+      <button class="btn btn-secondary btn-sm" style="margin-bottom:16px;" onclick="show('trouble')">← トラブル一覧に戻る</button>
+      <div class="card">
+        <h3 style="margin-bottom:12px;">#T-031 詳細 — 未回収トラブル</h3>
+        <table style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:12px;">
+          <tr><td style="color:#6b7280;padding:4px 0;width:90px;">発注者</td><td>株式会社サンプル産業</td></tr>
+          <tr><td style="color:#6b7280;padding:4px 0;">受注者</td><td>廃棄物回収㈱</td></tr>
+          <tr><td style="color:#6b7280;padding:4px 0;">契約</td><td>#C-0892</td></tr>
+          <tr><td style="color:#6b7280;padding:4px 0;">発生日</td><td>2026-04-25</td></tr>
+          <tr><td style="color:#6b7280;padding:4px 0;">内容</td><td>予定日に未回収。連絡なし。</td></tr>
+        </table>
+        <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">対応メモ（内部）</label>
+        <textarea rows="3" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px;font-size:13px;margin-bottom:10px;">受注者に電話連絡済。折返し待ち。</textarea>
+        <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">通知文（当事者送付用）</label>
+        <textarea rows="3" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px;font-size:13px;margin-bottom:12px;">件名：未回収に関するご連絡
 本件について調査中です。ご不便をおかけし…</textarea>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button class="btn btn-primary" style="font-size:12px;">通知を送信</button>
-              <button class="btn btn-outline" style="font-size:12px;">解決済にする</button>
-              <button class="btn btn-outline" style="font-size:12px;color:#dc2626;border-color:#dc2626;">エスカレーション</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ② 審査中管理 -->
-      <div style="border-left:4px solid #9ca3af;padding-left:16px;opacity:0.85;">
-        <h3 style="margin-bottom:12px;color:#6b7280;">② 審査中管理</h3>
-        <div class="card">
-          <table style="width:100%;font-size:13px;border-collapse:collapse;">
-            <thead>
-              <tr style="background:#f9fafb;">
-                <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">申請者</th>
-                <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">種別</th>
-                <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">申請日</th>
-                <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">優先度</th>
-                <th style="padding:8px;text-align:left;border-bottom:1px solid #e5e7eb;">アクション</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">㈱グリーン回収</td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">新規登録</td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-27</td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-pending">高</span></td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">
-                  <select style="border:1px solid #d1d5db;border-radius:4px;padding:4px;font-size:12px;margin-right:6px;">
-                    <option>承認</option><option>否認</option><option>追加資料要求</option>
-                  </select>
-                  <button class="btn btn-primary" style="font-size:11px;padding:4px 10px;">更新</button>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">東京廃棄物㈱</td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">許可証更新</td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">04-26</td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;"><span class="status status-active">通常</span></td>
-                <td style="padding:8px;border-bottom:1px solid #e5e7eb;">
-                  <select style="border:1px solid #d1d5db;border-radius:4px;padding:4px;font-size:12px;margin-right:6px;">
-                    <option>承認</option><option>否認</option><option>追加資料要求</option>
-                  </select>
-                  <button class="btn btn-primary" style="font-size:11px;padding:4px 10px;">更新</button>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:8px;">大阪産廃㈱</td>
-                <td style="padding:8px;">情報変更</td>
-                <td style="padding:8px;">04-25</td>
-                <td style="padding:8px;"><span class="status status-active">通常</span></td>
-                <td style="padding:8px;">
-                  <select style="border:1px solid #d1d5db;border-radius:4px;padding:4px;font-size:12px;margin-right:6px;">
-                    <option>承認</option><option>否認</option><option>追加資料要求</option>
-                  </select>
-                  <button class="btn btn-primary" style="font-size:11px;padding:4px 10px;">更新</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div style="margin-top:12px;text-align:right;">
-            <button class="btn btn-outline" style="font-size:12px;">通知を一括送信</button>
-          </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-primary" style="font-size:12px;">通知を送信</button>
+          <button class="btn btn-outline" style="font-size:12px;">解決済にする</button>
+          <button class="btn btn-outline" style="font-size:12px;color:#dc2626;border-color:#dc2626;">エスカレーション</button>
         </div>
       </div>
     </div>
@@ -893,22 +966,22 @@ tr:hover td { background: #f9fafb; }
             <text x="360" y="127" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S04 発注者DB</text>
             <text x="360" y="142" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
           </g>
-          <!-- S05 bases (C) -->
-          <g onclick="show('bases')" style="cursor:pointer;">
+          <!-- S06 post-condition (C) -->
+          <g onclick="show('post-condition')" style="cursor:pointer;">
             <rect x="250" y="170" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
-            <text x="360" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S05 拠点管理</text>
+            <text x="360" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S06 案件管理</text>
             <text x="360" y="202" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
           </g>
-          <!-- S06 post-condition (D) -->
-          <g onclick="show('post-condition')" style="cursor:pointer;">
+          <!-- S06 post-form (D) -->
+          <g onclick="show('post-form')" style="cursor:pointer;">
             <rect x="250" y="230" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
-            <text x="360" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S06 条件投稿</text>
+            <text x="360" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S06 案件登録フォーム</text>
             <text x="360" y="262" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
           </g>
-          <!-- S07 entry-list (E) -->
-          <g onclick="show('entry-list')" style="cursor:pointer;">
+          <!-- S06 condition-detail (E) -->
+          <g onclick="show('condition-detail')" style="cursor:pointer;">
             <rect x="250" y="290" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
-            <text x="360" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S07 エントリー一覧</text>
+            <text x="360" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S06 案件詳細・エントリー選定</text>
             <text x="360" y="322" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
           </g>
           <!-- S08 contract-create (F) -->
@@ -934,13 +1007,13 @@ tr:hover td { background: #f9fafb; }
           <!-- S11 search (C) -->
           <g onclick="show('search')" style="cursor:pointer;">
             <rect x="490" y="170" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
-            <text x="600" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S11 条件検索</text>
+            <text x="600" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S11 案件検索</text>
             <text x="600" y="202" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
           </g>
-          <!-- S12 quote (D) -->
-          <g onclick="show('quote')" style="cursor:pointer;">
+          <!-- S11-2 案件詳細・エントリー (D) ※旧S12廃止 -->
+          <g onclick="show('search-detail')" style="cursor:pointer;">
             <rect x="490" y="230" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
-            <text x="600" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S12 見積提示</text>
+            <text x="600" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S11 案件詳細・エントリー</text>
             <text x="600" y="262" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
           </g>
           <!-- S13 order-manage (E) -->
@@ -969,34 +1042,34 @@ tr:hover td { background: #f9fafb; }
             <text x="840" y="127" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S16 管理者DB</text>
             <text x="840" y="142" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
           </g>
-          <!-- S17 review (C) -->
-          <g onclick="show('review')" style="cursor:pointer;">
+          <!-- S18 user-payment (C) -->
+          <g onclick="show('user-payment')" style="cursor:pointer;">
             <rect x="730" y="170" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
-            <text x="840" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S17 事業者審査</text>
+            <text x="840" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S18 ユーザー・決済</text>
             <text x="840" y="202" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
           </g>
-          <!-- S18 user-payment (D) -->
-          <g onclick="show('user-payment')" style="cursor:pointer;">
+          <!-- S19 archive (D) -->
+          <g onclick="show('archive')" style="cursor:pointer;">
             <rect x="730" y="230" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
-            <text x="840" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S18 ユーザー・決済</text>
+            <text x="840" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S19 モニタリング</text>
             <text x="840" y="262" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
           </g>
-          <!-- S19 archive (E) -->
-          <g onclick="show('archive')" style="cursor:pointer;">
+          <!-- S20 master (E) -->
+          <g onclick="show('master')" style="cursor:pointer;">
             <rect x="730" y="290" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
-            <text x="840" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S19 モニタリング</text>
+            <text x="840" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S20 マスタ設定</text>
             <text x="840" y="322" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
           </g>
-          <!-- S20 master (F) -->
-          <g onclick="show('master')" style="cursor:pointer;">
-            <rect x="730" y="350" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
-            <text x="840" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S20 マスタ設定</text>
-            <text x="840" y="382" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
-          </g>
-          <!-- S28 trouble (G) NEW -->
+          <!-- S28 trouble (F) NEW -->
           <g onclick="show('trouble')" style="cursor:pointer;">
+            <rect x="730" y="350" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <text x="840" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S28 トラブル対応</text>
+            <text x="840" y="382" fill="#dc2626" text-anchor="middle" font-size="10">管理者 · NEW</text>
+          </g>
+          <!-- S28-01 trouble-detail (G sub) NEW -->
+          <g onclick="show('trouble-detail')" style="cursor:pointer;">
             <rect x="730" y="410" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
-            <text x="840" y="427" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S28 トラブル対応</text>
+            <text x="840" y="427" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S28-01 トラブル詳細</text>
             <text x="840" y="442" fill="#dc2626" text-anchor="middle" font-size="10">管理者 · NEW</text>
           </g>
 
@@ -1017,28 +1090,29 @@ tr:hover td { background: #f9fafb; }
           <line x1="600" y1="44" x2="600" y2="108" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
           <line x1="840" y1="44" x2="840" y2="108" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
 
-          <!-- 発注者 in-lane arrows: S04→S05→S06→S07→S08→S09 -->
+          <!-- 発注者 in-lane arrows: S04→S06管理→S06登録→S06詳細→S08→S09 -->
           <line x1="360" y1="154" x2="360" y2="168" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
           <line x1="360" y1="214" x2="360" y2="228" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
           <line x1="360" y1="274" x2="360" y2="288" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
           <line x1="360" y1="334" x2="360" y2="348" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
           <line x1="360" y1="394" x2="360" y2="408" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
 
-          <!-- 受注者 in-lane arrows: S10→S11→S12→S13→S14→S15 -->
+          <!-- 受注者 in-lane arrows: S10→S11→S11詳細→S13→S14→S15(自動遷移) -->
           <line x1="600" y1="154" x2="600" y2="168" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
           <line x1="600" y1="214" x2="600" y2="228" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
           <line x1="600" y1="274" x2="600" y2="288" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
           <line x1="600" y1="334" x2="600" y2="348" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
-          <line x1="600" y1="394" x2="600" y2="408" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
+          <line x1="600" y1="394" x2="600" y2="408" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-v)"/>
+          <text x="660" y="403" fill="#7c3aed" font-size="9" text-anchor="middle">自動遷移</text>
 
-          <!-- 管理者 in-lane arrows: S16→S17→S18→S19→S20→S28 -->
+          <!-- 管理者 in-lane arrows: S16→S18→S19→S20→S28→S28-01 -->
           <line x1="840" y1="154" x2="840" y2="168" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
           <line x1="840" y1="214" x2="840" y2="228" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
           <line x1="840" y1="274" x2="840" y2="288" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
           <line x1="840" y1="334" x2="840" y2="348" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
           <line x1="840" y1="394" x2="840" y2="408" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
 
-          <!-- クロスレーン: S07(発注者 E)→S13(受注者 E) オレンジ横矢印 -->
+          <!-- クロスレーン: S06詳細(発注者 E)→S13(受注者 E) オレンジ横矢印 -->
           <line x1="472" y1="312" x2="488" y2="312" stroke="#f97316" stroke-width="1.5" marker-end="url(#arr-o)"/>
           <text x="480" y="308" fill="#f97316" font-size="9" text-anchor="middle">選定</text>
 
@@ -1079,11 +1153,12 @@ const meta = {
   'notifications':  { title: 'S23 通知・お知らせ一覧',             role: '共通' },
   'account':        { title: 'S24 アカウント設定',                 role: '共通' },
   'a-dashboard':    { title: 'S16 管理者ダッシュボード',            role: '管理者' },
-  'review':         { title: 'S17 事業者審査',                     role: '管理者' },
   'user-payment':   { title: 'S18 ユーザー・決済管理',             role: '管理者' },
+  'user-detail':    { title: 'S18-01 会員詳細情報',                 role: '管理者' },
   'archive':        { title: 'S19 条件・契約モニタリング・アーカイブ',role: '管理者' },
   'master':         { title: 'S20 システムマスタ設定',             role: '管理者' },
   'trouble':        { title: 'S28 トラブル対応・審査管理',         role: '管理者' },
+  'trouble-detail': { title: 'S28-01 トラブル詳細',                role: '管理者' },
   'flow':           { title: '画面遷移図',                         role: '全ロール' },
 };
 const roleColor = { '共通':'#6b7280','発注者':'#2563eb','受注者':'#16a34a','管理者':'#dc2626','全ロール':'#6b7280' };
