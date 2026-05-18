@@ -3,774 +3,1468 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>操作マニュアル（発注者向け）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ジョブギルド — ワイヤーフレーム（発注者）</title>
 <style>
-@page { size: A4; margin: 20mm 18mm 20mm 18mm; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "BIZ UDPGothic", "Meiryo UI", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif; font-size: 10.5pt; line-height: 1.85; color: #1a1a2e; background: #fff; }
-.cover { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90vh; page-break-after: always; text-align: center; border-top: 6px solid #1d4ed8; border-bottom: 6px solid #1d4ed8; padding: 40px; }
-.cover h1 { font-size: 24pt; font-weight: 700; color: #1d4ed8; margin-bottom: 12px; }
-.cover .sub { font-size: 14pt; color: #374151; margin-bottom: 12px; }
-.cover .role-badge { display: inline-block; background: #1d4ed8; color: #fff; border-radius: 20px; padding: 6px 24px; font-size: 13pt; font-weight: 700; margin-bottom: 32px; }
-.cover .meta { font-size: 10pt; color: #6b7280; }
-.cover .meta p { margin: 4px 0; }
-h1 { font-size: 17pt; font-weight: 700; color: #1d4ed8; border-bottom: 3px solid #1d4ed8; padding-bottom: 6px; margin-top: 36px; margin-bottom: 14px; page-break-after: avoid; }
-h2 { font-size: 13pt; font-weight: 700; color: #1e40af; background: #eff6ff; border-left: 5px solid #3b82f6; padding: 7px 14px; margin-top: 28px; margin-bottom: 12px; page-break-after: avoid; }
-h3 { font-size: 11pt; font-weight: 700; color: #1e3a8a; border-bottom: 1px solid #bfdbfe; padding-bottom: 4px; margin-top: 20px; margin-bottom: 10px; page-break-after: avoid; }
-p { margin: 6px 0 10px; }
-strong { font-weight: 700; color: #1e3a8a; }
-hr { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
-.step-box { background: #f8faff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px 20px; margin: 12px 0 20px; }
-.step-item { display: flex; align-items: flex-start; margin-bottom: 14px; }
-.step-item:last-child { margin-bottom: 0; }
-.step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; min-width: 28px; background: #1d4ed8; color: #fff; border-radius: 50%; font-weight: 700; font-size: 11pt; margin-right: 12px; margin-top: 2px; }
-.step-text { flex: 1; }
-.step-text .action { font-weight: 700; color: #1e3a8a; font-size: 11pt; }
-.step-text .result { font-size: 9.5pt; color: #374151; margin-top: 3px; }
-.tip { background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 9.5pt; color: #15803d; }
-.tip::before { content: "💡 ポイント　"; font-weight: 700; }
-.warn { background: #fffbeb; border: 1px solid #fbbf24; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 9.5pt; color: #92400e; }
-.warn::before { content: "⚠️ 注意　"; font-weight: 700; }
-.info { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 9.5pt; color: #1e40af; }
-.info::before { content: "ℹ️ ご確認　"; font-weight: 700; }
-.faq-item { margin-bottom: 16px; border-left: 4px solid #3b82f6; padding-left: 12px; }
-.faq-q { font-weight: 700; color: #1d4ed8; font-size: 10.5pt; }
-.faq-a { font-size: 9.5pt; color: #374151; margin-top: 4px; }
-.flow { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin: 14px 0; }
-.flow-step { background: #1d4ed8; color: #fff; border-radius: 6px; padding: 5px 12px; font-size: 9pt; font-weight: 700; }
-.flow-arrow { color: #6b7280; font-size: 12pt; }
-.toc { background: #f8faff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px 24px; margin: 16px 0 32px; }
-.toc h4 { color: #1d4ed8; font-size: 11pt; margin-bottom: 10px; }
-.toc ol { margin: 0; padding-left: 20px; }
-.toc li { margin: 4px 0; font-size: 9.5pt; }
-
-/* ===== 画面モックアップ ===== */
-.mockup-wrap { margin: 14px 0 18px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.14); border: 1px solid #d1d5db; page-break-inside: avoid; }
-.mockup-label { background: #374151; color: #9ca3af; font-size: 8pt; padding: 3px 10px; }
-.mockup-label span { color: #e5e7eb; font-weight: 700; }
-.mockup-titlebar { background: #1f2937; padding: 6px 12px; display: flex; align-items: center; gap: 6px; }
-.mockup-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-.mockup-urlbar { flex: 1; background: #374151; border-radius: 4px; padding: 2px 8px; font-size: 7.5pt; color: #9ca3af; margin: 0 8px; }
-.mockup-body { background: #f3f4f6; }
-/* ナビゲーション */
-.mk-nav { background: #1d4ed8; color: white; padding: 7px 14px; display: flex; align-items: center; justify-content: space-between; font-size: 8pt; }
-.mk-nav-logo { font-weight: 700; font-size: 9.5pt; letter-spacing: 0.5px; }
-.mk-nav-right { display: flex; gap: 12px; align-items: center; font-size: 8pt; }
-.mk-nav-icon { background: rgba(255,255,255,0.15); border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 10pt; }
-.mk-sidebar { background: #1e3a8a; color: #bfdbfe; width: 110px; padding: 10px 0; font-size: 8pt; }
-.mk-sidebar-item { padding: 5px 12px; cursor: pointer; }
-.mk-sidebar-item.active { background: rgba(255,255,255,0.15); color: white; font-weight: 700; }
-.mk-content { padding: 12px 14px; flex: 1; }
-.mk-layout { display: flex; min-height: 180px; }
-/* KPI cards */
-.mk-kpi-row { display: flex; gap: 6px; margin-bottom: 10px; }
-.mk-kpi { background: white; border: 1px solid #e2e8f0; border-radius: 6px; padding: 7px 10px; flex: 1; text-align: center; }
-.mk-kpi-num { font-size: 14pt; font-weight: 700; color: #1d4ed8; }
-.mk-kpi-label { font-size: 7pt; color: #6b7280; }
-/* Alert */
-.mk-alert { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 5px; padding: 6px 10px; font-size: 8pt; color: #1e40af; margin-bottom: 8px; }
-/* Table */
-.mk-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; background: white; }
-.mk-table th { background: #1d4ed8; color: white; padding: 4px 6px; text-align: left; }
-.mk-table td { padding: 4px 6px; border-bottom: 1px solid #e2e8f0; }
-.mk-table tr:nth-child(even) td { background: #f8faff; }
-/* Badges */
-.mk-badge { display: inline-block; border-radius: 3px; padding: 1px 5px; font-size: 7pt; font-weight: 700; }
-.mk-badge-blue { background: #dbeafe; color: #1e40af; }
-.mk-badge-green { background: #dcfce7; color: #15803d; }
-.mk-badge-gray { background: #f3f4f6; color: #6b7280; }
-/* Button */
-.mk-btn { display: inline-block; border-radius: 4px; padding: 4px 10px; font-size: 8pt; font-weight: 700; cursor: pointer; }
-.mk-btn-blue { background: #1d4ed8; color: white; }
-.mk-btn-green { background: #16a34a; color: white; }
-.mk-btn-red { background: #dc2626; color: white; }
-.mk-btn-white { background: white; color: #374151; border: 1px solid #d1d5db; }
-/* Input */
-.mk-input { border: 1px solid #d1d5db; border-radius: 4px; padding: 4px 8px; font-size: 8pt; width: 100%; background: white; color: #374151; display: block; margin: 3px 0 8px; }
-.mk-input-label { font-size: 7.5pt; color: #374151; font-weight: 700; }
-/* Callout arrow */
-.mk-callout { position: relative; background: #fef9c3; border: 1px solid #fbbf24; border-radius: 4px; padding: 3px 8px; font-size: 7.5pt; color: #92400e; font-weight: 700; display: inline-block; margin: 2px; }
-/* Upload zone */
-.mk-upload { border: 2px dashed #93c5fd; border-radius: 6px; background: #eff6ff; padding: 12px; text-align: center; font-size: 8pt; color: #1e40af; }
-/* Tab */
-.mk-tabs { display: flex; border-bottom: 2px solid #e2e8f0; background: white; }
-.mk-tab { padding: 5px 12px; font-size: 8pt; color: #6b7280; border-bottom: 2px solid transparent; margin-bottom: -2px; }
-.mk-tab.active { color: #1d4ed8; font-weight: 700; border-bottom-color: #1d4ed8; }
-/* Login form */
-.mk-login-wrap { background: white; max-width: 260px; margin: 20px auto; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-.mk-login-title { font-size: 11pt; font-weight: 700; color: #1d4ed8; text-align: center; margin-bottom: 14px; }
-.mk-sms-badge { background: #fef9c3; border: 1px solid #fbbf24; border-radius: 4px; padding: 4px 8px; font-size: 7.5pt; color: #92400e; text-align: center; margin-bottom: 8px; }
-/* Two-col */
-.mk-2col { display: flex; gap: 10px; }
-.mk-col { flex: 1; }
-/* Section label */
-.mk-section-lbl { font-size: 7pt; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; background: #eee; color: #333; display: flex; height: 100vh; overflow: hidden; }
+#sidebar { width: 260px; background: #1e2535; color: #ccc; overflow-y: auto; flex-shrink: 0; }
+#sidebar h1 { padding: 14px 16px; font-size: 11px; color: #7a8ba0; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #2d3650; }
+.nav-group { padding: 6px 0; }
+.nav-group-title { padding: 8px 16px 4px; font-size: 10px; color: #556070; text-transform: uppercase; letter-spacing: 1px; }
+.nav-item { display: block; padding: 7px 16px; color: #bcc; font-size: 12px; cursor: pointer; border-left: 3px solid transparent; }
+.nav-item:hover { background: #2a3448; color: #fff; }
+.nav-item.active { background: #2d3f5c; color: #fff; border-left-color: #4a90d9; }
+.nav-new { font-size: 9px; background: #10b981; color: #fff; border-radius: 3px; padding: 1px 4px; vertical-align: middle; margin-left: 2px; }
+#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+#toolbar { background: #fff; border-bottom: 1px solid #ddd; padding: 10px 20px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+#toolbar .screen-title { font-weight: 600; font-size: 15px; }
+.badge { padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+#content { flex: 1; overflow-y: auto; padding: 24px; background: #f0f2f5; min-height: 0; }
+.screen { display: none; max-width: 980px; margin: 0 auto; }
+.screen.active { display: block; }
+.card { background: #fff; border: 1px solid #dde; border-radius: 6px; padding: 20px; margin-bottom: 16px; }
+.card-title { font-size: 11px; font-weight: 700; color: #666; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #eee; text-transform: uppercase; letter-spacing: 0.8px; }
+.form-row { display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.form-group { flex: 1; min-width: 160px; }
+.form-group.full { flex: 0 0 100%; }
+label { display: block; font-size: 11px; color: #777; margin-bottom: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+label .req { color: #e55; margin-left: 2px; }
+.input-box { border: 1.5px solid #ccc; border-radius: 4px; padding: 8px 10px; width: 100%; font-size: 13px; color: #444; background: #fafafa; }
+select.input-box { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; }
+textarea.input-box { height: 80px; resize: vertical; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 4px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-secondary { background: #fff; color: #555; border: 1.5px solid #ccc; }
+.btn-danger { background: #dc2626; color: #fff; }
+.btn-success { background: #16a34a; color: #fff; }
+.btn-warning { background: #f59e0b; color: #fff; }
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+.btn-group { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.img-box { background: #e8eaed; border: 2px dashed #bbb; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; position: relative; overflow: hidden; }
+.img-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px); }
+.img-thumb { width: 120px; height: 90px; flex-shrink: 0; }
+.img-hero { width: 100%; height: 180px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: #f5f6f8; color: #666; font-weight: 700; padding: 9px 12px; text-align: left; border-bottom: 2px solid #e0e0e0; font-size: 11px; text-transform: uppercase; }
+td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+tr:hover td { background: #f9fafb; }
+.status { display: inline-block; padding: 3px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+.status-blue { background: #dbeafe; color: #1d4ed8; }
+.status-green { background: #dcfce7; color: #15803d; }
+.status-yellow { background: #fef9c3; color: #92400e; }
+.status-red { background: #fee2e2; color: #dc2626; }
+.status-gray { background: #f3f4f6; color: #6b7280; }
+.status-orange { background: #ffedd5; color: #c2410c; }
+.status-purple { background: #ede9fe; color: #6d28d9; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.kpi-card { background: #fff; border: 1px solid #dde; border-radius: 6px; padding: 16px; }
+.kpi-label { font-size: 10px; color: #888; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.kpi-value { font-size: 28px; font-weight: 700; color: #1e2535; margin: 4px 0; }
+.kpi-sub { font-size: 11px; color: #aaa; }
+.alert { border-radius: 4px; padding: 10px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.alert-warning { background: #fef9c3; border-left: 4px solid #f59e0b; color: #78350f; }
+.alert-danger { background: #fee2e2; border-left: 4px solid #dc2626; color: #991b1b; }
+.alert-info { background: #dbeafe; border-left: 4px solid #2563eb; color: #1d4ed8; }
+.alert-success { background: #dcfce7; border-left: 4px solid #16a34a; color: #15803d; }
+.check-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; font-size: 13px; }
+.check-box { width: 16px; height: 16px; border: 2px solid #bbb; border-radius: 3px; background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.check-box.checked { background: #2563eb; border-color: #2563eb; }
+.check-box.checked::after { content: '✓'; color: #fff; font-size: 10px; font-weight: 900; }
+.tabs { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 16px; }
+.tab { padding: 10px 18px; font-size: 13px; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tab.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 700; }
+.stepper { display: flex; align-items: center; margin-bottom: 20px; overflow-x: auto; }
+.step { display: flex; align-items: center; flex-shrink: 0; }
+.step-circle { width: 28px; height: 28px; border-radius: 50%; background: #ddd; color: #888; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.step-circle.done { background: #2563eb; color: #fff; }
+.step-circle.current { background: #1e40af; color: #fff; box-shadow: 0 0 0 3px #bfdbfe; }
+.step-label { font-size: 11px; margin-left: 6px; color: #888; white-space: nowrap; }
+.step-line { flex: 1; height: 2px; background: #ddd; margin: 0 10px; min-width: 20px; }
+.step-line.done { background: #2563eb; }
+.mobile-frame { max-width: 390px; margin: 0 auto; background: #fff; border: 3px solid #333; border-radius: 20px; padding: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+.mobile-header { background: #1e2535; color: #fff; padding: 12px 16px; margin: -16px -16px 16px; border-radius: 17px 17px 0 0; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.section-header h2 { font-size: 16px; font-weight: 700; }
+.divider { border: none; border-top: 1px solid #eee; margin: 14px 0; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.upload-area { border: 2px dashed #bbb; border-radius: 6px; padding: 24px; text-align: center; color: #999; background: #fafafa; cursor: pointer; }
+.upload-area:hover { border-color: #2563eb; background: #eff6ff; }
+.upload-area .icon { font-size: 24px; margin-bottom: 8px; }
+.photo-strip { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.breadcrumb { font-size: 12px; color: #999; margin-bottom: 16px; }
+.breadcrumb span { color: #444; font-weight: 600; }
+.tag { display: inline-block; background: #e0e7ff; color: #3730a3; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin: 2px; }
+.annotation { background: #fffbeb; border: 1px dashed #fbbf24; border-radius: 4px; padding: 6px 10px; font-size: 11px; color: #92400e; margin-top: 6px; }
+.sig-pad { background: #fafafa; border: 1.5px solid #ccc; border-radius: 6px; padding: 10px 12px; }
+.sig-pad-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.sig-hint { font-size: 11px; color: #aaa; font-style: italic; }
+.sig-canvas { border: 1.5px dashed #bbb; border-radius: 4px; background: #fff; display: block; width: 100%; cursor: crosshair; touch-action: none; }
+.stripe-card { background: linear-gradient(135deg, #1a2e5e, #2563eb); border-radius: 10px; padding: 20px; color: #fff; margin-bottom: 12px; }
+.stripe-card .card-num { font-size: 18px; letter-spacing: 3px; margin: 12px 0; font-family: monospace; }
+.stripe-card .card-meta { display: flex; justify-content: space-between; font-size: 12px; opacity: 0.8; }
+.pdf-preview { background: #f5f5f5; border: 1px solid #ddd; border-radius: 4px; height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #999; font-size: 13px; gap: 6px; }
+.notif-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+.notif-row:hover { background: #f9fafb; }
+.notif-row.unread { background: #eff6ff; }
+.notif-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.notif-body { flex: 1; min-width: 0; }
+.notif-title { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+.notif-text { font-size: 12px; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.notif-time { font-size: 11px; color: #aaa; margin-top: 3px; }
+.unread-dot { width: 8px; height: 8px; border-radius: 50%; background: #2563eb; flex-shrink: 0; margin-top: 6px; }
 </style>
 </head>
 <body>
 
-<!-- 表紙 -->
-<div class="cover">
-  <img src="logo_sidebar.png" alt="ジョブギルド" style="max-width:200px;height:auto;display:block;margin:0 auto 24px;">
-  <h1>操作マニュアル</h1>
-  <div class="sub">ジョブギルド 廃棄物処理プラットフォーム</div>
-  <div class="role-badge">発注者（廃棄物を出す企業）向け</div>
-  <div class="meta">
-    <p>作成日: 2026-05-16　／　バージョン: v3.0</p>
-    <p>お困りの場合はシステム担当者までご連絡ください</p>
+<div id="sidebar">
+  <div style="padding:14px 16px 10px;border-bottom:1px solid #2d3650;text-align:center;">
+    <img src="logo_sidebar.png" alt="ジョブギルド" style="max-width:120px;height:auto;display:block;margin:0 auto;">
+  </div>
+  <h1>ジョブギルド — ワイヤーフレーム（発注者）</h1>
+  <div class="nav-group">
+    <div class="nav-group-title">共通</div>
+    <div class="nav-item active" onclick="show('login')">S01 ログイン</div>
+    <div class="nav-item" onclick="show('register')">S02 会員登録</div>
+    <div class="nav-item" onclick="show('billing')">S03 サブスク決済・アカウント</div>
+    <div class="nav-item" onclick="show('pw-reset')">S21 パスワードリセット <span class="nav-new">NEW</span></div>
+    <div class="nav-item" onclick="show('notifications')">S23 通知・お知らせ <span class="nav-new">NEW</span></div>
+    <div class="nav-item" onclick="show('account')">S24 アカウント設定 <span class="nav-new">NEW</span></div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-title">発注者</div>
+    <div class="nav-item" onclick="show('i-dashboard')">S04 ダッシュボード</div>
+    <div class="nav-item" onclick="show('post-condition')">S06 案件管理</div>
+    <div class="nav-item" onclick="show('contract-create')">S08 契約書作成・確認</div>
+    <div class="nav-item" onclick="show('report-confirm')">S09 回収・完了報告確認</div>
+  </div>
+  <div class="nav-group">
+    <div class="nav-group-title">ドキュメント</div>
+    <div class="nav-item" onclick="show('flow')">📊 画面遷移図</div>
   </div>
 </div>
 
-<!-- 目次 -->
-<h1>目次</h1>
-<div class="toc">
-  <h4>このマニュアルの内容</h4>
-  <ol>
-    <li>このマニュアルについて</li>
-    <li>画面へのログイン・ログアウト</li>
-    <li>ホーム画面の見方</li>
-    <li>拠点（廃棄物を出す場所）を登録する</li>
-    <li>案件を登録して公開する</li>
-    <li>エントリーを確認して業者を選ぶ</li>
-    <li>契約書を送付する</li>
-    <li>完了報告を確認・承認する</li>
-    <li>通知を確認する</li>
-    <li>アカウント設定・パスワード変更</li>
-    <li>よくある質問（FAQ）</li>
-  </ol>
-</div>
-<hr>
-
-<!-- 1. このマニュアルについて -->
-<h1>1. このマニュアルについて</h1>
-<p>このマニュアルは、<strong>廃棄物を排出する企業（発注者）</strong>の方が、ジョブギルドのシステムを使って廃棄物処理を依頼するための手順を説明したものです。</p>
-<div class="info">パソコンのブラウザ（画面を表示するソフト）からシステムにアクセスしてご利用ください。</div>
-<h3>基本的な操作の流れ</h3>
-<div class="flow">
-  <div class="flow-step">① 案件を登録</div>
-  <div class="flow-arrow">→</div>
-  <div class="flow-step">② 業者がエントリー</div>
-  <div class="flow-arrow">→</div>
-  <div class="flow-step">③ 業者を選ぶ</div>
-  <div class="flow-arrow">→</div>
-  <div class="flow-step">④ 契約書を送付</div>
-  <div class="flow-arrow">→</div>
-  <div class="flow-step">⑤ 完了報告を確認</div>
-</div>
-<hr>
-
-<!-- 2. ログイン・ログアウト -->
-<h1>2. 画面へのログイン・ログアウト</h1>
-
-<h2>ログイン（システムに入る）</h2>
-
-<!-- ログイン画面モックアップ -->
-<div class="mockup-wrap">
-  <div class="mockup-label">【画面イメージ】 <span>ログイン画面</span></div>
-  <div class="mockup-titlebar">
-    <span class="mockup-dot" style="background:#ef4444"></span>
-    <span class="mockup-dot" style="background:#f59e0b"></span>
-    <span class="mockup-dot" style="background:#22c55e"></span>
-    <span class="mockup-urlbar">https://jobguild.jp/login</span>
-  </div>
-  <div class="mockup-body" style="background:#f3f4f6; padding: 10px 0;">
-    <div class="mk-login-wrap">
-      <div class="mk-login-title">ジョブギルド ログイン</div>
-      <div class="mk-input-label">メールアドレス</div>
-      <div class="mk-input" style="color:#9ca3af;">example@company.co.jp</div>
-      <div class="mk-input-label">パスワード</div>
-      <div class="mk-input" style="color:#9ca3af;">••••••••</div>
-      <div style="text-align:center; margin-top:10px;">
-        <span class="mk-btn mk-btn-blue" style="width:100%; display:block; text-align:center; padding:7px 0;">ログイン</span>
+<div id="main">
+  <div id="toolbar">
+    <span class="screen-title" id="t-title">S01 ログイン画面</span>
+    <span class="badge" id="t-role" style="background:#6b728022;color:#6b7280;">共通</span>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:16px;">
+      <div style="position:relative;cursor:pointer;" onclick="show('notifications')" title="通知">
+        <span style="font-size:20px;line-height:1;">🔔</span>
+        <span style="position:absolute;top:-5px;right:-7px;background:#dc2626;color:#fff;border-radius:50%;width:16px;height:16px;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;">3</span>
       </div>
-      <div style="text-align:center; margin-top:8px; font-size:7.5pt; color:#3b82f6;">パスワードをお忘れの方</div>
-      <div class="mk-sms-badge" style="margin-top:10px;">📱 SMSに6桁のコードが届きます</div>
-    </div>
-  </div>
-</div>
-
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">ブラウザでシステムのURLを開きます</div>
-      <div class="result">ログイン画面が表示されます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">「メールアドレス」の欄に、登録したメールアドレスを入力します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">「パスワード」の欄に、パスワードを入力します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">4</div>
-    <div class="step-text">
-      <div class="action">「ログイン」ボタンを押します</div>
-      <div class="result">SMS（携帯電話のショートメッセージ）に6桁の確認コードが届きます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">5</div>
-    <div class="step-text">
-      <div class="action">届いた確認コードを入力して「確認」を押します</div>
-      <div class="result">ホーム画面が表示されます</div>
-    </div>
-  </div>
-</div>
-
-<div class="tip">パスワードを忘れた場合は、ログイン画面の「パスワードをお忘れの方」を押してください。登録したメールアドレスにリセット用のリンクが届きます。</div>
-
-<h2>ログアウト（システムから出る）</h2>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">画面右上の人のアイコン（👤）を押します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">「ログアウト」を押します</div>
-      <div class="result">ログイン画面に戻ります</div>
-    </div>
-  </div>
-</div>
-<div class="warn">作業が終わったら必ずログアウトしてください。特に共用パソコンをお使いの場合は、他の方が誤って操作してしまう可能性があります。</div>
-<hr>
-
-<!-- 3. ホーム画面 -->
-<h1>3. ホーム画面の見方</h1>
-
-<!-- ダッシュボードモックアップ -->
-<div class="mockup-wrap">
-  <div class="mockup-label">【画面イメージ】 <span>ホーム画面（ダッシュボード）</span></div>
-  <div class="mockup-titlebar">
-    <span class="mockup-dot" style="background:#ef4444"></span>
-    <span class="mockup-dot" style="background:#f59e0b"></span>
-    <span class="mockup-dot" style="background:#22c55e"></span>
-    <span class="mockup-urlbar">https://jobguild.jp/dashboard</span>
-  </div>
-  <div class="mockup-body">
-    <div class="mk-nav">
-      <span class="mk-nav-logo">JobGuild</span>
-      <span class="mk-nav-right">
-        <span class="mk-nav-icon">🔔</span>
-        <span class="mk-nav-icon">👤</span>
-      </span>
-    </div>
-    <div class="mk-layout">
-      <div class="mk-sidebar">
-        <div class="mk-sidebar-item active">🏠 ホーム</div>
-        <div class="mk-sidebar-item">📋 案件管理</div>
-        <div class="mk-sidebar-item">📍 拠点管理</div>
-        <div class="mk-sidebar-item">⚙️ 設定</div>
-      </div>
-      <div class="mk-content">
-        <div class="mk-alert">📬 新着エントリーが3件届いています → <span style="color:#1d4ed8; font-weight:700;">確認する</span></div>
-        <div class="mk-kpi-row">
-          <div class="mk-kpi"><div class="mk-kpi-num">4</div><div class="mk-kpi-label">公開中</div></div>
-          <div class="mk-kpi"><div class="mk-kpi-num" style="color:#f59e0b;">3</div><div class="mk-kpi-label">エントリー待ち</div></div>
-          <div class="mk-kpi"><div class="mk-kpi-num" style="color:#16a34a;">2</div><div class="mk-kpi-label">契約中</div></div>
-          <div class="mk-kpi"><div class="mk-kpi-num" style="color:#7c3aed;">1</div><div class="mk-kpi-label">作業中</div></div>
-          <div class="mk-kpi"><div class="mk-kpi-num" style="color:#6b7280;">8</div><div class="mk-kpi-label">完了(今月)</div></div>
-        </div>
-        <table class="mk-table">
-          <tr><th>案件ID</th><th>品目</th><th>希望日</th><th>ステータス</th><th>操作</th></tr>
-          <tr><td>ANK-001</td><td>木くず</td><td>6/5</td><td><span class="mk-badge mk-badge-blue">公開中</span></td><td><span class="mk-btn mk-btn-white">詳細</span></td></tr>
-          <tr><td>ANK-002</td><td>廃プラ</td><td>6/10</td><td><span class="mk-badge mk-badge-green">エントリー待ち</span></td><td><span class="mk-btn mk-btn-white">詳細</span></td></tr>
-        </table>
-        <div style="text-align:right; margin-top:6px;"><span class="mk-btn mk-btn-blue">＋ 新規案件を登録</span></div>
+      <div style="cursor:pointer;" onclick="show('account')" title="アカウント設定">
+        <span style="font-size:20px;line-height:1;">👤</span>
       </div>
     </div>
   </div>
-</div>
+  <div id="content">
 
-<p>ログインすると最初に表示される画面です。自社の廃棄物処理案件の状況が一目でわかります。</p>
-<table style="width:100%; border-collapse:collapse; font-size:9.5pt; margin:10px 0 16px;">
-  <thead><tr style="background:#1d4ed8; color:white;"><th style="padding:7px 10px; border:1px solid #1e40af;">表示されている情報</th><th style="padding:7px 10px; border:1px solid #1e40af;">内容</th></tr></thead>
-  <tbody>
-    <tr><td style="padding:6px 10px; border:1px solid #e2e8f0;"><strong>公開中</strong></td><td style="padding:6px 10px; border:1px solid #e2e8f0;">現在公開していて業者のエントリーを受け付けている案件の数</td></tr>
-    <tr style="background:#f8faff;"><td style="padding:6px 10px; border:1px solid #e2e8f0;"><strong>エントリー待ち</strong></td><td style="padding:6px 10px; border:1px solid #e2e8f0;">業者からエントリーが来ていて、業者を選んでいない案件の数</td></tr>
-    <tr><td style="padding:6px 10px; border:1px solid #e2e8f0;"><strong>契約中</strong></td><td style="padding:6px 10px; border:1px solid #e2e8f0;">契約書を送付済みで、作業待ちの案件の数</td></tr>
-    <tr style="background:#f8faff;"><td style="padding:6px 10px; border:1px solid #e2e8f0;"><strong>作業中</strong></td><td style="padding:6px 10px; border:1px solid #e2e8f0;">業者が現場で作業を行っている案件の数</td></tr>
-    <tr><td style="padding:6px 10px; border:1px solid #e2e8f0;"><strong>完了（今月）</strong></td><td style="padding:6px 10px; border:1px solid #e2e8f0;">今月完了した案件の数</td></tr>
-  </tbody>
-</table>
-<div class="tip">「新着エントリーが届いています」というお知らせが表示された場合は、そこを押すと案件の詳細画面に直接移動できます。</div>
-<hr>
-
-<!-- 4. 拠点登録 -->
-<h1>4. 拠点（廃棄物を出す場所）を登録する</h1>
-<p>案件を登録する前に、廃棄物が発生する場所（工場・倉庫・現場など）をあらかじめ登録しておく必要があります。</p>
-<div class="info">案件を登録する際に「排出場所」として選ぶので、案件登録より先に拠点を登録してください。</div>
-<h2>拠点を新しく登録する</h2>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">左のメニューから「拠点管理」を押します</div>
-      <div class="result">登録済みの拠点一覧が表示されます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">「＋ 新規拠点を追加」ボタンを押します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">拠点名、住所（郵便番号・都道府県・市区町村・番地）を入力します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">4</div>
-    <div class="step-text">
-      <div class="action">「登録する」ボタンを押します</div>
-      <div class="result">拠点が登録され、一覧に追加されます</div>
-    </div>
-  </div>
-</div>
-<hr>
-
-<!-- 5. 案件登録 -->
-<h1>5. 案件を登録して公開する</h1>
-
-<!-- 案件登録フォームモックアップ -->
-<div class="mockup-wrap">
-  <div class="mockup-label">【画面イメージ】 <span>案件登録フォーム</span></div>
-  <div class="mockup-titlebar">
-    <span class="mockup-dot" style="background:#ef4444"></span>
-    <span class="mockup-dot" style="background:#f59e0b"></span>
-    <span class="mockup-dot" style="background:#22c55e"></span>
-    <span class="mockup-urlbar">https://jobguild.jp/projects/new</span>
-  </div>
-  <div class="mockup-body">
-    <div class="mk-nav"><span class="mk-nav-logo">JobGuild</span><span class="mk-nav-right"><span class="mk-nav-icon">🔔</span><span class="mk-nav-icon">👤</span></span></div>
-    <div class="mk-layout">
-      <div class="mk-sidebar">
-        <div class="mk-sidebar-item">🏠 ホーム</div>
-        <div class="mk-sidebar-item active">📋 案件管理</div>
-        <div class="mk-sidebar-item">📍 拠点管理</div>
-      </div>
-      <div class="mk-content">
-        <div style="font-size:10pt; font-weight:700; color:#1d4ed8; margin-bottom:10px;">📋 新規案件登録</div>
-        <div class="mk-2col">
-          <div class="mk-col">
-            <div class="mk-input-label">排出場所（拠点）</div>
-            <div class="mk-input" style="color:#374151;">▼ 大阪工場</div>
-            <div class="mk-input-label">廃棄物の品目</div>
-            <div class="mk-input" style="color:#374151;">▼ 木くず</div>
-            <div class="mk-input-label">荷姿</div>
-            <div class="mk-input" style="color:#374151;">▼ バラ</div>
-            <div class="mk-input-label">概量（おおよその量）</div>
-            <div class="mk-input" style="color:#374151;">2.5 ｔ</div>
-            <div class="mk-input-label">希望日程</div>
-            <div class="mk-input" style="color:#374151;">2026/06/10</div>
-            <div style="margin-top:4px;"><div class="mk-upload" style="padding:8px; font-size:7.5pt;">📷 現場写真をドロップ<br>またはファイルを選択</div></div>
+    <!-- ========== S01 ログイン ========== -->
+    <div class="screen active" id="s-login">
+      <div style="max-width:420px;margin:40px auto;">
+        <div class="card">
+          <div style="text-align:center;margin-bottom:24px;">
+            <img src="logo_login.png" alt="ジョブギルド" style="max-width:180px;height:auto;display:block;margin:0 auto 8px;">
+            <div style="font-size:12px;color:#999;margin-top:4px;">ログイン</div>
           </div>
-          <div class="mk-col">
-            <div class="mk-input-label">運搬費（円）</div>
-            <div class="mk-input" style="color:#374151;">50,000</div>
-            <div class="mk-input-label">処分費（円）</div>
-            <div class="mk-input" style="color:#374151;">30,000</div>
-            <div style="border:1px solid #e2e8f0; border-radius:4px; padding:6px 8px; font-size:7.5pt; color:#374151; margin-bottom:8px;">合計: <strong>80,000 円</strong></div>
-            <div class="mk-input-label">備考</div>
-            <div style="border:1px solid #d1d5db; border-radius:4px; padding:6px 8px; font-size:7.5pt; color:#9ca3af; height:50px;">搬出時間の制限など</div>
-            <div style="display:flex; gap:6px; margin-top:10px;">
-              <span class="mk-btn mk-btn-white">下書き保存</span>
-              <span class="mk-btn mk-btn-blue">公開する</span>
+          <div class="form-group full" style="margin-bottom:12px;">
+            <label>メールアドレス（ID）<span class="req">*</span></label>
+            <div class="input-box" style="color:#aaa;">example@company.co.jp</div>
+          </div>
+          <div class="form-group full" style="margin-bottom:16px;">
+            <label>パスワード<span class="req">*</span></label>
+            <div class="input-box" style="color:#aaa;">••••••••</div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;">ログイン</button>
+
+          </div>
+          <div style="text-align:center;margin-top:14px;font-size:13px;">
+            <span style="color:#2563eb;cursor:pointer;" onclick="show('pw-reset')">パスワードをお忘れの方</span>
+            &nbsp;|&nbsp;
+            <span style="color:#2563eb;cursor:pointer;" onclick="show('register')">新規会員登録</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== S02 会員登録 ========== -->
+    <div class="screen" id="s-register">
+      <div style="max-width:620px;margin:0 auto;">
+        <div class="stepper">
+          <div class="step"><div class="step-circle current">1</div><div class="step-label">区分選択</div></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-circle">2</div><div class="step-label">基本情報</div></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-circle">3</div><div class="step-label">書類提出</div></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-circle">4</div><div class="step-label">確認・送信</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">STEP 1 — ユーザー区分選択</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:140px;border:2.5px solid #2563eb;border-radius:8px;padding:16px;text-align:center;background:#eff6ff;cursor:pointer;">
+              <div style="font-size:26px;margin-bottom:8px;">🏭</div>
+              <div style="font-weight:700;color:#1d4ed8;font-size:14px;">発注者</div>
+              <div style="font-size:11px;color:#555;margin-top:4px;">廃棄物を排出する企業</div>
+            </div>
+            <div style="flex:1;min-width:140px;border:2px solid #ddd;border-radius:8px;padding:16px;text-align:center;cursor:pointer;">
+              <div style="font-size:26px;margin-bottom:8px;">🚛</div>
+              <div style="font-weight:700;color:#555;font-size:14px;">受注者</div>
+              <div style="font-size:11px;color:#777;margin-top:4px;">収集運搬業・処分業者</div>
+            </div>
+            <div style="flex:1;min-width:140px;border:2px solid #ddd;border-radius:8px;padding:16px;text-align:center;cursor:pointer;">
+              <div style="font-size:26px;margin-bottom:8px;">🔄</div>
+              <div style="font-weight:700;color:#555;font-size:14px;">発注者 + 受注者</div>
+              <div style="font-size:11px;color:#777;margin-top:4px;">両方の機能を利用する</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">STEP 2 — 基本情報入力</div>
+          <div class="form-row">
+            <div class="form-group full"><label>会社名<span class="req">*</span></label><div class="input-box" style="color:#aaa;">株式会社〇〇</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="max-width:140px;"><label>郵便番号<span class="req">*</span></label><div class="input-box" style="color:#aaa;">000-0000</div></div>
+            <div class="form-group" style="max-width:160px;"><label>都道府県<span class="req">*</span></label><select class="input-box"><option>東京都</option><option>大阪府</option></select></div>
+            <div class="form-group"><label>市区町村<span class="req">*</span></label><div class="input-box" style="color:#aaa;">渋谷区</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full"><label>番地・建物名</label><div class="input-box" style="color:#aaa;">〇〇1-2-3 〇〇ビル4F</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full"><label>メールアドレス（ログインID）<span class="req">*</span></label><div class="input-box" style="color:#aaa;">email@company.co.jp</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>パスワード<span class="req">*</span></label><div class="input-box" style="color:#aaa;">••••••••</div></div>
+            <div class="form-group"><label>パスワード（確認）<span class="req">*</span></label><div class="input-box" style="color:#aaa;">••••••••</div></div>
+          </div>
+          <!-- 担当者セクション（最大3名） -->
+          <div style="margin-top:16px;">
+            <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">担当者情報（最大3名）</div>
+            <div style="border:1px solid #d1d5db;border-radius:8px;padding:14px;margin-bottom:10px;background:#fafafa;">
+              <div style="font-size:12px;font-weight:700;color:#2563eb;margin-bottom:10px;">担当者 1</div>
+              <div class="form-row">
+                <div class="form-group full"><label>担当者名<span class="req">*</span></label><div class="input-box" style="color:#aaa;">山田 太郎</div></div>
+              </div>
+              <div style="font-size:11px;color:#6b7280;margin-bottom:6px;font-weight:600;">連絡先</div>
+              <div class="form-group full" style="margin-bottom:0;"><div class="input-box" style="color:#aaa;">03-0000-0000</div></div>
+            </div>
+            <div style="border:1px solid #d1d5db;border-radius:8px;padding:14px;margin-bottom:10px;background:#fafafa;">
+              <div style="font-size:12px;font-weight:700;color:#2563eb;margin-bottom:10px;">担当者 2</div>
+              <div class="form-row">
+                <div class="form-group full"><label>担当者名</label><div class="input-box" style="color:#aaa;">鈴木 次郎</div></div>
+              </div>
+              <div style="font-size:11px;color:#6b7280;margin-bottom:6px;font-weight:600;">連絡先</div>
+              <div class="form-group full" style="margin-bottom:0;"><div class="input-box" style="color:#aaa;">090-0000-0000</div></div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:100%;justify-content:center;border-style:dashed;">＋ 担当者を追加（あと1名追加可能）</button>
+          </div>
+        </div>
+        <div class="card" style="border-color:#fbbf24;">
+          <div class="card-title">STEP 3 — 受注者専用書類アップロード（受注者のみ必須）</div>
+          <div class="annotation">審査完了後にアカウントが有効化されます。発注者の場合はこの手順はスキップされます。</div>
+          <div style="margin-top:14px;" class="grid-2">
+            <div>
+              <label style="margin-bottom:6px;">産業廃棄物収集運搬業許可証 PDF<span class="req">*</span></label>
+              <div class="upload-area"><div class="icon">📄</div><div>クリックまたはドロップ</div><div style="font-size:11px;color:#bbb;">最大20MB</div></div>
+            </div>
+            <div>
+              <label style="margin-bottom:6px;">処分業許可証 PDF（処分業者のみ）</label>
+              <div class="upload-area"><div class="icon">📄</div><div>クリックまたはドロップ</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group" style="justify-content:flex-end;">
+          <button class="btn btn-secondary">戻る</button>
+          <button class="btn btn-primary">確認画面へ →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== S03 サブスク決済 ========== -->
+    <div class="screen" id="s-billing">
+
+      <!-- ① プラン比較 -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title">プラン選択</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;border:2px solid #e5e7eb;border-radius:10px;padding:20px;">
+            <div style="font-size:13px;font-weight:700;color:#6b7280;margin-bottom:4px;">無料プラン</div>
+            <div style="font-size:22px;font-weight:700;margin-bottom:14px;">¥0</div>
+            <div style="font-size:12px;color:#374151;margin-bottom:10px;font-weight:600;">できること</div>
+            <div style="font-size:12px;color:#374151;line-height:2;">✅ 案件閲覧（一覧のみ）<br>✅ 業者検索<br>✅ プロフィール作成</div>
+            <div style="font-size:12px;color:#374151;margin-top:10px;margin-bottom:6px;font-weight:600;">できないこと</div>
+            <div style="font-size:12px;color:#9ca3af;line-height:2;">✗ 案件詳細の閲覧<br>✗ 案件応募・掲載<br>✗ 連絡先の開示</div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid #f3f4f6;font-size:11px;color:#6b7280;">業者を集める入口として無料でご利用いただけます。</div>
+          </div>
+          <div style="flex:1;min-width:220px;border:2.5px solid #2563eb;border-radius:10px;padding:20px;background:#eff6ff;position:relative;">
+            <div style="position:absolute;top:-1px;right:14px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:0 0 6px 6px;">現在のプラン</div>
+            <div style="font-size:13px;font-weight:700;color:#1d4ed8;margin-bottom:4px;">基本会員（有料）</div>
+            <div style="font-size:22px;font-weight:700;margin-bottom:14px;">¥11,000<span style="font-size:12px;font-weight:400;color:#6b7280;">（税込）/ 月</span></div>
+            <div style="font-size:12px;color:#374151;margin-bottom:10px;font-weight:600;">できること（すべて）</div>
+            <div style="font-size:12px;color:#374151;line-height:2;">✅ 案件閲覧（詳細含む）<br>✅ 業者検索<br>✅ プロフィール作成<br>✅ 案件応募・掲載<br>✅ 連絡先の開示</div>
+            <div style="margin-top:14px;"><button class="btn btn-danger btn-sm">解約して無料プランへ</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ② サマリーバー -->
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">現在のプラン</div>
+          <div style="font-size:15px;font-weight:700;color:#1d4ed8;">基本会員</div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">月額料金</div>
+          <div style="font-size:15px;font-weight:700;">¥11,000<span style="font-size:11px;font-weight:400;color:#6b7280;">（税込）</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">次回請求日</div>
+          <div style="font-size:15px;font-weight:700;">2026-06-01</div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">ステータス</div>
+          <span class="status status-green">有効</span>
+        </div>
+      </div>
+
+      <!-- ③ 登録クレジットカード -->
+      <div class="card" style="margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div class="card-title" style="margin:0;">登録クレジットカード</div>
+          <button class="btn btn-secondary btn-sm">カード情報を変更</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <div class="stripe-card" style="margin:0;flex-shrink:0;">
+            <div style="font-size:11px;opacity:0.7;">VISA</div>
+            <div class="card-num">**** **** **** 4242</div>
+            <div class="card-meta"><span>山田 太郎</span><span>有効期限: 09/28</span></div>
+          </div>
+          <div style="flex:1;min-width:260px;border:1px solid #e5e7eb;border-radius:8px;padding:14px;background:#f9fafb;">
+            <div style="font-size:12px;color:#6b7280;margin-bottom:10px;">新しいカード情報を入力（Stripe埋め込みUI）</div>
+            <div class="form-group" style="margin-bottom:8px;"><label>カード番号</label><div class="input-box" style="color:#aaa;">1234 5678 9012 3456</div></div>
+            <div class="form-row" style="margin-bottom:8px;">
+              <div class="form-group"><label>有効期限</label><div class="input-box" style="color:#aaa;">MM / YY</div></div>
+              <div class="form-group"><label>CVC</label><div class="input-box" style="color:#aaa;">•••</div></div>
+            </div>
+            <div class="annotation" style="margin-bottom:10px;">PCI DSS準拠のStripeフォームが埋め込まれます。</div>
+            <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">カード情報を更新する</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ④ 請求・領収書履歴 -->
+      <div class="card">
+        <div class="card-title">請求・領収書履歴</div>
+        <table>
+          <thead><tr><th>請求日</th><th>金額</th><th>状態</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>2026-04-01</td><td>¥11,000（税込）</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+            <tr><td>2026-03-01</td><td>¥11,000（税込）</td><td><span class="status status-green">成功</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+            <tr><td>2026-02-01</td><td>¥11,000（税込）</td><td><span class="status status-red">失敗</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- ========== S04 発注者ダッシュボード ========== -->
+    <div class="screen" id="s-i-dashboard">
+      <div class="alert alert-info">🔔 新しいエントリーが3件届いています。<span style="color:#2563eb;cursor:pointer;margin-left:8px;font-weight:700;" onclick="show('condition-detail')">確認する →</span></div>
+
+      <!-- ① 全期間サマリーバー（常時表示） -->
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計登録案件</div>
+          <div style="font-size:24px;font-weight:700;color:#374151;">47<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計完了案件</div>
+          <div style="font-size:24px;font-weight:700;color:#16a34a;">31<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">取引業者（累計）</div>
+          <div style="font-size:24px;font-weight:700;color:#7c3aed;">12<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">社</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">完了率（全期間）</div>
+          <div style="font-size:24px;font-weight:700;color:#f59e0b;">66<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">%</span></div>
+        </div>
+      </div>
+
+      <!-- ② 月別ビュー（タブ切り替え ＋ 月ナビゲーター） -->
+      <div class="card" style="margin-bottom:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+          <!-- タブ: 月別 / 全期間 -->
+          <div style="display:flex;border:1.5px solid #e5e7eb;border-radius:6px;overflow:hidden;">
+            <button style="padding:7px 20px;font-size:13px;font-weight:600;background:#2563eb;color:#fff;border:none;cursor:pointer;">月別</button>
+            <button style="padding:7px 20px;font-size:13px;font-weight:600;background:#fff;color:#6b7280;border:none;border-left:1.5px solid #e5e7eb;cursor:pointer;">全期間</button>
+          </div>
+          <!-- 月ナビゲーター -->
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button style="padding:6px 14px;font-size:14px;border:1.5px solid #e5e7eb;border-radius:5px;background:#fff;cursor:pointer;color:#374151;">←</button>
+            <span style="font-size:14px;font-weight:700;min-width:90px;text-align:center;">2026年5月</span>
+            <button style="padding:6px 14px;font-size:14px;border:1.5px solid #e5e7eb;border-radius:5px;background:#fff;cursor:pointer;color:#9ca3af;">→</button>
+          </div>
+        </div>
+        <!-- 月別KPIカード -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:100px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:11px;color:#3b82f6;font-weight:600;margin-bottom:6px;">公開中</div>
+            <div style="font-size:26px;font-weight:700;color:#2563eb;">3</div>
+            <div style="font-size:11px;color:#6b7280;">案件</div>
+          </div>
+          <div style="flex:1;min-width:100px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:11px;color:#d97706;font-weight:600;margin-bottom:6px;">見積中</div>
+            <div style="font-size:26px;font-weight:700;color:#f59e0b;">5</div>
+            <div style="font-size:11px;color:#6b7280;">案件</div>
+          </div>
+          <div style="flex:1;min-width:100px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:11px;color:#7c3aed;font-weight:600;margin-bottom:6px;">契約中</div>
+            <div style="font-size:26px;font-weight:700;color:#7c3aed;">2</div>
+            <div style="font-size:11px;color:#6b7280;">案件</div>
+          </div>
+          <div style="flex:1;min-width:100px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:11px;color:#16a34a;font-weight:600;margin-bottom:6px;">作業中</div>
+            <div style="font-size:26px;font-weight:700;color:#16a34a;">4</div>
+            <div style="font-size:11px;color:#6b7280;">案件</div>
+          </div>
+          <div style="flex:1;min-width:100px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:11px;color:#6b7280;font-weight:600;margin-bottom:6px;">完了（今月）</div>
+            <div style="font-size:26px;font-weight:700;color:#6b7280;">8</div>
+            <div style="font-size:11px;color:#6b7280;">案件</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ③ 月別推移テーブル -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title">月別推移</div>
+        <table style="width:100%;font-size:13px;border-collapse:collapse;">
+          <thead>
+            <tr style="background:#f9fafb;">
+              <th style="padding:9px 12px;text-align:left;border-bottom:2px solid #e5e7eb;">月</th>
+              <th style="padding:9px 12px;text-align:right;border-bottom:2px solid #e5e7eb;">登録</th>
+              <th style="padding:9px 12px;text-align:right;border-bottom:2px solid #e5e7eb;">完了</th>
+              <th style="padding:9px 12px;text-align:right;border-bottom:2px solid #e5e7eb;">キャンセル</th>
+              <th style="padding:9px 12px;text-align:right;border-bottom:2px solid #e5e7eb;">完了率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#eff6ff;">
+              <td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700;">2026年5月 <span style="font-size:10px;background:#2563eb;color:#fff;border-radius:3px;padding:1px 5px;margin-left:4px;">今月</span></td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">14</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#16a34a;font-weight:600;">8</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">0</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#6b7280;font-style:italic;">進行中</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;">2026年4月</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">11</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#16a34a;font-weight:600;">9</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">1</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#16a34a;font-weight:600;">82%</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;">2026年3月</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">10</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#16a34a;font-weight:600;">8</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">0</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#16a34a;font-weight:600;">80%</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;">2026年2月</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">8</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#f59e0b;font-weight:600;">6</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">1</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#f59e0b;font-weight:600;">75%</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;">2026年1月</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">4</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#16a34a;font-weight:600;">4</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;">0</td>
+              <td style="padding:9px 12px;text-align:right;border-bottom:1px solid #e5e7eb;color:#16a34a;font-weight:600;">100%</td>
+            </tr>
+            <tr style="background:#f5f6f8;font-weight:700;border-top:2px solid #e5e7eb;">
+              <td style="padding:9px 12px;">合計</td>
+              <td style="padding:9px 12px;text-align:right;">47</td>
+              <td style="padding:9px 12px;text-align:right;color:#16a34a;">31</td>
+              <td style="padding:9px 12px;text-align:right;">2</td>
+              <td style="padding:9px 12px;text-align:right;color:#f59e0b;">66%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ④ 進行中の条件 -->
+      <div class="card">
+        <div class="section-header">
+          <h2>進行中の案件</h2>
+          <button class="btn btn-primary btn-sm" onclick="show('post-form')">＋ 新規案件を登録</button>
+        </div>
+        <table>
+          <thead><tr><th>案件ID</th><th>作業所在地</th><th>品目</th><th>希望日</th><th>ステータス</th><th>エントリー数</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;">#023</td><td style="font-size:12px;">東京都渋谷区〇〇1-2-3</td>
+              <td><span class="tag">木くず</span><span class="tag">金属</span></td>
+              <td>2026-05-10</td><td><span class="status status-yellow">見積中</span></td>
+              <td style="font-weight:700;color:#2563eb;">3件</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="show('condition-detail')">詳細</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">#022</td><td style="font-size:12px;">東京都板橋区〇〇4-5-6</td>
+              <td><span class="tag">廃プラ</span></td>
+              <td>2026-05-08</td><td><span class="status status-blue">公開中</span></td>
+              <td>0件</td>
+              <td><button class="btn btn-secondary btn-sm">詳細</button></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">#021</td><td style="font-size:12px;">東京都新宿区〇〇1-1-1</td>
+              <td><span class="tag">廃棄物混合</span></td>
+              <td>2026-04-28</td><td><span class="status status-orange">作業中</span></td>
+              <td>—</td>
+              <td><button class="btn btn-secondary btn-sm" onclick="show('report-confirm')">詳細</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== S06 条件管理ハブ ========== -->
+    <div class="screen" id="s-post-condition">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:#1e2535;">案件管理</div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">登録した案件の一覧と管理</div>
+        </div>
+        <button class="btn btn-primary" onclick="show('post-form')">＋ 新規案件を登録</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+        <div class="kpi-card" style="text-align:center;">
+          <div class="kpi-label">公開中</div>
+          <div class="kpi-value" style="font-size:22px;color:#2563eb;">3</div>
+        </div>
+        <div class="kpi-card" style="text-align:center;">
+          <div class="kpi-label">エントリー受付中</div>
+          <div class="kpi-value" style="font-size:22px;color:#f59e0b;">5</div>
+        </div>
+        <div class="kpi-card" style="text-align:center;">
+          <div class="kpi-label">完了</div>
+          <div class="kpi-value" style="font-size:22px;color:#16a34a;">31</div>
+        </div>
+        <div class="kpi-card" style="text-align:center;">
+          <div class="kpi-label">下書き</div>
+          <div class="kpi-value" style="font-size:22px;color:#6b7280;">2</div>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab active">すべて（41）</div>
+        <div class="tab">公開中（3）</div>
+        <div class="tab">エントリー受付中（5）</div>
+        <div class="tab">完了（31）</div>
+        <div class="tab">下書き（2）</div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table>
+          <thead>
+            <tr><th>案件番号</th><th>品目</th><th>作業所在地</th><th>希望日</th><th>エントリー数</th><th>ステータス</th><th>操作</th></tr>
+          </thead>
+          <tbody>
+            <tr style="cursor:pointer;" onclick="show('condition-detail')">
+              <td><strong>#023</strong></td><td>木くず・金属</td><td>渋谷区〇〇1-2-3</td><td>2026-05-10</td>
+              <td><span style="font-weight:700;color:#f59e0b;">3社</span></td>
+              <td><span class="tag" style="background:#fef9c3;color:#92400e;">エントリー受付中</span></td>
+              <td><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('condition-detail')">詳細</button></td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('condition-detail')">
+              <td><strong>#022</strong></td><td>廃プラスチック</td><td>新宿区△△2-4-6</td><td>2026-05-08</td>
+              <td><span style="font-weight:700;color:#2563eb;">1社</span></td>
+              <td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">公開中</span></td>
+              <td><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('condition-detail')">詳細</button></td>
+            </tr>
+            <tr style="cursor:pointer;">
+              <td><strong>#021</strong></td><td>汚泥（砂・泥）</td><td>品川区■■3-1-5</td><td>2026-04-28</td>
+              <td><span style="color:#aaa;">—</span></td>
+              <td><span class="tag" style="background:#f3f4f6;color:#374151;">下書き</span></td>
+              <td><button class="btn btn-secondary btn-sm" onclick="show('post-form')">編集</button></td>
+            </tr>
+            <tr style="cursor:pointer;" onclick="show('condition-detail')">
+              <td><strong>#020</strong></td><td>金属くず</td><td>港区〇〇5-2-1</td><td>2026-04-15</td>
+              <td><span style="font-weight:700;color:#16a34a;">選定済（1社）</span></td>
+              <td><span class="tag" style="background:#dcfce7;color:#15803d;">完了</span></td>
+              <td style="display:flex;gap:6px;">
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('condition-detail')">詳細</button>
+                <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();show('report-confirm')">完了報告</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== S06 新規投稿フォーム ========== -->
+    <div class="screen" id="s-post-form">
+      <button class="btn btn-secondary btn-sm" style="margin-bottom:16px;" onclick="show('post-condition')">← 案件管理に戻る</button>
+      <div class="card">
+        <div class="card-title">案件登録 — 基本情報</div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>作業所在地（現場住所）<span class="req">*</span></label>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">
+              <div class="input-box" style="max-width:120px;color:#aaa;">〒 000-0000</div>
+              <button class="btn btn-secondary btn-sm" type="button">住所検索</button>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:6px;">
+              <select class="input-box" style="max-width:150px;"><option value="">都道府県</option><option>東京都</option><option>神奈川県</option><option>大阪府</option></select>
+              <div class="input-box" style="flex:1;color:#aaa;">市区町村</div>
+            </div>
+            <div class="input-box" style="color:#aaa;">番地・建物名・部屋番号</div>
+            <div class="annotation">住所テキスト入力時、スペースは自動で半角化・カタカナは自動で全角化されます。</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>現場写真</label>
+            <input type="file" id="s06-file-input" accept="image/*" multiple style="display:none;" onchange="s06HandleFiles(this.files)">
+            <div id="s06-dropzone"
+                 style="border:2px dashed #4a90d9;border-radius:8px;padding:20px 16px;text-align:center;cursor:pointer;background:#f0f7ff;margin-bottom:8px;transition:background 0.15s,border-color 0.15s;"
+                 onclick="document.getElementById('s06-file-input').click()"
+                 ondragover="s06DragOver(event)" ondragleave="s06DragLeave(event)" ondrop="s06Drop(event)">
+              <div style="font-size:26px;margin-bottom:6px;">📁</div>
+              <div style="font-size:13px;color:#2563eb;font-weight:600;">クリックまたはドラッグ＆ドロップで写真を追加</div>
+              <div style="font-size:11px;color:#999;margin-top:4px;">複数選択可・枚数制限なし（JPG / PNG / HEIC 等）</div>
+            </div>
+            <div id="s06-photos" style="display:flex;gap:8px;flex-wrap:wrap;">
+              <div class="img-box img-thumb" style="position:relative;"><span style="position:relative;z-index:1;">写真1</span><button onclick="this.parentElement.remove()" style="position:absolute;top:2px;right:2px;background:#dc2626;color:#fff;border:none;border-radius:50%;width:18px;height:18px;cursor:pointer;font-size:11px;z-index:2;line-height:1;padding:0;">×</button></div>
+              <div class="img-box img-thumb" style="position:relative;"><span style="position:relative;z-index:1;">写真2</span><button onclick="this.parentElement.remove()" style="position:absolute;top:2px;right:2px;background:#dc2626;color:#fff;border:none;border-radius:50%;width:18px;height:18px;cursor:pointer;font-size:11px;z-index:2;line-height:1;padding:0;">×</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>品目<span class="req">*</span></label>
+            <select class="input-box"><option>木くず</option><option>金属くず</option><option>廃プラスチック</option><option>汚泥（砂・泥）</option><option>廃棄物混合</option><option>特別管理産業廃棄物</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>荷姿<span class="req">*</span></label><div class="input-box" style="color:#aaa;">例：パソコンバッグ入り、バラ積み</div></div>
+          <div class="form-group" style="max-width:220px;">
+            <label>概量<span class="req">*</span></label>
+            <div style="display:flex;gap:6px;"><div class="input-box" style="color:#aaa;">500</div><select class="input-box" style="width:80px;"><option>kg</option><option>t</option><option>立米</option><option>台</option></select></div>
+          </div>
+          <div class="form-group">
+            <label>希望日程<span class="req">*</span></label>
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+              <div class="input-box" style="color:#aaa;max-width:150px;">2026-05-10</div>
+              <div class="input-box" style="color:#aaa;max-width:110px;">09:00</div>
+              <span style="font-size:11px;color:#999;">時間は任意</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-
-<h2>案件の新規登録</h2>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">ホーム画面の「＋ 新規案件を登録」ボタンを押します</div>
-      <div class="result">案件登録フォームが開きます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">「排出場所」の欄で、事前に登録した拠点を選びます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">現場の写真を追加する場合は、写真ファイルを「ここにファイルをドロップ」の欄の上にドラッグして放します（または「ファイルを選択」で写真フォルダから選びます）</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">4</div>
-    <div class="step-text">
-      <div class="action">廃棄物の「品目」「荷姿」「概量（おおよその量）」「希望日程」を入力します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">5</div>
-    <div class="step-text">
-      <div class="action">「運搬費」「処分費」（希望金額）を入力します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">6</div>
-    <div class="step-text">
-      <div class="action">特殊な条件がある場合（根っこあり・特別管理産廃など）は、該当する項目にチェックを入れます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">7</div>
-    <div class="step-text">
-      <div class="action">「備考」欄に搬出時間の制限や駐車スペースなど業者に伝えたいことを入力します（任意）</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">8</div>
-    <div class="step-text">
-      <div class="action">内容を確認して「公開する」ボタンを押します</div>
-      <div class="result">案件が公開され、条件に合う業者に通知が届きます。まだ保存しておきたい場合は「下書き保存」を押してください</div>
-    </div>
-  </div>
-</div>
-<div class="tip">「下書き保存」を使うと、入力途中で保存して後から続きを入力できます。公開するまで業者には表示されません。</div>
-<hr>
-
-<!-- 6. エントリー確認・業者選定 -->
-<h1>6. エントリーを確認して業者を選ぶ</h1>
-
-<!-- エントリー一覧モックアップ -->
-<div class="mockup-wrap">
-  <div class="mockup-label">【画面イメージ】 <span>エントリー一覧・選定画面</span></div>
-  <div class="mockup-titlebar">
-    <span class="mockup-dot" style="background:#ef4444"></span>
-    <span class="mockup-dot" style="background:#f59e0b"></span>
-    <span class="mockup-dot" style="background:#22c55e"></span>
-    <span class="mockup-urlbar">https://jobguild.jp/projects/ANK-002/detail</span>
-  </div>
-  <div class="mockup-body">
-    <div class="mk-nav"><span class="mk-nav-logo">JobGuild</span><span class="mk-nav-right"><span class="mk-nav-icon">🔔</span><span class="mk-nav-icon">👤</span></span></div>
-    <div class="mk-content">
-      <div style="font-size:9pt; color:#6b7280; margin-bottom:6px;">案件管理 &gt; ANK-002 廃プラスチック類</div>
-      <div class="mk-tabs">
-        <div class="mk-tab">登録内容を確認・編集</div>
-        <div class="mk-tab active">エントリー一覧・選定</div>
-        <div class="mk-tab">完了報告確認</div>
+      <div class="card">
+        <div class="card-title">依頼金額（発注者指定）</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>運搬費（希望・円）<span class="req">*</span></label>
+            <div class="input-box" style="color:#aaa;">¥ 35,000</div>
+          </div>
+          <div class="form-group">
+            <label>処分費（希望・円）<span class="req">*</span></label>
+            <div class="input-box" style="color:#aaa;">¥ 18,000</div>
+          </div>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span style="font-weight:700;">合計（自動計算）</span>
+          <span style="font-size:18px;font-weight:700;color:#16a34a;">¥ 53,000</span>
+        </div>
+        <div class="annotation">ここで指定した金額が受注者に提示されます。受注者はこの金額を確認したうえでエントリーします。</div>
       </div>
-      <div style="padding-top:10px;">
-        <table class="mk-table">
-          <tr><th>業者名</th><th>コメント</th><th>作業条件</th><th>操作</th></tr>
-          <tr><td>山田産廃㈱</td><td>対応可能です</td><td>午前中希望</td><td><span class="mk-btn mk-btn-blue">発注確定</span></td></tr>
-          <tr><td>田中運搬㈱</td><td>翌週も可能です</td><td>なし</td><td><span class="mk-btn mk-btn-blue">発注確定</span></td></tr>
-          <tr><td>グリーン収集㈱</td><td>ご連絡お待ちしてます</td><td>車両: 4ｔ</td><td><span class="mk-btn mk-btn-blue">発注確定</span></td></tr>
+      <div class="card">
+        <div class="card-title">付加情報</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">段差</div>
+            <div style="display:flex;gap:12px;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-step" value="不明" checked onchange="s06UpdateBiko()">不明</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-step" value="あり" onchange="s06UpdateBiko()">あり</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-step" value="なし" onchange="s06UpdateBiko()">なし</label>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">エレベーター</div>
+            <div style="display:flex;gap:12px;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-elev" value="不明" checked onchange="s06UpdateBiko()">不明</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-elev" value="あり" onchange="s06UpdateBiko()">あり</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-elev" value="なし" onchange="s06UpdateBiko()">なし</label>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">養生</div>
+            <div style="display:flex;gap:12px;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-prot" value="不明" checked onchange="s06UpdateBiko()">不明</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-prot" value="必要" onchange="s06UpdateBiko()">必要</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-prot" value="不要" onchange="s06UpdateBiko()">不要</label>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">駐車場</div>
+            <div style="display:flex;gap:12px;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-park" value="不明" checked onchange="s06UpdateBiko()">不明</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-park" value="あり" onchange="s06UpdateBiko()">あり</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-park" value="なし" onchange="s06UpdateBiko()">なし</label>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">電気</div>
+            <div style="display:flex;gap:12px;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-elec" value="不明" checked onchange="s06UpdateBiko()">不明</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-elec" value="あり" onchange="s06UpdateBiko()">あり</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-elec" value="なし" onchange="s06UpdateBiko()">なし</label>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#555;margin-bottom:6px;">水道</div>
+            <div style="display:flex;gap:12px;">
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-water" value="不明" checked onchange="s06UpdateBiko()">不明</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-water" value="あり" onchange="s06UpdateBiko()">あり</label>
+              <label style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:normal;text-transform:none;letter-spacing:0;color:#333;"><input type="radio" name="s06-water" value="なし" onchange="s06UpdateBiko()">なし</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">詳細確認・備考</div>
+        <div style="margin-bottom:16px;">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:13px;text-transform:none;letter-spacing:0;color:#333;">
+            <input type="checkbox" id="s06-tel-check" style="width:16px;height:16px;">
+            詳細確認は電話問い合わせにて
+          </label>
+          <div class="annotation" style="margin-top:4px;">チェックした場合、受注者から電話での詳細確認が入る場合があります。</div>
+        </div>
+        <div class="form-group">
+          <label>備考欄</label>
+          <div id="s06-biko-auto" style="border:1px solid #e5e7eb;border-radius:6px;padding:10px 12px;background:#f9fafb;margin-bottom:6px;min-height:48px;font-size:13px;color:#555;line-height:1.8;">
+            <span style="color:#bbb;font-style:italic;">（付加情報の選択内容が自動で表示されます）</span>
+          </div>
+          <textarea class="input-box" id="s06-biko-manual" style="min-height:80px;" placeholder="追加の備考があれば入力してください…"></textarea>
+          <div class="annotation">付加情報で選択した項目は上欄に自動表示されます。追加の補足事項は下欄に入力してください。</div>
+        </div>
+      </div>
+      <div class="btn-group" style="justify-content:flex-end;">
+        <button class="btn btn-secondary">下書き保存</button>
+        <button class="btn btn-primary" onclick="show('post-condition')">案件を公開する</button>
+      </div>
+    </div>
+
+    <!-- ========== S06 条件詳細 ========== -->
+    <div class="screen" id="s-condition-detail">
+      <button class="btn btn-secondary btn-sm" style="margin-bottom:16px;" onclick="show('post-condition')">← 案件管理に戻る</button>
+      <div class="breadcrumb">案件管理 › <span>#023 木くず・金属 / 渋谷区〇〇1-2-3 / 2026-05-10</span></div>
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <span class="tag" style="background:#fef9c3;color:#92400e;">エントリー受付中</span>
+        <span style="font-size:13px;color:#555;">現在 <strong>3社</strong> がエントリーしています</span>
+        <span style="margin-left:auto;font-size:12px;color:#888;">登録日: 2026-05-01　依頼金額: ¥53,000</span>
+      </div>
+      <div class="tabs">
+        <div class="tab" onclick="show('post-form')">登録内容を確認・編集</div>
+        <div class="tab active">エントリー一覧・選定</div>
+        <div class="tab" onclick="show('report-confirm')">完了報告確認</div>
+      </div>
+      <div class="alert alert-info">現在 <strong>3社</strong> がエントリーしています。1社を選定して発注を確定してください。</div>
+      <div class="card">
+        <div class="card-title">応募業者一覧</div>
+        <table>
+          <thead><tr><th>業者名</th><th>エントリー日時</th><th>コメント</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>ケット運搬</strong></td>
+              <td>2026-05-02 14:32</td>
+              <td style="color:#555;">翌日までにご連絡いただければ対応可能です。</td>
+              <td><button class="btn btn-success btn-sm" onclick="show('contract-create')">発注確定</button></td>
+            </tr>
+            <tr>
+              <td>〇〇産廃</td>
+              <td>2026-05-03 09:15</td>
+              <td style="color:#555;">現場確認後、対応可否をご連絡します。</td>
+              <td><button class="btn btn-success btn-sm">発注確定</button></td>
+            </tr>
+            <tr>
+              <td>▲▲クリーン</td>
+              <td>2026-05-03 16:48</td>
+              <td style="color:#aaa;">（コメントなし）</td>
+              <td><button class="btn btn-success btn-sm">発注確定</button></td>
+            </tr>
+          </tbody>
         </table>
-        <div class="warn" style="font-size:8pt; margin-top:8px;">「発注確定」を押すと、選ばれなかった業者に自動でお断り通知が届きます</div>
+        <div class="annotation" style="margin-top:10px;">「発注確定」後、未選定業者には自動で結果通知が送信され、契約書作成フローに進みます。</div>
       </div>
     </div>
-  </div>
-</div>
 
-<p>案件を公開すると、条件に合う業者がエントリー（応募）してきます。業者の内容を確認して発注先を決めます。</p>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">「案件管理」の一覧から、対象の案件の「詳細」ボタンを押します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">「エントリー一覧・選定」タブを押します</div>
-      <div class="result">エントリーしてきた業者の一覧が表示されます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">業者のコメントや作業条件を確認し、依頼したい業者を選びます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">4</div>
-    <div class="step-text">
-      <div class="action">選んだ業者の「発注確定」ボタンを押します</div>
-      <div class="result">選ばれなかった業者に自動でお断りの通知が届きます。選んだ業者との次の手続き（契約書の送付）に進みます</div>
-    </div>
-  </div>
-</div>
-<div class="warn">「発注確定」を押すと、選ばれなかった業者への通知が自動送信されます。押す前にしっかり業者を確認してください。</div>
-<hr>
-
-<!-- 7. 契約書送付 -->
-<h1>7. 契約書を送付する</h1>
-
-<!-- 契約書送付モックアップ -->
-<div class="mockup-wrap">
-  <div class="mockup-label">【画面イメージ】 <span>契約書アップロード・送付画面</span></div>
-  <div class="mockup-titlebar">
-    <span class="mockup-dot" style="background:#ef4444"></span>
-    <span class="mockup-dot" style="background:#f59e0b"></span>
-    <span class="mockup-dot" style="background:#22c55e"></span>
-    <span class="mockup-urlbar">https://jobguild.jp/contracts/upload</span>
-  </div>
-  <div class="mockup-body">
-    <div class="mk-nav"><span class="mk-nav-logo">JobGuild</span><span class="mk-nav-right"><span class="mk-nav-icon">🔔</span><span class="mk-nav-icon">👤</span></span></div>
-    <div class="mk-content">
-      <div style="font-size:10pt; font-weight:700; color:#1d4ed8; margin-bottom:10px;">📄 契約書アップロード・送付</div>
-      <div style="background:#eff6ff; border:1px solid #93c5fd; border-radius:5px; padding:6px 10px; font-size:7.5pt; color:#1e40af; margin-bottom:10px;">対象案件: ANK-002　受注業者: 山田産廃株式会社</div>
-      <div class="mk-2col">
-        <div class="mk-col">
-          <div class="mk-section-lbl">契約書PDFをアップロード</div>
-          <div class="mk-upload">
-            📎 ここにPDFをドロップ<br>または「ファイルを選択」
-          </div>
-          <div style="margin-top:6px; display:flex; gap:6px; font-size:7.5pt; align-items:center; background:white; border:1px solid #e2e8f0; border-radius:4px; padding:5px 8px;">
-            <span>📄 contract_yamada.pdf</span>
-            <span style="color:#6b7280;">124KB</span>
-            <span style="margin-left:auto;" class="mk-btn mk-btn-white" style="font-size:7pt;">確認</span>
+    <!-- ========== S08 契約書アップロード・送付 ========== -->
+    <div class="screen" id="s-contract-create">
+      <div class="breadcrumb">案件 #023 › <span>契約書アップロード・送付</span></div>
+      <div class="grid-2" style="align-items:start;">
+        <div>
+          <div class="card">
+            <div class="card-title">契約書（PDF）アップロード</div>
+            <div class="annotation" style="margin-bottom:12px;">発注者・受注者間の2社間契約書（PDF）をアップロードしてください。送付後、受注者がダウンロードして内容を確認します。</div>
+            <!-- アップロード済みファイル表示 -->
+            <div style="border:1px solid #d1fae5;background:#f0fdf4;border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+              <span style="font-size:24px;">📄</span>
+              <div style="flex:1;">
+                <div style="font-weight:600;color:#374151;font-size:13px;">contract_023_20260501.pdf</div>
+                <div style="font-size:11px;color:#6b7280;margin-top:2px;">842 KB　2026-05-01 アップロード済み</div>
+              </div>
+              <button class="btn btn-secondary btn-sm">削除</button>
+            </div>
+            <!-- ドロップゾーン -->
+            <div style="border:2px dashed #93c5fd;border-radius:8px;padding:20px;text-align:center;background:#eff6ff;cursor:pointer;color:#2563eb;font-size:13px;">
+              📁 クリックまたはドラッグ＆ドロップでPDFを追加・差し替え
+              <input type="file" accept="application/pdf" style="display:none;">
+            </div>
+            <div class="btn-group" style="margin-top:12px;">
+              <button class="btn btn-secondary btn-sm">📥 ダウンロードして確認</button>
+            </div>
+            <div class="annotation" style="margin-top:12px;color:#6b7280;">※ 内容に不明点がある場合は、受注者から担当者へ直接お電話でご確認ください。</div>
           </div>
         </div>
-        <div class="mk-col">
-          <div class="mk-section-lbl">特記事項（任意）</div>
-          <div style="border:1px solid #d1d5db; border-radius:4px; padding:6px 8px; font-size:7.5pt; color:#9ca3af; height:60px; background:white;">特記事項があれば入力</div>
-          <div style="margin-top:8px; background:#fef9c3; border:1px solid #fbbf24; border-radius:4px; padding:5px 8px; font-size:7.5pt; color:#92400e;">不明点は受注者が担当者に直接電話で確認します</div>
-          <div style="margin-top:8px;"><span class="mk-btn mk-btn-blue" style="display:block; text-align:center; padding:8px 0;">受注者に契約書を送付する</span></div>
-          <div style="font-size:7pt; color:#6b7280; text-align:center; margin-top:4px;">書類は5年間クラウドに保管されます</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<p>発注確定後、契約書（PDF）を業者に送付します。契約書はお客様（発注者）と業者（受注者）の2社間で直接締結します。</p>
-<div class="info">契約書のPDFは、事前にご自身でご用意いただく必要があります。</div>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">「発注確定」を押すと、契約書のアップロード画面が開きます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">契約書のPDFファイルを、左側の「ここにファイルをドロップ」の枠内にドラッグして放します（またはフォルダから選びます）</div>
-      <div class="result">ファイル名とサイズが表示されます。「確認」ボタンで内容を確認できます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">特記事項（業者への追加連絡事項）があれば右側の欄に入力します（任意）</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">4</div>
-    <div class="step-text">
-      <div class="action">「受注者に契約書を送付する」ボタンを押します</div>
-      <div class="result">業者に契約書の到着通知が届きます。契約書は5年間クラウドに保管されます</div>
-    </div>
-  </div>
-</div>
-<div class="tip">契約書の内容について業者から質問がある場合、業者が担当者に直接電話で確認することがあります。担当者連絡先を業者に伝えておくとスムーズです。</div>
-<hr>
-
-<!-- 8. 完了報告確認 -->
-<h1>8. 完了報告を確認・承認する</h1>
-
-<!-- 完了報告確認モックアップ -->
-<div class="mockup-wrap">
-  <div class="mockup-label">【画面イメージ】 <span>回収・完了報告確認画面</span></div>
-  <div class="mockup-titlebar">
-    <span class="mockup-dot" style="background:#ef4444"></span>
-    <span class="mockup-dot" style="background:#f59e0b"></span>
-    <span class="mockup-dot" style="background:#22c55e"></span>
-    <span class="mockup-urlbar">https://jobguild.jp/projects/ANK-002/report</span>
-  </div>
-  <div class="mockup-body">
-    <div class="mk-nav"><span class="mk-nav-logo">JobGuild</span><span class="mk-nav-right"><span class="mk-nav-icon">🔔</span><span class="mk-nav-icon">👤</span></span></div>
-    <div class="mk-content">
-      <div style="background:#1e3a8a; color:white; border-radius:5px; padding:6px 10px; font-size:7.5pt; display:flex; gap:16px; margin-bottom:10px;">
-        <span>案件: ANK-002</span><span>品目: 廃プラ</span><span>受注: 山田産廃㈱</span><span>金額: ¥80,000</span>
-      </div>
-      <div class="mk-2col">
-        <div class="mk-col">
-          <div class="mk-section-lbl">報告データ</div>
-          <table class="mk-table">
-            <tr><td>回収日</td><td><strong>2026/06/10</strong></td></tr>
-            <tr><td>処分日</td><td><strong>2026/06/11</strong></td></tr>
-            <tr><td>計量値</td><td><strong>2.3ｔ</strong></td></tr>
-            <tr><td>マニフェスト</td><td><strong>MA-20260610</strong></td></tr>
-          </table>
-          <div class="mk-section-lbl" style="margin-top:8px;">エビデンス写真</div>
-          <div style="display:flex; gap:4px; margin-top:4px;">
-            <div style="width:50px; height:40px; background:#e2e8f0; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:8pt;">📷</div>
-            <div style="width:50px; height:40px; background:#e2e8f0; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:8pt;">📷</div>
-            <div style="width:50px; height:40px; background:#e2e8f0; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:8pt;">📷</div>
+        <div>
+          <div class="card">
+            <div class="card-title">法定補足・特記事項（任意）</div>
+            <div class="annotation" style="margin-bottom:12px;">案件登録フォームの備考欄とは別に、契約書に関する特記事項を入力してください。</div>
+            <div class="form-group" style="margin-bottom:12px;">
+              <label>排出・作業に関する特記事項</label>
+              <textarea class="input-box" style="height:80px;" placeholder="例：搬出は午前中のみ可。現場担当者への事前連絡必須。"></textarea>
+            </div>
+            <div class="form-group">
+              <label>その他契約上の条件</label>
+              <textarea class="input-box" style="height:60px;" placeholder="例：支払いサイト 翌月末払い。"></textarea>
+            </div>
           </div>
-        </div>
-        <div class="mk-col">
-          <div class="mk-section-lbl">最終報告書PDF</div>
-          <div style="background:white; border:1px solid #e2e8f0; border-radius:4px; padding:8px; text-align:center; margin-bottom:8px; font-size:7.5pt;">📄 report_ANK002.pdf<br><span class="mk-btn mk-btn-white" style="margin-top:4px; display:inline-block;">ダウンロード</span></div>
-          <div class="mk-section-lbl">承認・完了処理</div>
-          <div style="display:flex; flex-direction:column; gap:6px; margin-top:4px;">
-            <span class="mk-btn mk-btn-green" style="display:block; text-align:center; padding:7px 0;">✅ 承認する（完了）</span>
-            <span class="mk-btn" style="display:block; text-align:center; padding:7px 0; background:#fef9c3; color:#92400e; border:1px solid #fbbf24;">⚠️ 差し戻す（再報告依頼）</span>
+          <div class="card" style="border-color:#2563eb;">
+            <div class="card-title">受注者への送付</div>
+            <div class="annotation" style="margin-bottom:12px;">上記の契約書PDFと特記事項を受注者に送付します。受注者はダウンロードして内容を確認します。</div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;">📨 受注者に契約書を送付する</button>
+            <div class="annotation" style="margin-top:8px;">送付後、受注者に通知が届きます。書類はクラウドに5年間保管されます。</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<p>業者が作業を完了すると、処分完了の報告がシステムに届きます。内容を確認して承認してください。</p>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">「案件管理」の一覧から、対象案件の「完了報告」ボタンを押します</div>
-      <div class="result">完了報告の確認画面が開きます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">左側に表示されている報告内容（回収日・処分日・計量値・マニフェスト番号・写真）を確認します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">右側の「最終報告書PDF」の「ダウンロード」ボタンを押して、報告書を確認します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">4</div>
-    <div class="step-text">
-      <div class="action">内容に問題がなければ「✅ 承認する（完了）」ボタンを押します</div>
-      <div class="result">案件が完了となり、書類が正式にアーカイブ（保管）されます</div>
-    </div>
-  </div>
-</div>
-<div class="warn">報告内容に不備がある場合は「⚠️ 差し戻す（再報告依頼）」ボタンを押してください。業者に再報告を求める通知が届きます。</div>
-<hr>
+    <!-- ========== S09 回収・完了報告確認 ========== -->
+    <div class="screen" id="s-report-confirm">
+      <div class="breadcrumb">案件 #021 › <span>回収・完了報告確認</span></div>
 
-<!-- 9. 通知確認 -->
-<h1>9. 通知を確認する</h1>
-<p>エントリーの受信・契約書の送付完了・完了報告など、重要なお知らせは通知として届きます。</p>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">画面右上のベルのアイコン（🔔）を押します</div>
-      <div class="result">通知の一覧が表示されます。未読のお知らせは青い背景で表示されます</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">確認したい通知を押すと、関連する画面に移動します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">全てのお知らせを既読にしたい場合は「すべて既読にする」ボタンを押します</div>
-    </div>
-  </div>
-</div>
-<div class="tip">ベルのアイコンに数字が表示されている場合、その数だけ未読の通知があります。</div>
-<hr>
+      <!-- 案件サマリーバー -->
+      <div class="card" style="margin-bottom:16px;background:#f8fafc;border-color:#e5e7eb;">
+        <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:13px;">
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">案件番号</div><strong>#021</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">品目</div><strong>廃プラスチック</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">作業所在地</div><strong>東京都渋谷区〇〇1-2-3</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">受注業者</div><strong>ケット運搬株式会社</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">依頼金額</div><strong>¥53,000</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">契約日</div><strong>2026-04-15</strong></div>
+        </div>
+      </div>
 
-<!-- 10. アカウント設定 -->
-<h1>10. アカウント設定・パスワード変更</h1>
-<h2>会社情報・担当者情報を変更する</h2>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">画面右上の人のアイコン（👤）を押し、「アカウント設定」を選びます</div>
+      <div class="grid-2" style="align-items:start;">
+        <div>
+          <div class="card">
+            <div class="card-title">受注者からの報告データ</div>
+            <table><tbody>
+              <tr><td style="color:#888;width:130px;">回収日</td><td>2026-04-20</td></tr>
+              <tr><td style="color:#888;">処分日</td><td>2026-04-21</td></tr>
+              <tr><td style="color:#888;">最終計量値</td><td><strong>520 kg</strong></td></tr>
+              <tr><td style="color:#888;">マニフェスト番号</td><td>A-2026-042101</td></tr>
+            </tbody></table>
+          </div>
+          <div class="card">
+            <div class="card-title">エビデンス写真</div>
+            <div style="font-size:12px;color:#888;margin-bottom:6px;">積載時</div>
+            <div class="photo-strip">
+              <div class="img-box img-thumb"><span style="position:relative;z-index:1;">積載写真1</span></div>
+              <div class="img-box img-thumb"><span style="position:relative;z-index:1;">積載写真2</span></div>
+            </div>
+            <div style="font-size:12px;color:#888;margin-top:12px;margin-bottom:6px;">処分後</div>
+            <div class="photo-strip"><div class="img-box img-thumb"><span style="position:relative;z-index:1;">処分後写真</span></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom:12px;">
+            <div class="card-title">最終報告書（PDF）</div>
+            <div style="border:1px solid #e5e7eb;border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;">
+              <span style="font-size:24px;">📄</span>
+              <div style="flex:1;">
+                <div style="font-weight:600;font-size:13px;color:#374151;">report_021_20260421.pdf</div>
+                <div style="font-size:11px;color:#6b7280;margin-top:2px;">受注者より提出済み　2026-04-21</div>
+              </div>
+              <button class="btn btn-secondary btn-sm">📥 DL</button>
+            </div>
+          </div>
+          <div class="card" style="border-color:#16a34a;">
+            <div class="card-title">承認・完了処理</div>
+            <div class="alert alert-success" style="margin-bottom:16px;">報告内容とエビデンス写真を確認のうえ、承認してください。承認後、書類が正式アーカイブされます。</div>
+            <button class="btn btn-success" style="width:100%;justify-content:center;margin-bottom:10px;">✅ 承認する（完了）</button>
+            <button class="btn btn-secondary" style="width:100%;justify-content:center;">⚠️ 差し戻す（再報告依頼）</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">左側の欄に現在の登録情報が表示されます。変更したい項目（担当者名・電話番号・メールアドレス）を書き直します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <div class="action">「変更を保存する」ボタンを押します</div>
-    </div>
-  </div>
-</div>
-<h2>パスワードを変更する</h2>
-<div class="step-box">
-  <div class="step-item">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <div class="action">「アカウント設定」画面の右側にある「パスワード変更」の欄に、現在のパスワードと新しいパスワードを入力します</div>
-    </div>
-  </div>
-  <div class="step-item">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <div class="action">「パスワードを変更する」ボタンを押します</div>
-      <div class="result">新しいパスワードが設定されます</div>
-    </div>
-  </div>
-</div>
-<div class="warn">パスワードは8文字以上で設定してください。</div>
-<hr>
 
-<!-- 11. FAQ -->
-<h1>11. よくある質問（FAQ）</h1>
-<div class="faq-item">
-  <div class="faq-q">Q. 案件を公開したのに業者からエントリーが来ない</div>
-  <div class="faq-a">A. 公開直後はしばらく時間がかかる場合があります。希望金額が市場相場と大きく異なる場合や、特殊条件が多い場合はエントリーが少ないことがあります。数日待っても来ない場合はシステム担当者にご相談ください。</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Q. 登録した案件の内容を修正したい</div>
-  <div class="faq-a">A. 「案件管理」→「詳細」→「登録内容を確認・編集」タブから修正できます。業者が既にエントリーしている場合は、内容の変更が業者に影響することがあります。大きな変更がある場合は業者にもご連絡ください。</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Q. 複数の業者からエントリーが来た。どれを選べばよいか</div>
-  <div class="faq-a">A. 業者のコメント・作業条件を参考に、信頼できると判断した業者をお選びください。業者の許可証情報はシステム担当者にお問い合わせいただくと確認できます。</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Q. 契約書のPDFファイルをどう用意すればよいか</div>
-  <div class="faq-a">A. 契約書の書式は各社でご用意いただく必要があります。既存の契約書ひな型をPDF形式に変換してご使用ください。PDF変換の方法がわからない場合はシステム担当者にご相談ください。</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Q. 完了報告の内容を間違えて承認してしまった</div>
-  <div class="faq-a">A. 一度承認した後に取り消すことはできません。お困りの場合はシステム担当者にご連絡ください。</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Q. パスワードを忘れてログインできない</div>
-  <div class="faq-a">A. ログイン画面の「パスワードをお忘れの方」リンクを押してください。登録したメールアドレス宛てにリセット用のリンクが届きます。メールが届かない場合は迷惑メールフォルダもご確認ください。</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Q. 契約書や完了報告書はどこで確認できるか</div>
-  <div class="faq-a">A. システム内に5年間保管されます。必要な場合はシステム担当者にご依頼ください。</div>
-</div>
+    <!-- S21 パスワードリセット -->
+    <div class="screen" id="s-pw-reset">
+      <div style="max-width:500px;margin:0 auto;">
+        <div class="stepper" style="margin-bottom:24px;">
+          <div class="step active">1<span>メール送信</span></div>
+          <div class="step-line"></div>
+          <div class="step">2<span>メール確認</span></div>
+          <div class="step-line"></div>
+          <div class="step">3<span>新PW設定</span></div>
+        </div>
+
+        <!-- STEP 1 active -->
+        <div class="card" style="margin-bottom:16px;">
+          <h3 style="margin-bottom:12px;">STEP 1｜メールアドレスを入力</h3>
+          <div class="alert alert-info" style="margin-bottom:16px;">登録済みのメールアドレスにリセットリンクをお送りします。</div>
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">メールアドレス</label>
+          <input type="email" value="user@example.com" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:16px;">
+          <button class="btn btn-primary" style="width:100%;">リセットメールを送る</button>
+          <div style="text-align:center;margin-top:12px;font-size:13px;">
+            <a href="#" onclick="show('login')" style="color:#2563eb;">ログイン画面に戻る</a>
+          </div>
+        </div>
+
+        <!-- STEP 2 faded -->
+        <div class="card" style="margin-bottom:16px;border:1.5px dashed #d1d5db;opacity:0.6;">
+          <h3 style="margin-bottom:12px;">STEP 2｜メールを確認</h3>
+          <div class="alert alert-info" style="margin-bottom:12px;">送信されたメール内のリンクをクリックしてください。</div>
+          <p style="font-size:13px;color:#6b7280;margin:0;">※ リンクの有効期限は24時間です。届かない場合は迷惑メールフォルダをご確認ください。</p>
+        </div>
+
+        <!-- STEP 3 faded -->
+        <div class="card" style="border:1.5px dashed #d1d5db;opacity:0.6;">
+          <h3 style="margin-bottom:12px;">STEP 3｜新しいパスワードを設定</h3>
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">新しいパスワード</label>
+          <input type="password" placeholder="8文字以上" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">パスワード（確認）</label>
+          <input type="password" placeholder="再入力" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:16px;">
+          <button class="btn btn-primary" style="width:100%;">パスワードを設定する</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- S23 通知・お知らせ一覧 -->
+    <div class="screen" id="s-notifications">
+      <div class="section-header">
+        <h2>通知・お知らせ一覧</h2>
+        <button class="btn btn-outline" style="font-size:12px;">すべて既読にする</button>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <!-- 未読 -->
+        <div class="notif-row unread">
+          <div class="unread-dot"></div>
+          <div class="notif-body">
+            <div class="notif-title">エントリーが届きました</div>
+            <div class="notif-text">「廃プラスチック 東京・月2回」に2社からエントリーがありました。内容を確認してください。</div>
+            <div class="notif-time">2026-04-28 09:15</div>
+          </div>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('condition-detail')">確認する</button>
+        </div>
+        <div class="notif-row unread">
+          <div class="unread-dot"></div>
+          <div class="notif-body">
+            <div class="notif-title">契約書を受注者に送付しました</div>
+            <div class="notif-text">「廃油 大阪・週1回」の契約書PDFを受注者に送付しました。受注者の確認をお待ちください。</div>
+            <div class="notif-time">2026-04-27 17:42</div>
+          </div>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('contract-create')">確認する</button>
+        </div>
+        <div class="notif-row unread">
+          <div class="unread-dot"></div>
+          <div class="notif-body">
+            <div class="notif-title">完了報告が提出されました</div>
+            <div class="notif-text">「廃プラ 名古屋・月1回」の回収完了報告が提出されました。内容を承認してください。</div>
+            <div class="notif-time">2026-04-27 14:00</div>
+          </div>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('report-confirm')">承認する</button>
+        </div>
+        <!-- 既読 -->
+        <div class="notif-row" style="opacity:0.65;">
+          <div class="notif-body">
+            <div class="notif-title">案件が公開されました</div>
+            <div class="notif-text">「廃棄物（混合） 福岡・随時」の案件が公開されました。エントリー可能です。</div>
+            <div class="notif-time">2026-04-26 11:30</div>
+          </div>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;opacity:0.6;" onclick="show('search')">詳細</button>
+        </div>
+        <div class="notif-row" style="opacity:0.65;">
+          <div class="notif-body">
+            <div class="notif-title">【重要】システムメンテナンスのお知らせ</div>
+            <div class="notif-text">2026-05-01 02:00〜04:00 の間、システムメンテナンスを実施します。この間はご利用いただけません。</div>
+            <div class="notif-time">2026-04-25 09:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S24 アカウント設定 -->
+    <div class="screen" id="s-account">
+      <div class="section-header"><h2>アカウント設定</h2></div>
+
+      <!-- ① サマリーバー -->
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <div style="flex:2;min-width:160px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">会社名</div>
+          <div style="font-size:15px;font-weight:700;">株式会社サンプル産業</div>
+        </div>
+        <div style="flex:1;min-width:100px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">区分</div>
+          <div><span class="tag" style="background:#dbeafe;color:#1d4ed8;">発注者</span></div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">プラン</div>
+          <div style="font-size:14px;font-weight:700;">基本会員</div>
+          <div style="font-size:11px;color:#6b7280;">¥11,000（税込）/ 月</div>
+        </div>
+        <div style="flex:1;min-width:110px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">登録日</div>
+          <div style="font-size:14px;font-weight:700;">2025-10-01</div>
+        </div>
+      </div>
+
+      <!-- ② 基本情報変更 / PW変更 -->
+      <div class="grid-2" style="align-items:start;">
+        <div class="card">
+          <h3 style="margin-bottom:16px;">基本情報の変更</h3>
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">担当者名</label>
+          <input type="text" value="山田 太郎" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">電話番号</label>
+          <input type="tel" value="03-1234-5678" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">メールアドレス</label>
+          <input type="email" value="yamada@sample.co.jp" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:20px;">
+          <button class="btn btn-primary">変更を保存する</button>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom:16px;">パスワードの変更</h3>
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">現在のパスワード</label>
+          <input type="password" placeholder="現在のパスワード" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">新しいパスワード</label>
+          <input type="password" placeholder="8文字以上" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:12px;">
+          <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">新しいパスワード（確認）</label>
+          <input type="password" placeholder="再入力" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px 10px;font-size:14px;margin-bottom:20px;">
+          <button class="btn btn-primary">パスワードを変更する</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="screen" id="s-flow">
+      <div class="section-header"><h2>画面遷移図</h2><span style="font-size:13px;color:#6b7280;">クリックで各画面に遷移します</span></div>
+      <div style="overflow-x:auto;">
+        <svg width="960" height="540" style="display:block;font-family:sans-serif;font-size:12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;">
+          <defs>
+            <marker id="arr"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#9ca3af"/></marker>
+            <marker id="arr-b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/></marker>
+            <marker id="arr-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/></marker>
+            <marker id="arr-r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/></marker>
+            <marker id="arr-o" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f97316"/></marker>
+            <marker id="arr-v" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7c3aed"/></marker>
+          </defs>
+
+          <!-- Swim lane backgrounds -->
+          <rect x="0"   y="0" width="240" height="540" fill="#f8fafc"/>
+          <rect x="240" y="0" width="240" height="540" fill="#eff6ff"/>
+          <rect x="480" y="0" width="240" height="540" fill="#f0fdf4"/>
+          <rect x="720" y="0" width="240" height="540" fill="#fef2f2"/>
+          <!-- Lane borders -->
+          <line x1="240" y1="0" x2="240" y2="540" stroke="#e5e7eb" stroke-width="1"/>
+          <line x1="480" y1="0" x2="480" y2="540" stroke="#e5e7eb" stroke-width="1"/>
+          <line x1="720" y1="0" x2="720" y2="540" stroke="#e5e7eb" stroke-width="1"/>
+          <!-- Lane headers -->
+          <rect x="0"   y="0" width="240" height="30" fill="#6b7280"/>
+          <rect x="240" y="0" width="240" height="30" fill="#2563eb"/>
+          <rect x="480" y="0" width="240" height="30" fill="#16a34a"/>
+          <rect x="720" y="0" width="240" height="30" fill="#dc2626"/>
+          <text x="120" y="20" fill="white" text-anchor="middle" font-weight="bold">共通</text>
+          <text x="360" y="20" fill="white" text-anchor="middle" font-weight="bold">発注者</text>
+          <text x="600" y="20" fill="white" text-anchor="middle" font-weight="bold">受注者</text>
+          <text x="840" y="20" fill="white" text-anchor="middle" font-weight="bold">管理者</text>
+
+          <!-- Helper: box macro via use/symbol not available; draw each box explicitly -->
+          <!-- Row y positions: A=50, B=110, C=170, D=230, E=290, F=350, G=410 (box h=44) -->
+
+          <!-- 共通 screens -->
+          <!-- S01 login (A) -->
+          <g onclick="show('login')" style="cursor:pointer;">
+            <rect x="10" y="50" width="220" height="44" rx="6" fill="white" stroke="#6b7280" stroke-width="1.5"/>
+            <text x="120" y="67" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S01 ログイン</text>
+            <text x="120" y="82" fill="#6b7280" text-anchor="middle" font-size="10">共通</text>
+          </g>
+          <!-- S02 register (B) -->
+          <g onclick="show('register')" style="cursor:pointer;">
+            <rect x="10" y="110" width="220" height="44" rx="6" fill="white" stroke="#6b7280" stroke-width="1.5"/>
+            <text x="120" y="127" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S02 会員登録</text>
+            <text x="120" y="142" fill="#6b7280" text-anchor="middle" font-size="10">共通</text>
+          </g>
+          <!-- S03 billing (C) -->
+          <g onclick="show('billing')" style="cursor:pointer;">
+            <rect x="10" y="170" width="220" height="44" rx="6" fill="white" stroke="#6b7280" stroke-width="1.5"/>
+            <text x="120" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S03 サブスク決済</text>
+            <text x="120" y="202" fill="#6b7280" text-anchor="middle" font-size="10">共通</text>
+          </g>
+          <!-- S21 pw-reset (D) NEW -->
+          <g onclick="show('pw-reset')" style="cursor:pointer;">
+            <rect x="10" y="230" width="220" height="44" rx="6" fill="white" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <text x="120" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S21 PW リセット</text>
+            <text x="120" y="262" fill="#6b7280" text-anchor="middle" font-size="10">共通 · NEW</text>
+          </g>
+          <!-- S23 notifications (E) NEW -->
+          <g onclick="show('notifications')" style="cursor:pointer;">
+            <rect x="10" y="290" width="220" height="44" rx="6" fill="white" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <text x="120" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S23 通知一覧</text>
+            <text x="120" y="322" fill="#6b7280" text-anchor="middle" font-size="10">共通 · NEW</text>
+          </g>
+          <!-- S24 account (F) NEW -->
+          <g onclick="show('account')" style="cursor:pointer;">
+            <rect x="10" y="350" width="220" height="44" rx="6" fill="white" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <text x="120" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S24 アカウント設定</text>
+            <text x="120" y="382" fill="#6b7280" text-anchor="middle" font-size="10">共通 · NEW</text>
+          </g>
+
+          <!-- 発注者 screens -->
+          <!-- S04 i-dashboard (B) -->
+          <g onclick="show('i-dashboard')" style="cursor:pointer;">
+            <rect x="250" y="110" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="360" y="127" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S04 発注者DB</text>
+            <text x="360" y="142" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
+          </g>
+          <!-- S06 post-condition (C) -->
+          <g onclick="show('post-condition')" style="cursor:pointer;">
+            <rect x="250" y="170" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="360" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S06 案件管理</text>
+            <text x="360" y="202" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
+          </g>
+          <!-- S06 post-form (D) -->
+          <g onclick="show('post-form')" style="cursor:pointer;">
+            <rect x="250" y="230" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="360" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S06 案件登録フォーム</text>
+            <text x="360" y="262" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
+          </g>
+          <!-- S06 condition-detail (E) -->
+          <g onclick="show('condition-detail')" style="cursor:pointer;">
+            <rect x="250" y="290" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="360" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S06 案件詳細・エントリー選定</text>
+            <text x="360" y="322" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
+          </g>
+          <!-- S08 contract-create (F) -->
+          <g onclick="show('contract-create')" style="cursor:pointer;">
+            <rect x="250" y="350" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="360" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S08 契約書作成</text>
+            <text x="360" y="382" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
+          </g>
+          <!-- S09 report-confirm (G) -->
+          <g onclick="show('report-confirm')" style="cursor:pointer;">
+            <rect x="250" y="410" width="220" height="44" rx="6" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="360" y="427" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S09 完了報告確認</text>
+            <text x="360" y="442" fill="#2563eb" text-anchor="middle" font-size="10">発注者</text>
+          </g>
+
+          <!-- 受注者 screens -->
+          <!-- S10 r-settings (B) -->
+          <g onclick="show('r-settings')" style="cursor:pointer;">
+            <rect x="490" y="110" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="600" y="127" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S10 受注設定</text>
+            <text x="600" y="142" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
+          </g>
+          <!-- S11 search (C) -->
+          <g onclick="show('search')" style="cursor:pointer;">
+            <rect x="490" y="170" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="600" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S11 案件検索</text>
+            <text x="600" y="202" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
+          </g>
+          <!-- S11-2 案件詳細・エントリー (D) ※旧S12廃止 -->
+          <g onclick="show('search-detail')" style="cursor:pointer;">
+            <rect x="490" y="230" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="600" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S11 案件詳細・エントリー</text>
+            <text x="600" y="262" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
+          </g>
+          <!-- S13 order-manage (E) -->
+          <g onclick="show('order-manage')" style="cursor:pointer;">
+            <rect x="490" y="290" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="600" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S13 受注管理・契約</text>
+            <text x="600" y="322" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
+          </g>
+          <!-- S14 field-report (F) -->
+          <g onclick="show('field-report')" style="cursor:pointer;">
+            <rect x="490" y="350" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="600" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S14 現場報告</text>
+            <text x="600" y="382" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
+          </g>
+          <!-- S15 completion (G) -->
+          <g onclick="show('completion')" style="cursor:pointer;">
+            <rect x="490" y="410" width="220" height="44" rx="6" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="600" y="427" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S15 処分完了入力</text>
+            <text x="600" y="442" fill="#16a34a" text-anchor="middle" font-size="10">受注者</text>
+          </g>
+
+          <!-- 管理者 screens -->
+          <!-- S16 a-dashboard (B) -->
+          <g onclick="show('a-dashboard')" style="cursor:pointer;">
+            <rect x="730" y="110" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="840" y="127" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S16 管理者DB</text>
+            <text x="840" y="142" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
+          </g>
+          <!-- S17 review (C) -->
+          <g onclick="show('review')" style="cursor:pointer;">
+            <rect x="730" y="170" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="840" y="187" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S17 事業者審査</text>
+            <text x="840" y="202" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
+          </g>
+          <!-- S18 user-payment (D) -->
+          <g onclick="show('user-payment')" style="cursor:pointer;">
+            <rect x="730" y="230" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="840" y="247" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S18 ユーザー・決済</text>
+            <text x="840" y="262" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
+          </g>
+          <!-- S19 archive (E) -->
+          <g onclick="show('archive')" style="cursor:pointer;">
+            <rect x="730" y="290" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="840" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S19 モニタリング</text>
+            <text x="840" y="322" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
+          </g>
+          <!-- S20 master (F) -->
+          <g onclick="show('master')" style="cursor:pointer;">
+            <rect x="730" y="350" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="840" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S20 マスタ設定</text>
+            <text x="840" y="382" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
+          </g>
+          <!-- S28 trouble (G) NEW -->
+          <g onclick="show('trouble')" style="cursor:pointer;">
+            <rect x="730" y="410" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <text x="840" y="427" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S28 トラブル対応</text>
+            <text x="840" y="442" fill="#dc2626" text-anchor="middle" font-size="10">管理者 · NEW</text>
+          </g>
+
+          <!-- ===== Arrows ===== -->
+          <!-- S01→S02 (共通 内 A→B) -->
+          <line x1="120" y1="94" x2="120" y2="108" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- S02→S03 (共通 内 B→C) -->
+          <line x1="120" y1="154" x2="120" y2="168" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- S21 パスワードリセット ← S01 (left side branch) -->
+          <line x1="10" y1="72" x2="4" y2="72" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="4" y1="72" x2="4" y2="252" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="4" y1="252" x2="9" y2="252" stroke="#9ca3af" stroke-width="1" marker-end="url(#arr)"/>
+
+          <!-- S01 login → fork bar at y=46 → S04/S10/S16 dashboards -->
+          <line x1="120" y1="50" x2="120" y2="44" stroke="#9ca3af" stroke-width="1.5"/>
+          <line x1="120" y1="44" x2="840" y2="44" stroke="#9ca3af" stroke-width="1.5"/>
+          <line x1="360" y1="44" x2="360" y2="108" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
+          <line x1="600" y1="44" x2="600" y2="108" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
+          <line x1="840" y1="44" x2="840" y2="108" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
+
+          <!-- 発注者 in-lane arrows: S04→S06管理→S06登録→S06詳細→S08→S09 -->
+          <line x1="360" y1="154" x2="360" y2="168" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
+          <line x1="360" y1="214" x2="360" y2="228" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
+          <line x1="360" y1="274" x2="360" y2="288" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
+          <line x1="360" y1="334" x2="360" y2="348" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
+          <line x1="360" y1="394" x2="360" y2="408" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-b)"/>
+
+          <!-- 受注者 in-lane arrows: S10→S11→S11詳細→S13→S14→S15(自動遷移) -->
+          <line x1="600" y1="154" x2="600" y2="168" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
+          <line x1="600" y1="214" x2="600" y2="228" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
+          <line x1="600" y1="274" x2="600" y2="288" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
+          <line x1="600" y1="334" x2="600" y2="348" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-g)"/>
+          <line x1="600" y1="394" x2="600" y2="408" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-v)"/>
+          <text x="660" y="403" fill="#7c3aed" font-size="9" text-anchor="middle">自動遷移</text>
+
+          <!-- 管理者 in-lane arrows: S16→S17→S18→S19→S20→S28 -->
+          <line x1="840" y1="154" x2="840" y2="168" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
+          <line x1="840" y1="214" x2="840" y2="228" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
+          <line x1="840" y1="274" x2="840" y2="288" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
+          <line x1="840" y1="334" x2="840" y2="348" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
+          <line x1="840" y1="394" x2="840" y2="408" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
+
+          <!-- クロスレーン: S06詳細(発注者 E,y=312)→S13(受注者 E,y=312) オレンジ横矢印 -->
+          <line x1="472" y1="312" x2="488" y2="312" stroke="#f97316" stroke-width="1.5" marker-end="url(#arr-o)"/>
+          <text x="480" y="308" fill="#f97316" font-size="9" text-anchor="middle">選定</text>
+
+          <!-- クロスレーン: S15(受注者 G,y=432)→S09(発注者 G,y=432) 紫横矢印 -->
+          <line x1="490" y1="432" x2="474" y2="432" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arr-v)"/>
+          <text x="482" y="428" fill="#7c3aed" font-size="9" text-anchor="middle">完了</text>
+
+          <!-- Legend -->
+          <rect x="0" y="500" width="960" height="40" fill="#f8fafc"/>
+          <line x1="10" y1="520" x2="30" y2="520" stroke="#9ca3af" stroke-width="1.5"/>
+          <text x="35" y="524" fill="#6b7280" font-size="10">共通フロー</text>
+          <line x1="100" y1="520" x2="120" y2="520" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="125" y="524" fill="#6b7280" font-size="10">発注者</text>
+          <line x1="175" y1="520" x2="195" y2="520" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="524" fill="#6b7280" font-size="10">受注者</text>
+          <line x1="250" y1="520" x2="270" y2="520" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="275" y="524" fill="#6b7280" font-size="10">管理者</text>
+          <line x1="320" y1="520" x2="340" y2="520" stroke="#f97316" stroke-width="1.5"/>
+          <text x="345" y="524" fill="#6b7280" font-size="10">選定通知</text>
+          <line x1="400" y1="520" x2="420" y2="520" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="425" y="524" fill="#6b7280" font-size="10">完了報告</text>
+          <rect x="475" y="513" width="30" height="14" rx="3" fill="white" stroke="#6b7280" stroke-dasharray="5,3"/>
+          <text x="510" y="524" fill="#6b7280" font-size="10">破線 = NEW画面</text>
+          <text x="620" y="524" fill="#6b7280" font-size="10">※ S23通知・S24設定はツールバーから全画面アクセス可</text>
+        </svg>
+      </div>
+    </div>
+
+  </div><!-- /#content -->
+</div><!-- /#main -->
+
+<script>
+const meta = {
+  'login':          { title: 'S01 ログイン画面',                   role: '共通' },
+  'register':       { title: 'S02 会員登録画面',                   role: '共通' },
+  'billing':        { title: 'S03 サブスク決済・アカウント管理',    role: '共通' },
+  'pw-reset':       { title: 'S21 パスワードリセット',             role: '共通' },
+  'notifications':  { title: 'S23 通知・お知らせ一覧',             role: '共通' },
+  'account':        { title: 'S24 アカウント設定',                 role: '共通' },
+  'i-dashboard':      { title: 'S04 発注者ダッシュボード',          role: '発注者' },
+  'post-condition':   { title: 'S06 案件管理',                     role: '発注者' },
+  'post-form':        { title: 'S06 案件登録フォーム',             role: '発注者' },
+  'condition-detail': { title: 'S06 案件詳細・エントリー選定',     role: '発注者' },
+  'contract-create':  { title: 'S08 契約書作成・確認',             role: '発注者' },
+  'report-confirm':   { title: 'S09 回収・完了報告確認',           role: '発注者' },
+  'flow':           { title: '画面遷移図',                         role: '全ロール' },
+};
+const roleColor = { '共通':'#6b7280','発注者':'#2563eb','受注者':'#16a34a','管理者':'#dc2626','全ロール':'#6b7280' };
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const sc = document.getElementById('s-' + id);
+  if (sc) sc.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if ((n.getAttribute('onclick') || '').includes("'" + id + "'")) n.classList.add('active');
+  });
+  const m = meta[id] || { title: id, role: '' };
+  document.getElementById('t-title').textContent = m.title;
+  const badge = document.getElementById('t-role');
+  badge.textContent = m.role;
+  const c = roleColor[m.role] || '#6b7280';
+  badge.style.background = c + '22';
+  badge.style.color = c;
+}
+// --- S06 付加情報 → 備考欄 自動注入 ---
+function s06UpdateBiko() {
+  const items = [
+    { name: 's06-step',  label: '段差' },
+    { name: 's06-elev',  label: 'エレベーター' },
+    { name: 's06-prot',  label: '養生' },
+    { name: 's06-park',  label: '駐車場' },
+    { name: 's06-elec',  label: '電気' },
+    { name: 's06-water', label: '水道' },
+  ];
+  const lines = [];
+  items.forEach(item => {
+    const el = document.querySelector('input[name="' + item.name + '"]:checked');
+    if (el && el.value !== '不明') lines.push('【' + item.label + '】' + el.value);
+  });
+  const box = document.getElementById('s06-biko-auto');
+  if (!box) return;
+  if (lines.length === 0) {
+    box.innerHTML = '<span style="color:#bbb;font-style:italic;">（付加情報の選択内容が自動で表示されます）</span>';
+  } else {
+    box.textContent = lines.join('　');
+  }
+}
+// --- S06 写真アップロード（ファイル選択・ドラッグ＆ドロップ）---
+let s06PhotoCount = 2;
+function s06DragOver(e) {
+  e.preventDefault();
+  const dz = document.getElementById('s06-dropzone');
+  if (dz) { dz.style.background = '#dbeafe'; dz.style.borderColor = '#2563eb'; }
+}
+function s06DragLeave(e) {
+  const dz = document.getElementById('s06-dropzone');
+  if (dz) { dz.style.background = '#f0f7ff'; dz.style.borderColor = '#4a90d9'; }
+}
+function s06Drop(e) {
+  e.preventDefault();
+  s06DragLeave(e);
+  s06HandleFiles(e.dataTransfer.files);
+}
+function s06HandleFiles(files) {
+  const container = document.getElementById('s06-photos');
+  if (!container) return;
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    s06PhotoCount++;
+    const thumb = document.createElement('div');
+    thumb.className = 'img-box img-thumb';
+    thumb.style.position = 'relative';
+    const label = file.name.length > 8 ? file.name.substring(0, 8) + '…' : file.name;
+    thumb.innerHTML = '<button onclick="this.parentElement.remove()" style="position:absolute;top:2px;right:2px;background:#dc2626;color:#fff;border:none;border-radius:50%;width:18px;height:18px;cursor:pointer;font-size:11px;z-index:2;line-height:1;padding:0;">×</button><span style="position:relative;z-index:1;font-size:11px;">' + label + '</span>';
+    const reader = new FileReader();
+    reader.onload = ev => {
+      thumb.style.backgroundImage = 'url(' + ev.target.result + ')';
+      thumb.style.backgroundSize = 'cover';
+      thumb.style.backgroundPosition = 'center';
+      thumb.querySelector('span').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+    container.appendChild(thumb);
+  });
+}
+// --- Signature canvas ---
+function initSigCanvas() {
+  const canvas = document.getElementById('sig-canvas-s15');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
+  let lastX = 0, lastY = 0;
+
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const sx = canvas.width / rect.width;
+    const sy = canvas.height / rect.height;
+    if (e.touches) {
+      return { x: (e.touches[0].clientX - rect.left) * sx, y: (e.touches[0].clientY - rect.top) * sy };
+    }
+    return { x: (e.clientX - rect.left) * sx, y: (e.clientY - rect.top) * sy };
+  }
+  function stroke(to) {
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(to.x, to.y);
+    ctx.strokeStyle = '#1e2535';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+    lastX = to.x; lastY = to.y;
+  }
+
+  canvas.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); lastX = p.x; lastY = p.y; });
+  canvas.addEventListener('mousemove', e => { if (drawing) stroke(getPos(e)); });
+  canvas.addEventListener('mouseup',   () => { drawing = false; });
+  canvas.addEventListener('mouseleave',() => { drawing = false; });
+
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e); lastX = p.x; lastY = p.y; }, { passive: false });
+  canvas.addEventListener('touchmove',  e => { e.preventDefault(); if (drawing) stroke(getPos(e)); }, { passive: false });
+  canvas.addEventListener('touchend',   () => { drawing = false; });
+}
+function clearSigCanvas() {
+  const canvas = document.getElementById('sig-canvas-s15');
+  if (!canvas) return;
+  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initSigCanvas();
+  const h = location.hash.replace('#', '');
+  show(h || 'login');
+});
+</script>
 </body>
 </html>
