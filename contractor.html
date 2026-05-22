@@ -887,8 +887,69 @@ tr:hover td { background: #f9fafb; }
     <div class="screen" id="s-search">
       <div class="card" style="margin-bottom:16px;">
         <div class="card-title">絞り込みフィルター</div>
+
+        <!-- サービスエリア -->
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>サービスエリア <span style="font-size:11px;font-weight:400;color:#888;">（複数選択可）</span></label>
+          <!-- 選択中タグ -->
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+            <span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#16a34a;border:1px solid #86efac;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:600;">渋谷区 <span style="cursor:pointer;font-size:14px;line-height:1;">×</span></span>
+            <span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#16a34a;border:1px solid #86efac;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:600;">新宿区 <span style="cursor:pointer;font-size:14px;line-height:1;">×</span></span>
+            <span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#16a34a;border:1px solid #86efac;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:600;">港区 <span style="cursor:pointer;font-size:14px;line-height:1;">×</span></span>
+            <span style="display:inline-flex;align-items:center;gap:4px;background:#dcfce7;color:#16a34a;border:1px solid #86efac;border-radius:12px;padding:2px 10px;font-size:12px;font-weight:600;">中野区 <span style="cursor:pointer;font-size:14px;line-height:1;">×</span></span>
+          </div>
+          <!-- エリア選択パネル -->
+          <div style="border:1px solid #e5e7eb;border-radius:6px;overflow:hidden;font-size:12px;">
+            <!-- 東京都（展開状態） -->
+            <div style="background:#f0f4ff;border-bottom:1px solid #e5e7eb;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-weight:700;font-size:13px;">東京都</span>
+              <span style="font-size:11px;color:#16a34a;font-weight:600;">4区選択中 ▲</span>
+            </div>
+            <div style="padding:10px 12px;display:grid;grid-template-columns:repeat(8,1fr);gap:4px 6px;border-bottom:1px solid #e5e7eb;">
+              <div class="check-row"><div class="check-box"></div><span>千代田区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>中央区</span></div>
+              <div class="check-row"><div class="check-box checked"></div><span>港区</span></div>
+              <div class="check-row"><div class="check-box checked"></div><span>新宿区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>文京区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>台東区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>墨田区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>江東区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>品川区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>目黒区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>大田区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>世田谷区</span></div>
+              <div class="check-row"><div class="check-box checked"></div><span>渋谷区</span></div>
+              <div class="check-row"><div class="check-box checked"></div><span>中野区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>杉並区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>豊島区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>北区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>荒川区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>板橋区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>練馬区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>足立区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>葛飾区</span></div>
+              <div class="check-row"><div class="check-box"></div><span>江戸川区</span></div>
+            </div>
+            <!-- 埼玉県（折り畳み） -->
+            <div style="background:#f5f6f8;border-bottom:1px solid #e5e7eb;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-weight:700;font-size:13px;">埼玉県</span>
+              <span style="font-size:11px;color:#888;">選択なし ▼</span>
+            </div>
+            <!-- 千葉県（折り畳み） -->
+            <div style="background:#f5f6f8;border-bottom:1px solid #e5e7eb;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-weight:700;font-size:13px;">千葉県</span>
+              <span style="font-size:11px;color:#888;">選択なし ▼</span>
+            </div>
+            <!-- 神奈川県（折り畳み） -->
+            <div style="background:#f5f6f8;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+              <span style="font-weight:700;font-size:13px;">神奈川県</span>
+              <span style="font-size:11px;color:#888;">選択なし ▼</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 品目・希望日程 -->
         <div class="form-row" style="margin-bottom:12px;">
-          <div class="form-group"><label>距離（現在地から）</label><select class="input-box"><option>20km以内</option><option>50km以内</option><option>指定なし</option></select></div>
           <div class="form-group"><label>品目</label><select class="input-box"><option>すべて</option><option>木くず</option><option>金属くず</option><option>廃プラ</option><option>汚泥</option></select></div>
           <div class="form-group"><label>希望日程</label><div class="input-box" style="color:#aaa;">2026-05-01 〜 2026-05-31</div></div>
         </div>
@@ -900,7 +961,7 @@ tr:hover td { background: #f9fafb; }
           <div>
             <div style="display:flex;align-items:center;gap:8px;"><strong>#023</strong><span class="status status-blue">公開中</span></div>
             <div style="font-size:12px;color:#555;margin-top:4px;">木くず・金属 / 渋谷区〇〇1-2-3 / 約500kg / 2026-05-10</div>
-            <div style="font-size:11px;margin-top:3px;"><span style="color:#2563eb;">現在地から約3km</span>　<span style="color:#d97706;">⚠️ 根っこあり</span></div>
+            <div style="font-size:11px;margin-top:3px;"><span style="color:#16a34a;font-weight:600;">📍 渋谷区</span>　<span style="color:#d97706;">⚠️ 根っこあり</span></div>
             <div style="font-size:12px;font-weight:700;color:#16a34a;margin-top:4px;">依頼金額: ¥53,000（運搬 ¥35,000・処分 ¥18,000）</div>
           </div>
           <button class="btn btn-primary btn-sm" onclick="show('search-detail')">詳細を見る</button>
@@ -909,7 +970,7 @@ tr:hover td { background: #f9fafb; }
           <div>
             <div style="display:flex;align-items:center;gap:8px;"><strong>#024</strong><span class="status status-blue">公開中</span></div>
             <div style="font-size:12px;color:#666;margin-top:4px;">廃プラ / 新宿区〇〇3-4-5 / 約200kg / 2026-05-15</div>
-            <div style="font-size:11px;color:#888;margin-top:3px;">現在地から約7km</div>
+            <div style="font-size:11px;margin-top:3px;"><span style="color:#16a34a;font-weight:600;">📍 新宿区</span></div>
             <div style="font-size:12px;font-weight:700;color:#16a34a;margin-top:4px;">依頼金額: ¥28,000（運搬 ¥18,000・処分 ¥10,000）</div>
           </div>
           <button class="btn btn-secondary btn-sm" onclick="show('search-detail')">詳細を見る</button>
@@ -936,9 +997,32 @@ tr:hover td { background: #f9fafb; }
             </div>
             <hr class="divider">
             <table><tbody>
-              <tr><td style="color:#888;width:110px;">品目</td><td><span class="tag">木くず</span><span class="tag">金属</span></td></tr>
-              <tr><td style="color:#888;">荷姿</td><td>パソコンバッグ入り</td></tr>
-              <tr><td style="color:#888;">概量</td><td>500 kg</td></tr>
+              <tr>
+                <td style="color:#888;width:110px;vertical-align:top;padding-top:10px;">廃棄物品目</td>
+                <td>
+                  <table style="width:100%;border:1px solid #e5e7eb;border-radius:4px;font-size:12px;margin-bottom:4px;overflow:hidden;">
+                    <thead style="background:#f5f6f8;">
+                      <tr>
+                        <th style="padding:5px 8px;text-align:left;font-weight:600;color:#555;border-bottom:1px solid #e5e7eb;">品目</th>
+                        <th style="padding:5px 8px;text-align:left;font-weight:600;color:#555;border-bottom:1px solid #e5e7eb;">荷姿</th>
+                        <th style="padding:5px 8px;text-align:left;font-weight:600;color:#555;border-bottom:1px solid #e5e7eb;">概量</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="padding:6px 8px;"><span class="tag">木くず</span></td>
+                        <td style="padding:6px 8px;">パソコンバッグ入り</td>
+                        <td style="padding:6px 8px;">300 kg</td>
+                      </tr>
+                      <tr style="background:#fafafa;">
+                        <td style="padding:6px 8px;"><span class="tag">金属くず</span></td>
+                        <td style="padding:6px 8px;">バラ積み</td>
+                        <td style="padding:6px 8px;">200 kg</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
               <tr><td style="color:#888;">希望日程</td><td>2026-05-10</td></tr>
               <tr><td style="color:#888;">排出場所</td><td>東京都渋谷区〇〇1-2-3</td></tr>
               <tr><td style="color:#888;">根っこあり</td><td><span class="status status-yellow">あり（抜根処分費必須）</span></td></tr>
