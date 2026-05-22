@@ -655,16 +655,58 @@ tr:hover td { background: #f9fafb; }
         </div>
         <div class="form-row">
           <div class="form-group full">
-            <label>品目<span class="req">*</span></label>
-            <select class="input-box"><option>木くず</option><option>金属くず</option><option>廃プラスチック</option><option>汚泥（砂・泥）</option><option>廃棄物混合</option><option>特別管理産業廃棄物</option></select>
+            <label>廃棄物品目・数量<span class="req">*</span></label>
+            <div class="annotation" style="margin-bottom:10px;">品目ごとに荷姿と概量を入力してください。複数品目がある場合は「＋ 品目を追加」で行を追加できます。</div>
+            <div id="s06-item-list">
+              <!-- 品目行 1: 木くず -->
+              <div class="item-row" style="display:grid;grid-template-columns:1.5fr 1.5fr 120px 80px 36px;gap:8px;align-items:end;margin-bottom:8px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:6px;background:#fafafa;">
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">品目<span class="req">*</span></label>
+                  <select class="input-box"><option selected>木くず</option><option>金属くず</option><option>廃プラスチック</option><option>汚泥（砂・泥）</option><option>廃棄物混合</option><option>特別管理産業廃棄物</option></select>
+                </div>
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">荷姿<span class="req">*</span></label>
+                  <div class="input-box">パソコンバッグ入り</div>
+                </div>
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">概量<span class="req">*</span></label>
+                  <div class="input-box">300</div>
+                </div>
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">単位</label>
+                  <select class="input-box"><option>kg</option><option>t</option><option>立米</option><option>台</option></select>
+                </div>
+                <div>
+                  <button type="button" style="width:36px;height:38px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:4px;cursor:pointer;font-size:16px;line-height:1;">×</button>
+                </div>
+              </div>
+              <!-- 品目行 2: 金属くず -->
+              <div class="item-row" style="display:grid;grid-template-columns:1.5fr 1.5fr 120px 80px 36px;gap:8px;align-items:end;margin-bottom:8px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:6px;background:#fafafa;">
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">品目<span class="req">*</span></label>
+                  <select class="input-box"><option>木くず</option><option selected>金属くず</option><option>廃プラスチック</option><option>汚泥（砂・泥）</option><option>廃棄物混合</option><option>特別管理産業廃棄物</option></select>
+                </div>
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">荷姿<span class="req">*</span></label>
+                  <div class="input-box">バラ積み</div>
+                </div>
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">概量<span class="req">*</span></label>
+                  <div class="input-box">200</div>
+                </div>
+                <div>
+                  <label style="font-size:11px;color:#6b7280;margin-bottom:4px;display:block;font-weight:700;">単位</label>
+                  <select class="input-box"><option>kg</option><option>t</option><option>立米</option><option>台</option></select>
+                </div>
+                <div>
+                  <button type="button" style="width:36px;height:38px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:4px;cursor:pointer;font-size:16px;line-height:1;">×</button>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-sm" type="button">＋ 品目を追加</button>
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>荷姿<span class="req">*</span></label><div class="input-box" style="color:#aaa;">例：パソコンバッグ入り、バラ積み</div></div>
-          <div class="form-group" style="max-width:220px;">
-            <label>概量<span class="req">*</span></label>
-            <div style="display:flex;gap:6px;"><div class="input-box" style="color:#aaa;">500</div><select class="input-box" style="width:80px;"><option>kg</option><option>t</option><option>立米</option><option>台</option></select></div>
-          </div>
           <div class="form-group">
             <label>希望日程<span class="req">*</span></label>
             <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
