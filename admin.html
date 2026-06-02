@@ -133,7 +133,6 @@ tr:hover td { background: #f9fafb; }
     <div class="nav-item" onclick="show('user-payment')">S18 ユーザー・決済管理</div>
     <div class="nav-item" onclick="show('archive')">S19 案件・契約アーカイブ</div>
     <div class="nav-item" onclick="show('master')">S20 システムマスタ設定</div>
-    <div class="nav-item" onclick="show('trouble')">S28 トラブル対応・審査管理 <span class="nav-new">NEW</span></div>
   </div>
   <div class="nav-group">
     <div class="nav-group-title">ドキュメント</div>
@@ -561,24 +560,17 @@ tr:hover td { background: #f9fafb; }
         </div>
       </div>
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <div style="font-size:16px;font-weight:700;">案件・契約一覧（全247件）</div>
-          <button class="btn btn-secondary btn-sm">📥 一括ダウンロード（ZIP）</button>
-        </div>
+        <div style="font-size:16px;font-weight:700;margin-bottom:12px;">案件・契約一覧（全247件）</div>
         <table>
-          <thead><tr><th>案件ID</th><th>発注者</th><th>受注者</th><th>品目</th><th>完了日</th><th>状態</th><th>書類</th><th>監督通知</th></tr></thead>
+          <thead><tr><th>案件ID</th><th>発注者</th><th>受注者</th><th>品目</th><th>完了日</th><th>状態</th></tr></thead>
           <tbody>
-            <tr>
+            <tr style="cursor:pointer;" onclick="show('archive-detail')">
               <td>#021</td><td>ケット製造</td><td>ケット運搬</td><td>廃プラ</td><td>2026-04-21</td>
               <td><span class="status status-green">完了</span></td>
-              <td><button class="btn btn-secondary btn-sm">契約書</button> <button class="btn btn-secondary btn-sm">報告書</button></td>
-              <td><button class="btn btn-warning btn-sm">通知</button></td>
             </tr>
-            <tr>
+            <tr style="cursor:pointer;" onclick="show('archive-detail')">
               <td>#020</td><td>△△合成け</td><td>〇〇産廃け</td><td>木くず</td><td>2026-04-10</td>
               <td><span class="status status-green">完了</span></td>
-              <td><button class="btn btn-secondary btn-sm">契約書</button> <button class="btn btn-secondary btn-sm">報告書</button></td>
-              <td>—</td>
             </tr>
           </tbody>
         </table>
@@ -586,47 +578,127 @@ tr:hover td { background: #f9fafb; }
       </div>
     </div>
 
+    <!-- ========== S19-01 案件詳細（管理者） ========== -->
+    <div class="screen" id="s-archive-detail">
+      <div class="page-header">
+        <div class="breadcrumb-text">案件・契約アーカイブ › <span>#021 廃プラ / ケット製造</span></div>
+        <button class="btn btn-secondary btn-sm" onclick="show('archive')">← 一覧に戻る</button>
+      </div>
+
+      <!-- 案件サマリーバー -->
+      <div class="card" style="margin-bottom:16px;background:#f8fafc;border-color:#e5e7eb;">
+        <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:13px;">
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">案件番号</div><strong>#021</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">品目</div><strong>廃プラスチック</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">作業所在地</div><strong>東京都渋谷区〇〇1-2-3</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">完了日</div><strong>2026-04-21</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">状態</div><span class="status status-green">完了</span></div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="align-items:start;margin-bottom:16px;">
+        <!-- 左カラム -->
+        <div>
+          <div class="card" style="margin-bottom:12px;">
+            <div class="card-title">案件情報</div>
+            <table style="font-size:13px;width:100%;border-collapse:collapse;">
+              <tbody>
+                <tr><td style="color:#888;padding:5px 0;width:120px;">案件番号</td><td><strong>#021</strong></td></tr>
+                <tr><td style="color:#888;padding:5px 0;">品目</td><td>廃プラスチック</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">作業所在地</td><td>東京都渋谷区〇〇1-2-3</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">希望日</td><td>2026-04-20</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">依頼金額</td><td style="font-weight:700;">¥53,000（運搬 ¥30,000・処分 ¥23,000）</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">付加情報</td><td style="font-size:12px;">【段差】あり　【エレベーター】あり　【養生】必要　【駐車場】あり　【電気】あり　【水道】なし</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">備考</td><td style="font-size:12px;color:#666;">搬出時間は午前中のみ可。駐車スペースあり（4tまで）。</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card" style="margin-bottom:12px;">
+            <div class="card-title">発注者情報</div>
+            <table style="font-size:13px;width:100%;border-collapse:collapse;">
+              <tbody>
+                <tr><td style="color:#888;padding:5px 0;width:120px;">会社名</td><td><strong>ケット製造株式会社</strong></td></tr>
+                <tr><td style="color:#888;padding:5px 0;">担当者名</td><td>田中 太郎</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-title">受注者情報</div>
+            <table style="font-size:13px;width:100%;border-collapse:collapse;">
+              <tbody>
+                <tr><td style="color:#888;padding:5px 0;width:120px;">会社名</td><td><strong>ケット運搬株式会社</strong></td></tr>
+                <tr><td style="color:#888;padding:5px 0;">担当者名</td><td>鈴木 一郎</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">発注確定日</td><td>2026-04-05</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 右カラム -->
+        <div>
+          <div class="card" style="margin-bottom:12px;">
+            <div class="card-title">作業ステータス <span style="font-size:11px;color:#888;font-weight:400;">（受注者による報告）</span></div>
+            <div class="stepper" style="margin-bottom:12px;">
+              <div class="step">
+                <div class="step-circle done">✓</div>
+                <div class="step-label" style="color:#2563eb;font-weight:700;">出発</div>
+              </div>
+              <div class="step-line done"></div>
+              <div class="step">
+                <div class="step-circle done">✓</div>
+                <div class="step-label" style="color:#2563eb;font-weight:700;">現場到着</div>
+              </div>
+              <div class="step-line done"></div>
+              <div class="step">
+                <div class="step-circle done">✓</div>
+                <div class="step-label" style="color:#2563eb;font-weight:700;">作業中</div>
+              </div>
+              <div class="step-line done"></div>
+              <div class="step">
+                <div class="step-circle done">✓</div>
+                <div class="step-label" style="color:#2563eb;font-weight:700;">作業終了</div>
+              </div>
+            </div>
+            <div style="font-size:12px;color:#6b7280;">最終更新: 2026-04-20 14:23（受注者による記録）</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">完了報告内容 <span style="font-size:11px;color:#888;font-weight:400;">（受注者提出）</span></div>
+            <table style="font-size:13px;width:100%;border-collapse:collapse;margin-bottom:12px;">
+              <tbody>
+                <tr><td style="color:#888;padding:5px 0;width:120px;">回収日</td><td>2026-04-20</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">処分日</td><td>2026-04-21</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">マニフェスト番号</td><td>A-2026-042101</td></tr>
+                <tr><td style="color:#888;padding:5px 0;">実測量</td><td><strong>520 kg</strong></td></tr>
+              </tbody>
+            </table>
+            <div style="font-size:12px;color:#888;margin-bottom:4px;font-weight:700;">備考</div>
+            <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;font-size:13px;color:#374151;margin-bottom:12px;">
+              現場立ち会い者: 田中様 / 追加廃材あり（担当者確認済み）
+            </div>
+            <div style="font-size:12px;color:#888;margin-bottom:4px;font-weight:700;">手書きサイン</div>
+            <div style="border:1px solid #e5e7eb;border-radius:6px;background:#f9fafb;height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+              <div style="font-size:13px;color:#9ca3af;font-style:italic;">〔署名画像〕</div>
+            </div>
+            <div style="font-size:11px;color:#9ca3af;margin-bottom:12px;">署名日時: 2026-04-21 14:23</div>
+            <div style="font-size:12px;color:#888;margin-bottom:6px;font-weight:700;">エビデンス写真</div>
+            <div class="photo-strip">
+              <div class="img-box img-thumb"><span style="position:relative;z-index:1;">積載写真1</span></div>
+              <div class="img-box img-thumb"><span style="position:relative;z-index:1;">積載写真2</span></div>
+              <div class="img-box img-thumb"><span style="position:relative;z-index:1;">処分後写真</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ========== S20 システムマスタ設定 ========== -->
     <div class="screen" id="s-master">
       <div class="tabs">
-        <div class="tab active" onclick="showMasterTab(0)">契約書テンプレート</div>
-        <div class="tab" onclick="showMasterTab(1)">品目マスタ</div>
-        <div class="tab" onclick="showMasterTab(2)">サービスエリアマスタ</div>
+        <div class="tab active" onclick="showMasterTab(0)">品目マスタ</div>
+        <div class="tab" onclick="showMasterTab(1)">サービスエリアマスタ</div>
       </div>
       <div class="master-tab-content" style="display:block;">
-      <div class="card">
-        <div class="card-title">契約書PDFテンプレート（雛形）編集エディタ</div>
-        <div style="border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:12px;">
-          <div style="background:#f5f6f8;padding:8px 12px;border-bottom:1px solid #ddd;display:flex;gap:6px;font-size:12px;">
-            <span style="background:#fff;border:1px solid #ddd;border-radius:3px;padding:2px 8px;cursor:pointer;font-weight:700;">B</span>
-            <span style="background:#fff;border:1px solid #ddd;border-radius:3px;padding:2px 8px;cursor:pointer;font-style:italic;">I</span>
-            <span style="background:#fff;border:1px solid #ddd;border-radius:3px;padding:2px 8px;cursor:pointer;">H1</span>
-            <span style="background:#fff;border:1px solid #ddd;border-radius:3px;padding:2px 8px;cursor:pointer;">&#123;&#123;変数&#125;&#125;</span>
-          </div>
-          <textarea class="input-box" style="border:none;border-radius:0;height:220px;background:#fff;font-family:monospace;font-size:12px;line-height:1.7;">産業廃棄物収集運搬・処分委託契約書
-
-本契約は、{{排出者名}}（以下「甲」）、{{収集運搬業者名}}（以下「乙」）、
-{{処分業者名}}（以下「丙」）の三者間において締結する。
-
-第1条（委託内容）
-甲は乙に対し、以下の産業廃棄物の収集運搬を委託する。
-  品目：{{品目}}
-  数量：{{概量}}
-  排出場所：{{排出場所住所}}
-  処分場所：{{処分場名・住所}}
-
-第2条（処分の委託）
-乙は丙に対し、上記産業廃棄物の処分を委託する。
-処分方法：{{処分方法}}</textarea>
-        </div>
-        <div class="annotation">&#123;&#123;変数名&#125;&#125; 形式でデータが自動挿入されます。変更後はバージョン管理されます。</div>
-        <div class="btn-group">
-          <button class="btn btn-primary">保存（新バージョン）</button>
-          <button class="btn btn-secondary">PDFプレビュー</button>
-        </div>
-      </div>
-      </div>
-      <div class="master-tab-content" style="display:none;">
       <div class="card">
         <div class="card-title">品目マスタ</div>
         <table>
@@ -1004,78 +1076,6 @@ tr:hover td { background: #f9fafb; }
       </div>
     </div>
 
-    <!-- ========== S28 トラブル対応・審査管理 ========== -->
-    <div class="screen" id="s-trouble">
-      <div class="page-header"><h2>トラブル対応・審査管理</h2></div>
-      <div class="card">
-        <div class="card-title">トラブル一覧</div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>種別</th>
-              <th>ステータス</th>
-              <th>発生日</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="cursor:pointer;background:#fff7ed;" onclick="show('trouble-detail')">
-              <td>#T-031</td>
-              <td>未回収</td>
-              <td><span class="status status-orange">対応中</span></td>
-              <td>04-25</td>
-            </tr>
-            <tr style="cursor:pointer;" onclick="show('trouble-detail')">
-              <td>#T-030</td>
-              <td>請求相違</td>
-              <td><span class="status status-orange">対応中</span></td>
-              <td>04-23</td>
-            </tr>
-            <tr style="cursor:pointer;" onclick="show('trouble-detail')">
-              <td>#T-029</td>
-              <td>品目相違</td>
-              <td><span class="status status-green">解決済</span></td>
-              <td>04-20</td>
-            </tr>
-            <tr style="cursor:pointer;" onclick="show('trouble-detail')">
-              <td>#T-028</td>
-              <td>遅延</td>
-              <td><span class="status status-green">解決済</span></td>
-              <td>04-18</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ========== S28-01 トラブル詳細 ========== -->
-    <div class="screen" id="s-trouble-detail">
-      <div class="page-header">
-        <div class="breadcrumb-text">トラブル対応 › <span>#T-031 未回収トラブル</span></div>
-        <button class="btn btn-secondary btn-sm" onclick="show('trouble')">← トラブル一覧に戻る</button>
-      </div>
-      <div class="card">
-        <div class="card-title">#T-031 詳細 — 未回収トラブル</div>
-        <table style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:12px;">
-          <tr><td style="color:#6b7280;padding:4px 0;width:90px;">発注者</td><td>株式会社サンプル産業</td></tr>
-          <tr><td style="color:#6b7280;padding:4px 0;">受注者</td><td>廃棄物回収㈱</td></tr>
-          <tr><td style="color:#6b7280;padding:4px 0;">契約</td><td>#C-0892</td></tr>
-          <tr><td style="color:#6b7280;padding:4px 0;">発生日</td><td>2026-04-25</td></tr>
-          <tr><td style="color:#6b7280;padding:4px 0;">内容</td><td>予定日に未回収。連絡なし。</td></tr>
-        </table>
-        <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">対応メモ（内部）</label>
-        <textarea rows="3" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px;font-size:13px;margin-bottom:10px;">受注者に電話連絡済。折返し待ち。</textarea>
-        <label style="display:block;margin-bottom:4px;font-size:12px;color:#6b7280;">通知文（当事者送付用）</label>
-        <textarea rows="3" style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:6px;padding:8px;font-size:13px;margin-bottom:12px;">件名：未回収に関するご連絡
-本件について調査中です。ご不便をおかけし…</textarea>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="btn btn-primary btn-sm">通知を送信</button>
-          <button class="btn btn-secondary btn-sm">解決済にする</button>
-          <button class="btn btn-secondary btn-sm" style="color:#dc2626;border-color:#dc2626;">エスカレーション</button>
-        </div>
-      </div>
-    </div>
-
     <!-- ========== 画面遷移図 ========== -->
     <div class="screen" id="s-flow">
       <div class="page-header">
@@ -1221,16 +1221,6 @@ tr:hover td { background: #f9fafb; }
             <text x="840" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S20 マスタ設定</text>
             <text x="840" y="322" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
           </g>
-          <g onclick="show('trouble')" style="cursor:pointer;">
-            <rect x="730" y="350" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
-            <text x="840" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S28 トラブル対応</text>
-            <text x="840" y="382" fill="#dc2626" text-anchor="middle" font-size="10">管理者 · NEW</text>
-          </g>
-          <g onclick="show('trouble-detail')" style="cursor:pointer;">
-            <rect x="730" y="410" width="220" height="44" rx="6" fill="white" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
-            <text x="840" y="427" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S28-01 トラブル詳細</text>
-            <text x="840" y="442" fill="#dc2626" text-anchor="middle" font-size="10">管理者 · NEW</text>
-          </g>
           <!-- Arrows -->
           <line x1="120" y1="94" x2="120" y2="108" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
           <line x1="120" y1="154" x2="120" y2="168" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
@@ -1298,9 +1288,8 @@ const meta = {
   'user-payment':   { title: 'S18 ユーザー・決済管理',              role: '管理者' },
   'user-detail':    { title: 'S18-01 会員詳細情報',                  role: '管理者' },
   'archive':        { title: 'S19 条件・契約モニタリング・アーカイブ', role: '管理者' },
+  'archive-detail': { title: 'S19-01 案件詳細（管理者）',            role: '管理者' },
   'master':         { title: 'S20 システムマスタ設定',              role: '管理者' },
-  'trouble':        { title: 'S28 トラブル対応・審査管理',          role: '管理者' },
-  'trouble-detail': { title: 'S28-01 トラブル詳細',                 role: '管理者' },
   'flow':           { title: '画面遷移図',                          role: '全ロール' },
 };
 const roleColor = { '共通':'#6b7280','発注者':'#2563eb','受注者':'#16a34a','管理者':'#dc2626','全ロール':'#6b7280' };
