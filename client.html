@@ -549,7 +549,7 @@ tr:hover td { background: #f9fafb; }
         </div>
         <button class="btn btn-primary" onclick="show('post-form')">＋ 新規案件を登録</button>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px;">
         <div class="kpi-card" style="text-align:center;">
           <div class="kpi-label">公開中</div>
           <div class="kpi-value" style="font-size:22px;color:#2563eb;">3</div>
@@ -557,6 +557,10 @@ tr:hover td { background: #f9fafb; }
         <div class="kpi-card" style="text-align:center;">
           <div class="kpi-label">エントリー受付中</div>
           <div class="kpi-value" style="font-size:22px;color:#f59e0b;">5</div>
+        </div>
+        <div class="kpi-card" style="text-align:center;">
+          <div class="kpi-label">発注済み</div>
+          <div class="kpi-value" style="font-size:22px;color:#7c3aed;">10</div>
         </div>
         <div class="kpi-card" style="text-align:center;">
           <div class="kpi-label">完了</div>
@@ -568,9 +572,10 @@ tr:hover td { background: #f9fafb; }
         </div>
       </div>
       <div class="tabs">
-        <div class="tab active">すべて（41）</div>
+        <div class="tab active">すべて（51）</div>
         <div class="tab">公開中（3）</div>
         <div class="tab">エントリー受付中（5）</div>
+        <div class="tab">発注済み（10）</div>
         <div class="tab">完了（31）</div>
         <div class="tab">下書き（2）</div>
       </div>
@@ -586,6 +591,12 @@ tr:hover td { background: #f9fafb; }
               <td><span class="tag" style="background:#fef9c3;color:#92400e;">エントリー受付中</span></td>
               <td><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('condition-detail')">詳細</button></td>
             </tr>
+            <tr style="cursor:pointer;" onclick="show('order-detail')">
+              <td><strong>#019</strong></td><td>廃油・廃液</td><td>江東区〇〇4-7-2</td><td>2026-05-09</td>
+              <td><span style="font-weight:700;color:#7c3aed;">1社</span></td>
+              <td><span class="tag" style="background:#ede9fe;color:#5b21b6;">発注済み</span></td>
+              <td><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('order-detail')">詳細</button></td>
+            </tr>
             <tr style="cursor:pointer;" onclick="show('condition-detail')">
               <td><strong>#022</strong></td><td>廃プラスチック</td><td>新宿区△△2-4-6</td><td>2026-05-08</td>
               <td><span style="font-weight:700;color:#2563eb;">1社</span></td>
@@ -598,12 +609,12 @@ tr:hover td { background: #f9fafb; }
               <td><span class="tag" style="background:#f3f4f6;color:#374151;">下書き</span></td>
               <td><button class="btn btn-secondary btn-sm" onclick="show('post-form')">編集</button></td>
             </tr>
-            <tr style="cursor:pointer;" onclick="show('condition-detail')">
+            <tr style="cursor:pointer;" onclick="show('order-complete')">
               <td><strong>#020</strong></td><td>金属くず</td><td>港区〇〇5-2-1</td><td>2026-04-15</td>
               <td><span style="font-weight:700;color:#16a34a;">選定済（1社）</span></td>
               <td><span class="tag" style="background:#dcfce7;color:#15803d;">完了</span></td>
               <td style="display:flex;gap:6px;">
-                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('condition-detail')">詳細</button>
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('order-complete')">詳細</button>
                 <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();show('report-confirm')">完了報告</button>
               </td>
             </tr>
@@ -858,6 +869,163 @@ tr:hover td { background: #f9fafb; }
       </div>
     </div>
 
+    <!-- ========== S06 案件詳細（発注済み） ========== -->
+    <div class="screen" id="s-order-detail">
+      <div class="page-header">
+        <div class="breadcrumb-text">案件管理 › <span>#019 廃油・廃液 / 江東区〇〇4-7-2 / 2026-05-09</span></div>
+        <button class="btn btn-secondary btn-sm" onclick="show('post-condition')">← 案件管理に戻る</button>
+      </div>
+
+      <!-- ステータスバー -->
+      <div style="background:#f5f3ff;border:1px solid #ddd6fe;border-radius:6px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <span class="tag" style="background:#ede9fe;color:#5b21b6;">発注済み</span>
+        <span style="font-size:13px;color:#555;">受注者: <strong>ケット運搬</strong></span>
+        <span style="margin-left:auto;font-size:12px;color:#888;">登録日: 2026-05-01　依頼金額: ¥28,000</span>
+      </div>
+
+      <div class="grid-2" style="align-items:start;margin-bottom:16px;">
+        <!-- 案件情報 -->
+        <div class="card">
+          <div class="card-title">案件情報</div>
+          <table style="font-size:13px;width:100%;border-collapse:collapse;">
+            <tbody>
+              <tr><td style="color:#888;padding:5px 0;width:110px;">案件番号</td><td><strong>#019</strong></td></tr>
+              <tr><td style="color:#888;padding:5px 0;">品目</td><td>廃油・廃液</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">作業所在地</td><td>東京都江東区〇〇4-7-2</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">希望日程</td><td>2026-05-09</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">依頼金額</td><td style="font-weight:700;color:#2563eb;">¥28,000（運搬 ¥18,000・処分 ¥10,000）</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">付加情報</td><td style="font-size:12px;">【段差】なし　【エレベーター】なし　【養生】不要　【駐車場】あり　【電気】あり　【水道】あり</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">備考</td><td style="font-size:12px;color:#666;">搬出は午前中のみ可。現場担当者への事前連絡必須。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 受注者情報 -->
+        <div class="card">
+          <div class="card-title">受注者情報</div>
+          <table style="font-size:13px;width:100%;border-collapse:collapse;">
+            <tbody>
+              <tr><td style="color:#888;padding:5px 0;width:110px;">会社名</td><td><strong>ケット運搬</strong></td></tr>
+              <tr><td style="color:#888;padding:5px 0;">担当者</td><td>鈴木 一郎</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">電話番号</td><td>03-XXXX-XXXX</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">メール</td><td>suzuki@kett-unso.example.com</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">発注確定日</td><td>2026-05-02</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">契約書</td><td><button class="btn btn-secondary btn-sm" style="font-size:11px;">📄 contract_019.pdf</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 作業ステータス -->
+      <div class="card">
+        <div class="card-title">作業ステータス <span style="font-size:11px;color:#888;font-weight:400;">（受注者による報告）</span></div>
+        <div class="stepper" style="margin-bottom:16px;">
+          <div class="step">
+            <div class="step-circle done">✓</div>
+            <div class="step-label" style="color:#2563eb;font-weight:700;">出発</div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step">
+            <div class="step-circle done">✓</div>
+            <div class="step-label" style="color:#2563eb;font-weight:700;">現場到着</div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step">
+            <div class="step-circle current">3</div>
+            <div class="step-label" style="color:#1e40af;font-weight:700;">作業中</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <div class="step-circle">4</div>
+            <div class="step-label">作業終了</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#6b7280;">最終更新: 2026-05-09 10:47（受注者による記録）</div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="font-size:11px;color:#9ca3af;">※ 作業完了後、「完了」ステータスになると確認が可能になります</div>
+          <button class="btn btn-secondary" disabled style="opacity:0.4;cursor:not-allowed;color:#9ca3af;border-color:#d1d5db;">完了報告を確認する →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== S06 案件詳細（完了） ========== -->
+    <div class="screen" id="s-order-complete">
+      <div class="page-header">
+        <div class="breadcrumb-text">案件管理 › <span>#020 金属くず / 港区〇〇5-2-1 / 2026-04-15</span></div>
+        <button class="btn btn-secondary btn-sm" onclick="show('post-condition')">← 案件管理に戻る</button>
+      </div>
+
+      <!-- ステータスバー -->
+      <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <span class="tag" style="background:#dcfce7;color:#15803d;">完了</span>
+        <span style="font-size:13px;color:#555;">受注者: <strong>ケット運搬</strong></span>
+        <span style="margin-left:auto;font-size:12px;color:#888;">登録日: 2026-03-20　依頼金額: ¥35,000</span>
+      </div>
+
+      <div class="grid-2" style="align-items:start;margin-bottom:16px;">
+        <!-- 案件情報 -->
+        <div class="card">
+          <div class="card-title">案件情報</div>
+          <table style="font-size:13px;width:100%;border-collapse:collapse;">
+            <tbody>
+              <tr><td style="color:#888;padding:5px 0;width:110px;">案件番号</td><td><strong>#020</strong></td></tr>
+              <tr><td style="color:#888;padding:5px 0;">品目</td><td>金属くず</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">作業所在地</td><td>東京都港区〇〇5-2-1</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">希望日程</td><td>2026-04-15</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">依頼金額</td><td style="font-weight:700;color:#2563eb;">¥35,000（運搬 ¥20,000・処分 ¥15,000）</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">付加情報</td><td style="font-size:12px;">【段差】あり　【エレベーター】なし　【養生】不要　【駐車場】あり　【電気】あり　【水道】あり</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">備考</td><td style="font-size:12px;color:#666;">作業は午前中のみ可。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 受注者情報 -->
+        <div class="card">
+          <div class="card-title">受注者情報</div>
+          <table style="font-size:13px;width:100%;border-collapse:collapse;">
+            <tbody>
+              <tr><td style="color:#888;padding:5px 0;width:110px;">会社名</td><td><strong>ケット運搬</strong></td></tr>
+              <tr><td style="color:#888;padding:5px 0;">担当者</td><td>鈴木 一郎</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">電話番号</td><td>03-XXXX-XXXX</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">メール</td><td>suzuki@kett-unso.example.com</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">発注確定日</td><td>2026-03-25</td></tr>
+              <tr><td style="color:#888;padding:5px 0;">契約書</td><td><button class="btn btn-secondary btn-sm" style="font-size:11px;">📄 contract_020.pdf</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 作業ステータス -->
+      <div class="card">
+        <div class="card-title">作業ステータス <span style="font-size:11px;color:#888;font-weight:400;">（受注者による報告）</span></div>
+        <div class="stepper" style="margin-bottom:16px;">
+          <div class="step">
+            <div class="step-circle done">✓</div>
+            <div class="step-label" style="color:#2563eb;font-weight:700;">出発</div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step">
+            <div class="step-circle done">✓</div>
+            <div class="step-label" style="color:#2563eb;font-weight:700;">現場到着</div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step">
+            <div class="step-circle done">✓</div>
+            <div class="step-label" style="color:#2563eb;font-weight:700;">作業中</div>
+          </div>
+          <div class="step-line done"></div>
+          <div class="step">
+            <div class="step-circle done">✓</div>
+            <div class="step-label" style="color:#2563eb;font-weight:700;">作業終了</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#6b7280;">最終更新: 2026-04-15 14:23（受注者による記録）</div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;">
+          <button class="btn btn-primary" onclick="show('report-confirm')">完了報告を確認する →</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ========== S08 契約書アップロード・送付 ========== -->
     <div class="screen" id="s-contract-create">
       <div class="page-header">
@@ -953,15 +1121,17 @@ tr:hover td { background: #f9fafb; }
         </div>
         <div>
           <div class="card" style="margin-bottom:12px;">
-            <div class="card-title">最終報告書（PDF）</div>
-            <div style="border:1px solid #e5e7eb;border-radius:8px;padding:14px;display:flex;align-items:center;gap:12px;">
-              <span style="font-size:24px;">📄</span>
-              <div style="flex:1;">
-                <div style="font-weight:600;font-size:13px;color:#374151;">report_021_20260421.pdf</div>
-                <div style="font-size:11px;color:#6b7280;margin-top:2px;">受注者より提出済み　2026-04-21</div>
-              </div>
-              <button class="btn btn-secondary btn-sm">📥 DL</button>
+            <div class="card-title">備考 <span style="font-size:11px;color:#9ca3af;font-weight:400;">（受注者による入力）</span></div>
+            <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:12px;font-size:13px;color:#374151;line-height:1.6;">
+              現場立ち会い者: 田中様 / 追加廃材あり（担当者確認済み）
             </div>
+          </div>
+          <div class="card" style="margin-bottom:12px;">
+            <div class="card-title">手書きサイン <span style="font-size:11px;color:#9ca3af;font-weight:400;">（受注者による署名）</span></div>
+            <div style="border:1px solid #e5e7eb;border-radius:6px;background:#f9fafb;height:100px;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:13px;color:#9ca3af;font-style:italic;">〔署名画像〕</div>
+            </div>
+            <div style="font-size:11px;color:#9ca3af;margin-top:6px;">署名日時: 2026-04-21 14:23</div>
           </div>
           <div class="card" style="border-color:#16a34a;">
             <div class="card-title">承認・完了処理</div>
@@ -1392,6 +1562,8 @@ const meta = {
   'post-condition':   { title: 'S06 案件管理',                     role: '発注者' },
   'post-form':        { title: 'S06 案件登録フォーム',             role: '発注者' },
   'condition-detail': { title: 'S06 案件詳細・エントリー選定',     role: '発注者' },
+  'order-detail':     { title: 'S06 案件詳細（発注済み）',         role: '発注者' },
+  'order-complete':   { title: 'S06 案件詳細（完了）',             role: '発注者' },
   'contract-create':  { title: 'S08 契約書作成・確認',             role: '発注者' },
   'report-confirm':   { title: 'S09 回収・完了報告確認',           role: '発注者' },
   'flow':           { title: '画面遷移図',                         role: '全ロール' },
