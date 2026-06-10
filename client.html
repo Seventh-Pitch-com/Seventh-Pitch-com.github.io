@@ -269,7 +269,7 @@ tr:hover td { background: #f9fafb; }
         </div>
         <div class="card" style="border-color:#fbbf24;">
           <div class="card-title">STEP 3 — 受注者専用書類アップロード（受注者のみ必須）</div>
-          <div class="annotation">審査完了後にアカウントが有効化されます。発注者の場合はこの手順はスキップされます。</div>
+          <div class="annotation">書類をアップロードしてください。次のステップで決済情報を登録すると、すぐにご利用いただけます。発注者の場合はこの手順はスキップされます。</div>
           <div style="margin-top:14px;" class="grid-2">
             <div>
               <label style="margin-bottom:6px;">産業廃棄物収集運搬業許可証 PDF<span class="req">*</span></label>
@@ -281,15 +281,61 @@ tr:hover td { background: #f9fafb; }
             </div>
           </div>
         </div>
+        <div class="card" style="border-color:#2563eb;background:#eff6ff;">
+          <div class="card-title">STEP 4 — メールアドレスの確認</div>
+          <div class="annotation" style="margin-bottom:12px;">基本情報の登録が完了しました。ご登録のメールアドレスに確認メールをお送りします。</div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="show('verify-email')">確認メールを送信する →</button>
+        </div>
         <div class="btn-group" style="justify-content:flex-end;">
           <button class="btn btn-secondary">戻る</button>
-          <button class="btn btn-primary">確認画面へ →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== メールアドレス確認待ち ========== -->
+    <div class="screen" id="s-verify-email">
+      <div style="max-width:520px;margin:0 auto;">
+        <div class="card" style="text-align:center;padding:32px 24px;">
+          <div style="font-size:48px;margin-bottom:16px;">📧</div>
+          <h2 style="margin-bottom:8px;">確認メールを送信しました</h2>
+          <div style="font-size:13px;color:#555;margin-bottom:24px;">
+            <strong>email@company.co.jp</strong> に確認メールをお送りしました。<br>
+            メール内のリンクをクリックして、登録を完了してください。
+          </div>
+          <div class="alert alert-info" style="text-align:left;margin-bottom:20px;">
+            <div style="font-weight:700;margin-bottom:4px;">メールが届かない場合</div>
+            <div style="font-size:12px;">・迷惑メールフォルダをご確認ください。<br>・数分経っても届かない場合は「再送信」をお試しください。</div>
+          </div>
+          <button class="btn btn-secondary" style="width:100%;justify-content:center;margin-bottom:10px;">確認メールを再送信する</button>
+          <div style="font-size:12px;color:#9ca3af;margin-top:8px;">メールアドレスを間違えた場合は<span style="color:#2563eb;cursor:pointer;" onclick="show('register')">登録画面に戻る</span></div>
+        </div>
+        <div class="card" style="border-color:#2563eb;background:#eff6ff;text-align:center;">
+          <div style="font-size:12px;color:#555;margin-bottom:12px;">メールアドレスの確認が完了しましたら、プラン・決済情報の登録へお進みください。</div>
+          <button class="btn btn-primary" onclick="show('billing')">プラン・決済情報を登録する →</button>
         </div>
       </div>
     </div>
 
     <!-- ========== S03 サブスク決済 ========== -->
     <div class="screen" id="s-billing">
+
+      <!-- アカウントロック状態バナー（決済失敗時に表示） -->
+      <div class="alert alert-danger" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+        <div>
+          <strong>⚠️ アカウントが一時停止されています</strong><br>
+          <span style="font-size:12px;">お支払いの処理が完了できませんでした。下記よりカード情報をご更新ください。</span>
+        </div>
+        <button class="btn btn-danger btn-sm">カード情報を今すぐ更新する</button>
+      </div>
+
+      <!-- 解約後状態バナー（解約時に表示） -->
+      <div class="alert alert-warning" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+        <div>
+          <strong>プランを解約しました</strong><br>
+          <span style="font-size:12px;">【移行日】より無料プランに切り替わります。再加入はいつでも可能です。</span>
+        </div>
+        <button class="btn btn-primary btn-sm">有料プランに再加入する</button>
+      </div>
 
       <!-- ① プラン比較 -->
       <div class="card" style="margin-bottom:16px;">
@@ -371,6 +417,17 @@ tr:hover td { background: #f9fafb; }
             <tr><td>2026-02-01</td><td>¥11,000（税込）</td><td><span class="status status-red">失敗</span></td><td><button class="btn btn-secondary btn-sm">PDF</button></td></tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- 初回登録完了バナー -->
+      <div class="card" style="border-color:#2563eb;background:#eff6ff;margin-top:16px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-weight:700;color:#1d4ed8;margin-bottom:4px;">決済が完了しました。すぐにご利用いただけます。</div>
+            <div style="font-size:12px;color:#555;">ダッシュボードから案件の登録・管理を始めましょう。</div>
+          </div>
+          <button class="btn btn-primary" onclick="show('i-dashboard')">ダッシュボードへ →</button>
+        </div>
       </div>
 
     </div>
@@ -595,7 +652,10 @@ tr:hover td { background: #f9fafb; }
               <td><strong>#019</strong></td><td>廃油・廃液</td><td>江東区〇〇4-7-2</td><td>2026-05-09</td>
               <td><span style="font-weight:700;color:#7c3aed;">1社</span></td>
               <td><span class="tag" style="background:#ede9fe;color:#5b21b6;">発注済み</span></td>
-              <td><button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('order-detail')">詳細</button></td>
+              <td style="display:flex;gap:6px;">
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('order-detail')">詳細</button>
+                <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();show('condition-detail')" style="color:#dc2626;border-color:#dc2626;">業者変更</button>
+              </td>
             </tr>
             <tr style="cursor:pointer;" onclick="show('condition-detail')">
               <td><strong>#022</strong></td><td>廃プラスチック</td><td>新宿区△△2-4-6</td><td>2026-05-08</td>
@@ -1258,7 +1318,8 @@ tr:hover td { background: #f9fafb; }
         <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
           <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">プラン</div>
           <div style="font-size:14px;font-weight:700;">基本会員</div>
-          <div style="font-size:11px;color:#6b7280;">¥11,000（税込）/ 月</div>
+          <div style="font-size:11px;color:#6b7280;margin-bottom:8px;">¥11,000（税込）/ 月</div>
+          <button class="btn btn-secondary btn-sm" onclick="show('billing')" style="font-size:11px;">プラン・決済を管理する</button>
         </div>
         <div style="flex:1;min-width:110px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
           <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">登録日</div>
@@ -1554,6 +1615,7 @@ tr:hover td { background: #f9fafb; }
 const meta = {
   'login':          { title: 'S01 ログイン画面',                   role: '共通' },
   'register':       { title: 'S02 会員登録画面',                   role: '共通' },
+  'verify-email':   { title: 'S02-01 メールアドレス確認待ち',       role: '共通' },
   'billing':        { title: 'S03 サブスク決済・アカウント管理',    role: '共通' },
   'pw-reset':       { title: 'S21 パスワードリセット',             role: '共通' },
   'notifications':  { title: 'S23 通知・お知らせ一覧',             role: '共通' },
