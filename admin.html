@@ -136,7 +136,8 @@ tr:hover td { background: #f9fafb; }
   </div>
   <div class="nav-group">
     <div class="nav-group-title">ドキュメント</div>
-    <div class="nav-item" onclick="show('flow')">📊 画面遷移図</div>
+    <div class="nav-item" onclick="show('terms')">📋 利用規約</div>
+    <div class="nav-item" onclick="show('privacy')">🔒 プライバシーポリシー</div>
   </div>
 </div>
 
@@ -548,38 +549,76 @@ tr:hover td { background: #f9fafb; }
 
     <!-- ========== S19 条件・契約アーカイブ ========== -->
     <div class="screen" id="s-archive">
-      <div class="card">
-        <div class="card-title">検索フィルター</div>
-        <div class="form-row">
-          <div class="form-group"><label>ステータス</label><select class="input-box"><option>すべて</option><option>公開中</option><option>契約中</option><option>完了</option></select></div>
-          <div class="form-group"><label>期間</label><div class="input-box" style="color:#aaa;">2026-01-01 〜 2026-04-30</div></div>
-          <div class="form-group"><label>発注者</label><div class="input-box" style="color:#aaa;">会社名で絞り込み</div></div>
-          <div class="form-group" style="display:flex;align-items:flex-end;"><button class="btn btn-primary btn-sm">検索</button></div>
+      <div class="tabs">
+        <div class="tab active" onclick="showArchiveTab(0)">案件・契約一覧</div>
+        <div class="tab" onclick="showArchiveTab(1)">削除済み案件</div>
+      </div>
+
+      <!-- タブ①：案件・契約一覧 -->
+      <div class="archive-tab-content" style="display:block;">
+        <div class="card">
+          <div class="card-title">検索フィルター</div>
+          <div class="form-row">
+            <div class="form-group"><label>ステータス</label><select class="input-box"><option>すべて</option><option>公開中</option><option>契約中</option><option>完了</option><option>取り下げ済み</option></select></div>
+            <div class="form-group"><label>期間</label><div class="input-box" style="color:#aaa;">2026-01-01 〜 2026-04-30</div></div>
+            <div class="form-group"><label>発注者</label><div class="input-box" style="color:#aaa;">会社名で絞り込み</div></div>
+            <div class="form-group" style="display:flex;align-items:flex-end;"><button class="btn btn-primary btn-sm">検索</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-size:16px;font-weight:700;margin-bottom:12px;">案件・契約一覧（全247件）</div>
+          <table>
+            <thead><tr><th>案件ID</th><th>案件名</th><th>発注者</th><th>受注者</th><th>品目</th><th>完了日</th><th>状態</th></tr></thead>
+            <tbody>
+              <tr style="cursor:pointer;" onclick="show('archive-detail')">
+                <td>#021</td><td style="font-size:12px;font-weight:600;">渋谷区現場 廃プラスチック回収</td><td>ケット製造</td><td>ケット運搬</td><td>廃プラ</td><td>2026-04-21</td>
+                <td><span class="status status-green">完了</span></td>
+              </tr>
+              <tr style="cursor:pointer;" onclick="show('archive-detail')">
+                <td>#020</td><td style="font-size:12px;font-weight:600;">港区現場 木くず搬出</td><td>△△合成け</td><td>〇〇産廃け</td><td>木くず</td><td>2026-04-10</td>
+                <td><span class="status status-green">完了</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="annotation" style="margin-top:8px;">📁 GCP Cloud Storage に5年間セキュアアーカイブ済み・検索・出力可能。</div>
         </div>
       </div>
-      <div class="card">
-        <div style="font-size:16px;font-weight:700;margin-bottom:12px;">案件・契約一覧（全247件）</div>
-        <table>
-          <thead><tr><th>案件ID</th><th>発注者</th><th>受注者</th><th>品目</th><th>完了日</th><th>状態</th></tr></thead>
-          <tbody>
-            <tr style="cursor:pointer;" onclick="show('archive-detail')">
-              <td>#021</td><td>ケット製造</td><td>ケット運搬</td><td>廃プラ</td><td>2026-04-21</td>
-              <td><span class="status status-green">完了</span></td>
-            </tr>
-            <tr style="cursor:pointer;" onclick="show('archive-detail')">
-              <td>#020</td><td>△△合成け</td><td>〇〇産廃け</td><td>木くず</td><td>2026-04-10</td>
-              <td><span class="status status-green">完了</span></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="annotation" style="margin-top:8px;">📁 GCP Cloud Storage に5年間セキュアアーカイブ済み・検索・出力可能。</div>
+
+      <!-- タブ②：削除済み案件 -->
+      <div class="archive-tab-content" style="display:none;">
+        <div class="alert alert-warning" style="margin-bottom:16px;">
+          削除済み案件はデータとして保持されています（論理的削除）。必要に応じて復元できます。
+        </div>
+        <div class="card">
+          <div class="form-row" style="margin-bottom:12px;">
+            <div class="form-group"><label>発注者</label><div class="input-box" style="color:#aaa;">会社名で絞り込み</div></div>
+            <div class="form-group"><label>削除日</label><div class="input-box" style="color:#aaa;">2026-01-01 〜 2026-04-30</div></div>
+            <div class="form-group" style="display:flex;align-items:flex-end;"><button class="btn btn-primary btn-sm">検索</button></div>
+          </div>
+          <table>
+            <thead><tr><th>案件ID</th><th>発注者</th><th>品目</th><th>削除日時</th><th>削除前ステータス</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>#018</td><td>△△建材</td><td>木くず</td><td>2026-04-05 14:23</td>
+                <td><span class="tag" style="background:#f3f4f6;color:#374151;">下書き</span></td>
+                <td><button class="btn btn-secondary btn-sm">詳細</button> <button class="btn btn-primary btn-sm">復元する</button></td>
+              </tr>
+              <tr>
+                <td>#015</td><td>〇〇工務店</td><td>廃プラスチック類</td><td>2026-03-18 09:51</td>
+                <td><span class="tag" style="background:#f3f4f6;color:#374151;">下書き</span></td>
+                <td><button class="btn btn-secondary btn-sm">詳細</button> <button class="btn btn-primary btn-sm">復元する</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="annotation" style="margin-top:8px;">復元すると案件が「下書き」ステータスで発注者の案件管理に再表示されます。</div>
+        </div>
       </div>
     </div>
 
     <!-- ========== S19-01 案件詳細（管理者） ========== -->
     <div class="screen" id="s-archive-detail">
       <div class="page-header">
-        <div class="breadcrumb-text">案件・契約アーカイブ › <span>#021 廃プラ / ケット製造</span></div>
+        <div class="breadcrumb-text">案件・契約アーカイブ › <span>#021 渋谷区現場 廃プラスチック回収</span></div>
         <button class="btn btn-secondary btn-sm" onclick="show('archive')">← 一覧に戻る</button>
       </div>
 
@@ -587,6 +626,7 @@ tr:hover td { background: #f9fafb; }
       <div class="card" style="margin-bottom:16px;background:#f8fafc;border-color:#e5e7eb;">
         <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:13px;">
           <div><div style="font-size:11px;color:#888;margin-bottom:2px;">案件番号</div><strong>#021</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">案件名</div><strong>渋谷区現場 廃プラスチック回収</strong></div>
           <div><div style="font-size:11px;color:#888;margin-bottom:2px;">品目</div><strong>廃プラスチック</strong></div>
           <div><div style="font-size:11px;color:#888;margin-bottom:2px;">作業所在地</div><strong>東京都渋谷区〇〇1-2-3</strong></div>
           <div><div style="font-size:11px;color:#888;margin-bottom:2px;">完了日</div><strong>2026-04-21</strong></div>
@@ -602,6 +642,7 @@ tr:hover td { background: #f9fafb; }
             <table style="font-size:13px;width:100%;border-collapse:collapse;">
               <tbody>
                 <tr><td style="color:#888;padding:5px 0;width:120px;">案件番号</td><td><strong>#021</strong></td></tr>
+                <tr><td style="color:#888;padding:5px 0;">案件名</td><td><strong>渋谷区現場 廃プラスチック回収</strong></td></tr>
                 <tr><td style="color:#888;padding:5px 0;">品目</td><td>廃プラスチック</td></tr>
                 <tr><td style="color:#888;padding:5px 0;">作業所在地</td><td>東京都渋谷区〇〇1-2-3</td></tr>
                 <tr><td style="color:#888;padding:5px 0;">希望日</td><td>2026-04-20</td></tr>
@@ -694,22 +735,60 @@ tr:hover td { background: #f9fafb; }
     <div class="screen" id="s-master">
       <div class="tabs">
         <div class="tab active" onclick="showMasterTab(0)">品目マスタ</div>
-        <div class="tab" onclick="showMasterTab(1)">サービスエリアマスタ</div>
+        <div class="tab" onclick="showMasterTab(1)">荷姿マスタ</div>
+        <div class="tab" onclick="showMasterTab(2)">サービスエリアマスタ</div>
       </div>
+
+      <!-- 品目マスタ -->
       <div class="master-tab-content" style="display:block;">
       <div class="card">
-        <div class="card-title">品目マスタ</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div class="card-title" style="margin-bottom:0;">品目マスタ <span style="font-size:12px;font-weight:400;color:#888;">（全30品目）</span></div>
+          <button class="btn btn-secondary btn-sm">＋ 品目を追加</button>
+        </div>
         <table>
-          <thead><tr><th>品目名</th><th>コード</th><th>特管フラグ</th><th>操作</th></tr></thead>
+          <thead><tr><th>コード</th><th>品目名</th><th>区分</th><th>特管フラグ</th><th>操作</th></tr></thead>
           <tbody>
-            <tr><td>木くず</td><td>W001</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
-            <tr><td>金属くず</td><td>W002</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
-            <tr><td>汚泥</td><td>W003</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
-            <tr><td>廃プラスチック</td><td>W004</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
-            <tr><td>特別管理産廃（有害性）</td><td>S001</td><td><span class="status status-red">特管</span></td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">W001</td><td>燃え殻</td><td>一般産廃</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">W002</td><td>汚泥</td><td>一般産廃</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">W003</td><td>廃油</td><td>一般産廃</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">W006</td><td>廃プラスチック類</td><td>一般産廃</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">W008</td><td>木くず</td><td>一般産廃</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">W013</td><td>金属くず</td><td>一般産廃</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">W016</td><td>がれき類</td><td>一般産廃</td><td>—</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr style="background:#fff5f5;"><td style="color:#888;">S001</td><td>廃油（特管：揮発油・灯油・軽油類）</td><td>特管産廃</td><td><span class="status status-red">特管</span></td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr style="background:#fff5f5;"><td style="color:#888;">S004</td><td>感染性産業廃棄物</td><td>特管産廃</td><td><span class="status status-red">特管</span></td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr style="background:#fff5f5;"><td style="color:#888;">S007</td><td>廃石綿等（特管）</td><td>特管産廃</td><td><span class="status status-red">特管</span></td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
           </tbody>
         </table>
-        <button class="btn btn-secondary btn-sm" style="margin-top:12px;">＋ 品目を追加</button>
+        <div class="annotation" style="margin-top:8px;">全30品目（一般産廃 W001〜W020・特管産廃 S001〜S010）。詳細は品目マスタ.xlsxを参照。</div>
+      </div>
+      </div>
+
+      <!-- 荷姿マスタ -->
+      <div class="master-tab-content" style="display:none;">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div class="card-title" style="margin-bottom:0;">荷姿マスタ <span style="font-size:12px;font-weight:400;color:#888;">（全12種類）</span></div>
+          <button class="btn btn-secondary btn-sm">＋ 荷姿を追加</button>
+        </div>
+        <table>
+          <thead><tr><th>コード</th><th>荷姿名</th><th>主な用途</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td style="color:#888;">H001</td><td>バラ積み</td><td style="font-size:12px;color:#555;">木くず・金属くず・がれき等の大量排出</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H002</td><td>フレコンバッグ</td><td style="font-size:12px;color:#555;">汚泥・粉体・細粒物など</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H003</td><td>土嚢袋</td><td style="font-size:12px;color:#555;">小量の土砂・廃材等</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H004</td><td>ポリ袋</td><td style="font-size:12px;color:#555;">少量の廃プラ・紙くず等</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H005</td><td>段ボール箱</td><td style="font-size:12px;color:#555;">小物・梱包廃材等</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H006</td><td>ドラム缶</td><td style="font-size:12px;color:#555;">廃油・廃液・廃酸等の液体</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H007</td><td>タンク（液体用）</td><td style="font-size:12px;color:#555;">大量の廃油・廃アルカリ等</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H008</td><td>パレット積み</td><td style="font-size:12px;color:#555;">重量物・規格品の積み重ね</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H009</td><td>束（バンド掛け）</td><td style="font-size:12px;color:#555;">鉄骨・パイプ・木材等の棒状物</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H010</td><td>圧縮梱包（ベール）</td><td style="font-size:12px;color:#555;">圧縮した金属・プラスチック等</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H011</td><td>コンテナ</td><td style="font-size:12px;color:#555;">大量排出・混載</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+            <tr><td style="color:#888;">H012</td><td>その他</td><td style="font-size:12px;color:#555;">上記に当てはまらない場合</td><td><button class="btn btn-secondary btn-sm">編集</button></td></tr>
+          </tbody>
+        </table>
       </div>
       </div>
 
@@ -1074,6 +1153,213 @@ tr:hover td { background: #f9fafb; }
       </div>
     </div>
 
+    <!-- ========== 利用規約 ========== -->
+    <div class="screen" id="s-terms">
+      <div class="page-header"><h2>利用規約</h2></div>
+      <div style="max-width:800px;margin:0 auto;">
+        <div class="card">
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">本規約は、アスインベストメント株式会社（以下「当社」という）が提供するマッチングプラットフォーム「ジョブギルド」（以下「本サービス」という）の利用条件を定めるものである。本サービスの利用者（以下「ユーザー」という）は、本規約に同意の上、本サービスを利用するものとする。本サービスに登録または利用を開始した時点で、本規約に同意したものとみなす。</p>
+          <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第1条（目的および当社の立場）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:8px;">本サービスは、廃棄物排出企業、収集運搬業者、処分業者、および関連する作業請負業者間（以下「業者間」という）のマッチングを支援する情報の提供および管理システムを供するプラットフォームとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:8px;">当社は、ユーザーに対し、業者間における案件の掲載、検索、およびマッチングの場を提供するものであり、ユーザー間で締結される個別の契約（以下「個別契約」という）の当事者、代理人、または仲介人にはならないものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">ユーザー間で行われる交渉、契約、作業の実施、代金の支払い、および損害賠償請求等については、すべて当該ユーザー間の自己責任において解決するものとし、当社は何ら責任を負わないものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第2条（利用登録・会員資格）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．本サービスの利用を希望する者は、本規約を承諾の上、当社の定める手続きに従いユーザー登録を行うものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．本サービスにおいて案件を掲載できる者は、当社の定める有料会員プランに加入している法人または個人事業主に限定するものとする。一般個人による案件の掲載および利用は禁止するものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">３．当社は、登録申請者が以下の各号に該当すると判断した場合、登録を拒否することができる。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:4px;padding-left:24px;"><li>登録申請内容に虚偽・誤記がある場合</li><li>過去に本規約違反等により登録を取り消された場合</li><li>第15条に定める反社会的勢力に該当する場合</li><li>その他、当社が不適切と判断した場合</li></ul>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">４．ユーザーは、登録情報に変更が生じた場合、直ちにシステム上にて修正するものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第3条（アカウント管理）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．ユーザーは、登録したメールアドレスおよびパスワードを自己の責任において厳重に管理するものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．アカウントの不正利用による損害について、当社は一切の責任を負わない。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">３．ユーザーは、アカウントを第三者に貸与・譲渡・売買することはできない。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第4条（許認可および法令遵守）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．ユーザーは、本サービスを利用して取引を行うに際し、自らの業務に必要な許認可（産業廃棄物収集運搬業、一般廃棄物収集運搬業、その他関係法令に基づく許可等）を、自らの責任と費用において取得および維持していることを表明し、保証するものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．ユーザーは、許可証情報（自治体名、許可番号、有効期限等）を本サービス内に登録できるものとするが、当社は当該情報の真偽および有効性を確認する義務を負わないものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">３．ユーザーは、本サービスの利用にあたり、廃棄物の処理及び清掃に関する法律（以下「廃棄物処理法」という）その他関係法令を厳格に遵守するものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第5条（案件掲載ルール）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">案件を掲載するユーザー（以下「発注者」という）は、以下の情報を正確かつ詳細に記載するものとする。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:8px;padding-left:24px;"><li>作業内容（品目、荷姿、数量等）</li><li>作業場所（市区町村名、搬出経路条件等）</li><li>作業日時</li><li>報酬金額（消費税の扱いを含む）</li><li>支払い条件（振込、支払期日等）</li></ul>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">価格トラブルおよび不当な競り下げを防止するため、案件は原則として発注者が金額を提示する「金額提示型」とする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">法令に抵触する業務、詐欺的案件、無報酬案件、および安全性に著しく欠ける危険作業の掲載を禁止するものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第6条（マッチングと個別契約の成立）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．発注者が、応募のあった受注希望者の中から一社を選択（採択）し、システム上で成約処理を完了した時点をもって、ユーザー間に個別契約が成立するものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．個別契約成立後、ユーザーは双方の合意がある場合を除き、金額、日時、作業内容等の条件を一方的に変更してはならないものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">３．当社は、個別契約の成約について一切の関与をせず、その履行可能性を保証しないものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第7条（キャンセルおよび違約金指針）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．個別契約成立後のキャンセルに伴う損害補償および違約金の請求は、すべて当事者間の責任において直接協議し、解決するものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．当事者間での合意形成を補助するため、当社は以下の違約金基準（推奨指針）を提示する。ただし、当事者間での合意がある場合は、これを優先するものとする。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:8px;padding-left:24px;"><li>無断キャンセル（受注側の不着、または発注側の虚偽情報提供）：受発注額の<strong>100%</strong></li><li>当日キャンセル（事前の連絡あり）：受発注額の<strong>50%</strong></li><li>前日キャンセル：受発注額の<strong>30%</strong></li></ul>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">３．不測のキャンセルが発生した場合、発注者は当該案件を緊急案件として再掲載できるものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第8条（作業完了報告・マニフェスト・電子署名）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．受注者は、作業完了時にシステムを通じて作業後の写真および必要事項を遅滞なく報告するものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．受注者は、現場にて発注者（現場担当者等）からシステム上での手書きサイン（電子署名）を取得するものとし、これを回収の証憑とする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">３．甲及び乙は、廃棄物処理法第12条の3の規定に基づき産業廃棄物管理票（マニフェスト）を適切に交付・管理し、法令に定める期間（5年間）保存するものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第9条（内部評価および信頼スコア）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．業者間の接触トラブルおよび不当な誹謗中傷を防止するため、公開コメント形式のレビュー機能は提供しないものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．評価は、発注者が案件完了後に入力する「問題なし」「また依頼したい」「要注意」の3段階による内部評価システムによって行われるものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">３．当社は、案件実績数、キャンセル率、要注意報告数に基づき内部スコアを管理し、一定の基準を満たした受注者に対し「優良業者バッジ」等の認定を表示できるものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第10条（利用料金・決済）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．本サービスの利用料金は、当社が別途定める料金プランに従うものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．利用料金の決済は、Stripe, Inc.が提供する決済サービスを通じて行う。クレジットカード情報は当社のサーバーには保存されない。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">３．支払われた利用料金は、当社の責めに帰すべき事由による場合を除き返金しないものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">４．利用者が料金の支払いを怠った場合、当社はアカウントを停止することができる。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第11条（支払いおよび未払い報告）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．案件の代金支払いは、個別契約の定めに従い、ユーザー間で直接行われるものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．受注者は、支払期日を経過しても入金がない場合、請求書および催促の履歴を添えて、当社に「未払い報告」を申請できるものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">３．未払い報告を受理した場合、当社は発注者に対して状況確認の通知を送付するものとする。改善が見られない場合、第13条に定める措置を講じることができるものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第12条（禁止事項）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">ユーザーは、本サービスの利用にあたり、以下の行為を行ってはならないものとする。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:16px;padding-left:24px;"><li>法令、公序良俗に反する行為</li><li>虚偽の情報掲載</li><li>廃棄物処理法その他関係法令に違反する廃棄物の処理・取引</li><li>他のユーザーに対する嫌がらせ、誹謗中傷、不当な不利益を与える行為</li><li>ドタキャン（無断キャンセル）の繰り返し</li><li>正当な理由なき未払い</li><li>本サービスのシステムへの不正アクセスまたは運営妨害</li><li>当社または第三者の知的財産権・プライバシーを侵害する行為</li></ul>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第13条（ペナルティ・登録抹消）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．前条の違反または不誠実な行為が認められた場合、当社は独自の判断により以下の措置を講じることができるものとする。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:8px;padding-left:24px;"><li>厳重警告</li><li>一定期間の案件掲載または参加の制限</li><li>有料会員機能の停止または強制退会（再登録不可）</li></ul>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．当社は、利用者が以下の各号に該当する場合、事前通知なく登録を抹消することができる。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:16px;padding-left:24px;"><li>廃棄物処理法上の許可が失効した場合（受注者）</li><li>利用料金の支払いを2ヶ月以上怠った場合</li><li>第15条（反社会的勢力の排除）に違反した場合</li></ul>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第14条（知的財産権）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">本サービスに関連するコンテンツ・ソフトウェア・デザイン等の知的財産権は、当社または正当な権利を有する第三者に帰属する。ユーザーは、当社の事前の書面による許可なく、これらを複製・転用・販売することはできない。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第15条（反社会的勢力の排除）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．ユーザーは、自らが暴力団、暴力団員、その他これらに準ずる反社会的勢力に該当しないこと、および将来にわたっても該当しないことを表明し、保証するものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">２．ユーザーが前項に違反した場合、当社は事前の通知なく直ちに本サービスの利用を停止し、強制退会させることができるものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第16条（個人情報の取扱い）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">当社は、ユーザーの個人情報を、別途定める「プライバシーポリシー」に従い適切に取り扱うものとする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第17条（免責事項）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">１．当社は、ユーザー間で発生した紛争、事故、損害、不法投棄、支払トラブル、および法令違反について一切の責任を負わないものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">２．当社は、本サービスの内容・正確性・完全性について保証しない。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">３．当社は、システムの中断、遅延、停止、データの消失がないことを保証せず、これらに起因する損害について免責されるものとする。</p>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">４．当社の責めに帰すべき事由による損害の賠償額は、当該損害が発生した月にユーザーが当社に支払った利用料金を上限とする。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第18条（サービスの変更・停止・終了）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">当社は、システムのメンテナンス、天災、その他やむを得ない事由により、サービスの一部または全部を変更・停止・終了することができる。当社は、ユーザーに事前に通知するよう努めるが、緊急の場合はこの限りでない。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第19条（規約の変更）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">当社は、相当の事由がある場合、本規約を変更できるものとする。変更後の規約は、本サービス上での通知または登録メールアドレスへの通知をもって効力を生じるものとし、ユーザーは変更後も継続して利用することで変更内容に同意したものとみなされる。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">第20条（準拠法および管轄裁判所）</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">本規約の解釈にあたっては、日本法を準拠法とする。本サービスに関して発生した一切の紛争については、当社の本店所在地を管轄する地方裁判所を第一審の専属的合意管轄裁判所とする。</p>
+
+          <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
+          <p style="font-size:13px;font-weight:700;margin-bottom:12px;">以上</p>
+          <div style="font-size:13px;line-height:2;color:#555;">
+            アスインベストメント株式会社<br>
+            所在地：_____________________________________<br>
+            メール：support@jobguild.net<br>
+            URL：https://jobguild.net
+          </div>
+          <div style="margin-top:16px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== プライバシーポリシー ========== -->
+    <div class="screen" id="s-privacy">
+      <div class="page-header"><h2>プライバシーポリシー</h2></div>
+      <div style="max-width:800px;margin:0 auto;">
+        <div class="card">
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">アスインベストメント株式会社（以下「当社」といいます）は、産業廃棄物処理マッチングプラットフォーム「ジョブギルド」（以下「本サービス」といいます）において、利用者の個人情報の保護を重要な責務と認識し、個人情報の保護に関する法律（以下「個人情報保護法」といいます）その他関係法令を遵守し、以下のとおり適切に取り扱います。</p>
+          <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">1. 事業者情報</h3>
+          <div style="font-size:13px;line-height:2;margin-bottom:16px;padding-left:8px;">
+            会社名：アスインベストメント株式会社<br>
+            所在地：_____________________________________<br>
+            メール：support@jobguild.net<br>
+            URL：https://jobguild.net
+          </div>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">2. 収集する個人情報の種類</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">当社は、本サービスの提供にあたり、以下の個人情報を収集します。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:16px;padding-left:24px;">
+            <li>登録情報：会社名、住所、氏名（担当者名）、メールアドレス、電話番号</li>
+            <li>本人確認・許可証情報（受注者のみ）：産業廃棄物収集運搬業許可証、処分業許可証等</li>
+            <li>決済関連情報：Stripe, Inc.を通じて処理されるクレジットカード情報（当社のサーバーにはカード番号を保存しません）</li>
+            <li>利用履歴：案件登録・エントリー・作業報告等の操作履歴</li>
+            <li>通信情報：IPアドレス、ブラウザの種類、アクセス日時等のログ情報</li>
+            <li>Cookie・解析情報：本サービス改善のため、Google Analyticsその他の解析ツールを利用する場合があります</li>
+          </ul>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">3. 個人情報の利用目的</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">収集した個人情報は、以下の目的のために利用します。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:16px;padding-left:24px;">
+            <li>本サービスの提供・運営・改善</li>
+            <li>利用者の本人確認・登録審査</li>
+            <li>利用料金の請求・決済処理</li>
+            <li>案件情報のマッチング・通知</li>
+            <li>システムからの自動通知メールの送信（noreply@jobguild.netより送信）</li>
+            <li>サポート窓口によるお問い合わせ対応（support@jobguild.netにて受付）</li>
+            <li>法令に基づく義務の履行（廃棄物処理法に基づく記録・報告等）</li>
+            <li>利用規約違反等への対応</li>
+          </ul>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">4. 個人情報の第三者提供</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">当社は、以下の場合を除き、利用者の個人情報を第三者に提供しません。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:16px;padding-left:24px;">
+            <li>利用者本人の同意がある場合</li>
+            <li>法令に基づき開示が必要な場合（捜査機関からの照会等）</li>
+            <li>人の生命・身体・財産の保護のために必要で、本人の同意を得ることが困難な場合</li>
+            <li>公衆衛生の向上または児童の健全な育成のために必要な場合</li>
+          </ul>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">5. 業務委託先への提供</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">当社は、利用目的の達成に必要な範囲内で、個人情報の取扱いを以下の委託先に委託する場合があります。この場合、適切な委託先を選定し、必要に応じて秘密保持契約を締結します。</p>
+          <ul style="font-size:13px;line-height:1.9;margin-bottom:16px;padding-left:24px;">
+            <li>Stripe, Inc.（決済処理）</li>
+            <li>クラウドサーバー事業者（データ保存・管理）</li>
+            <li>メール配信サービス事業者（通知メール送信）</li>
+          </ul>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">6. 個人情報の安全管理</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">当社は、収集した個人情報の漏洩・滅失・毀損を防ぐため、適切な技術的・組織的安全管理措置を講じます。また、個人情報を取り扱う従業員に対して、適切な監督を行います。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">7. Cookie・解析ツールについて</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">本サービスでは、利便性向上のためCookieを使用しています。ブラウザの設定によりCookieを無効にすることができますが、一部サービスが正常に動作しない場合があります。また、Google Analytics等の解析ツールを使用してアクセス情報を収集することがあります。これらのツールが収集するデータは匿名化されており、個人を特定するものではありません。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">8. 保有個人データの開示・訂正・削除</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">利用者は、当社が保有する自己の個人情報について、個人情報保護法に基づき、開示・訂正・追加・削除・利用停止等を請求することができます。ご請求はサポート窓口（support@jobguild.net）までお問い合わせください。本人確認のうえ、合理的な期間内に対応します。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">9. 個人情報の保存期間</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">個人情報は、利用目的を達成するために必要な期間保存します。退会後は、法令に基づき保存が必要なものを除き、適切な方法により削除します。なお、廃棄物処理法に関連する記録については、法定の保存期間（5年間）に従います。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">10. 未成年者の個人情報</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">本サービスは法人および個人事業主を対象としており、未成年者の利用を想定していません。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">11. プライバシーポリシーの変更</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:16px;">当社は、法令の改正・サービス内容の変更等に伴い、本ポリシーを改定することがあります。重要な変更については、本サービス上での通知または登録メールアドレスへの通知を行います。</p>
+
+          <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#1e2535;">12. お問い合わせ窓口</h3>
+          <p style="font-size:13px;line-height:1.9;margin-bottom:4px;">個人情報の取扱いに関するお問い合わせは、以下の窓口までご連絡ください。</p>
+          <div style="font-size:13px;line-height:2;margin-bottom:16px;padding-left:8px;">
+            アスインベストメント株式会社　個人情報お問い合わせ窓口<br>
+            メール：support@jobguild.net<br>
+            受付時間：平日 10:00〜17:00（土日祝・年末年始を除く）<br>
+            ※ メールにて24時間受け付けております。ご返信は上記営業時間内に順次対応いたします。
+          </div>
+
+          <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
+          <div style="font-size:13px;color:#555;">アスインベストメント株式会社</div>
+          <div style="margin-top:12px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+        </div>
+      </div>
+    </div>
+
     <!-- ========== 画面遷移図 ========== -->
     <div class="screen" id="s-flow">
       <div class="page-header">
@@ -1289,8 +1575,18 @@ const meta = {
   'archive-detail': { title: 'S19-01 案件詳細（管理者）',            role: '管理者' },
   'master':         { title: 'S20 システムマスタ設定',              role: '管理者' },
   'flow':           { title: '画面遷移図',                          role: '全ロール' },
+  'terms':          { title: '利用規約',                            role: '共通' },
+  'privacy':        { title: 'プライバシーポリシー',                role: '共通' },
 };
 const roleColor = { '共通':'#6b7280','発注者':'#2563eb','受注者':'#16a34a','管理者':'#dc2626','全ロール':'#6b7280' };
+function showArchiveTab(idx) {
+  document.querySelectorAll('#s-archive .tab').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('#s-archive .archive-tab-content').forEach((c, i) => {
+    c.style.display = i === idx ? 'block' : 'none';
+  });
+}
 function showMasterTab(idx) {
   document.querySelectorAll('#s-master .tab').forEach((t, i) => {
     t.classList.toggle('active', i === idx);
