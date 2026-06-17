@@ -133,6 +133,7 @@ tr:hover td { background: #f9fafb; }
     <div class="nav-item" onclick="show('user-payment')">S18 ユーザー・決済管理</div>
     <div class="nav-item" onclick="show('archive')">S19 案件・契約アーカイブ</div>
     <div class="nav-item" onclick="show('master')">S20 システムマスタ設定</div>
+    <div class="nav-item" onclick="show('broadcast')">S25 お知らせ配信 <span class="nav-new">NEW</span></div>
   </div>
   <div class="nav-group">
     <div class="nav-group-title">ドキュメント</div>
@@ -1017,6 +1018,241 @@ tr:hover td { background: #f9fafb; }
       </div>
     </div>
 
+    <!-- ========== S25 お知らせ配信 ========== -->
+    <div class="screen" id="s-broadcast">
+      <div class="page-header">
+        <h2>お知らせ配信</h2>
+        <span class="breadcrumb-text">会員へのメール・アプリ内通知を作成・配信します</span>
+      </div>
+
+      <div class="card">
+        <div class="card-title">新規お知らせ作成</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>配信対象<span class="req">*</span></label>
+            <select class="input-box">
+              <option>全会員（発注者・受注者）</option>
+              <option>発注者のみ</option>
+              <option>受注者のみ</option>
+              <option>有料会員のみ</option>
+              <option>特定ユーザーを指定...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>重要度</label>
+            <select class="input-box">
+              <option>通常</option>
+              <option>重要（強調表示）</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>配信予約</label>
+            <select class="input-box" id="broadcast-schedule-select" onchange="toggleScheduleInput()">
+              <option value="now">今すぐ配信</option>
+              <option value="scheduled" selected>日時を指定する</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" id="schedule-datetime-row" style="display:flex;">
+          <div class="form-group" style="max-width:200px;">
+            <label>配信日<span class="req">*</span></label>
+            <input type="date" class="input-box" value="2026-07-01">
+          </div>
+          <div class="form-group" style="max-width:160px;">
+            <label>配信時刻<span class="req">*</span></label>
+            <input type="time" class="input-box" value="02:00">
+          </div>
+          <div class="form-group full" style="flex:2;min-width:240px;display:flex;align-items:flex-end;">
+            <div class="annotation" style="margin:0;width:100%;">⏰ 指定した日時にシステムが自動配信します。配信履歴には「配信予約中」として表示され、配信前であれば編集・取消が可能です。</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>配信方法<span class="req">*</span></label>
+            <div style="display:flex;gap:20px;margin-top:4px;">
+              <div class="check-row"><div class="check-box checked"></div>アプリ内通知（S23 通知一覧に表示）</div>
+              <div class="check-row"><div class="check-box checked"></div>メール送信</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>タイトル<span class="req">*</span></label>
+            <div class="input-box" style="color:#aaa;">【重要】システムメンテナンスのお知らせ</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>本文<span class="req">*</span></label>
+            <textarea class="input-box" style="height:120px;" placeholder="配信する本文を入力してください">2026-07-01 02:00〜04:00 の間、システムメンテナンスを実施します。この間はサービスをご利用いただけません。ご不便をおかけして申し訳ございません。</textarea>
+          </div>
+        </div>
+        <div class="annotation">メール配信時は「メール通知文面一覧」のテンプレート（お知らせ・システム通知区分）をベースに本文が自動整形されます。</div>
+        <div class="btn-group">
+          <button class="btn btn-outline">下書き保存</button>
+          <button class="btn btn-primary">配信する</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">配信履歴</div>
+        <table>
+          <thead><tr><th>配信日時</th><th>タイトル</th><th>対象</th><th>方法</th><th>既読率</th><th>状態</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>2026-04-25 09:00</td>
+              <td style="font-weight:600;">【重要】システムメンテナンスのお知らせ</td>
+              <td><span class="tag">全会員</span></td>
+              <td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">通知</span> <span class="tag" style="background:#dcfce7;color:#15803d;">メール</span></td>
+              <td>78%（267/342）</td>
+              <td><span class="status status-green">配信済</span></td>
+              <td><button class="btn btn-secondary btn-sm" onclick="show('broadcast-detail')">詳細</button></td>
+            </tr>
+            <tr>
+              <td>2026-04-10 10:30</td>
+              <td style="font-weight:600;">サービスエリア拡大のお知らせ（千葉県追加）</td>
+              <td><span class="tag">全会員</span></td>
+              <td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">通知</span> <span class="tag" style="background:#dcfce7;color:#15803d;">メール</span></td>
+              <td>92%（315/342）</td>
+              <td><span class="status status-green">配信済</span></td>
+              <td><button class="btn btn-secondary btn-sm" onclick="show('broadcast-detail')">詳細</button></td>
+            </tr>
+            <tr>
+              <td>2026-07-01 02:00（予約）</td>
+              <td style="font-weight:600;">GW期間中のサポート対応時間変更について</td>
+              <td><span class="tag">発注者</span></td>
+              <td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">通知</span></td>
+              <td style="color:#9ca3af;">—</td>
+              <td><span class="status status-yellow">配信予約中</span></td>
+              <td><button class="btn btn-secondary btn-sm" onclick="show('broadcast-edit')">編集</button> <button class="btn btn-danger btn-sm">取消</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== S25-01 配信詳細 ========== -->
+    <div class="screen" id="s-broadcast-detail">
+      <div class="page-header">
+        <div class="breadcrumb-text">お知らせ配信 › <span>配信詳細</span></div>
+        <button class="btn btn-secondary btn-sm" onclick="show('broadcast')">← 配信履歴に戻る</button>
+      </div>
+
+      <div class="card" style="margin-bottom:16px;background:#f8fafc;border-color:#e5e7eb;">
+        <div style="display:flex;flex-wrap:wrap;gap:20px;font-size:13px;">
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">配信日時</div><strong>2026-04-25 09:00</strong></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">対象</div><span class="tag">全会員</span></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">方法</div><span class="tag" style="background:#dbeafe;color:#1d4ed8;">通知</span> <span class="tag" style="background:#dcfce7;color:#15803d;">メール</span></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">重要度</div><span class="status status-red">重要</span></div>
+          <div><div style="font-size:11px;color:#888;margin-bottom:2px;">状態</div><span class="status status-green">配信済</span></div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="align-items:start;margin-bottom:16px;">
+        <div class="card">
+          <div class="card-title">配信内容</div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:10px;">【重要】システムメンテナンスのお知らせ</div>
+          <div style="font-size:13px;line-height:1.9;color:#374151;">2026-05-01 02:00〜04:00 の間、システムメンテナンスを実施します。この間はサービスをご利用いただけません。ご不便をおかけして申し訳ございません。</div>
+        </div>
+        <div class="card">
+          <div class="card-title">既読状況</div>
+          <div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);margin-bottom:14px;">
+            <div class="kpi-card" style="margin:0;"><div class="kpi-label">配信対象</div><div class="kpi-value">342</div><div class="kpi-sub">社</div></div>
+            <div class="kpi-card" style="margin:0;"><div class="kpi-label">既読</div><div class="kpi-value" style="color:#16a34a;">267</div><div class="kpi-sub">社（78%）</div></div>
+          </div>
+          <div style="background:#f3f4f6;border-radius:6px;height:10px;overflow:hidden;margin-bottom:4px;">
+            <div style="background:#16a34a;height:100%;width:78%;"></div>
+          </div>
+          <div style="font-size:11px;color:#999;">未読 75社（22%）</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">配信先別ステータス</div>
+        <table>
+          <thead><tr><th>会社名</th><th>区分</th><th>方法</th><th>既読</th><th>既読日時</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ケット製造</strong></td><td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">発注者</span></td><td>通知＋メール</td><td><span class="status status-green">既読</span></td><td>2026-04-25 09:32</td></tr>
+            <tr><td><strong>ケット運搬</strong></td><td><span class="tag" style="background:#dcfce7;color:#15803d;">受注者</span></td><td>通知＋メール</td><td><span class="status status-green">既読</span></td><td>2026-04-25 11:05</td></tr>
+            <tr><td><strong>〇〇商事</strong></td><td><span class="tag" style="background:#dbeafe;color:#1d4ed8;">発注者</span></td><td>通知＋メール</td><td><span class="status status-gray">未読</span></td><td style="color:#9ca3af;">—</td></tr>
+            <tr><td><strong>△△建材</strong></td><td><span class="tag" style="background:#dcfce7;color:#15803d;">受注者</span></td><td>通知＋メール</td><td><span class="status status-gray">未読</span></td><td style="color:#9ca3af;">—</td></tr>
+          </tbody>
+        </table>
+        <div class="annotation" style="margin-top:8px;">全342社中、先頭4社のみ表示しています。検索・絞り込みで全件確認できます。</div>
+      </div>
+    </div>
+
+    <!-- ========== S25-02 配信編集 ========== -->
+    <div class="screen" id="s-broadcast-edit">
+      <div class="page-header">
+        <div class="breadcrumb-text">お知らせ配信 › <span>配信予約の編集</span></div>
+        <button class="btn btn-secondary btn-sm" onclick="show('broadcast')">← 配信履歴に戻る</button>
+      </div>
+
+      <div class="alert alert-warning">⚠️ この配信は「配信予約中」です。配信日時を過ぎると編集できなくなります。</div>
+
+      <div class="card">
+        <div class="card-title">配信予約の編集</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>配信対象<span class="req">*</span></label>
+            <select class="input-box">
+              <option>全会員（発注者・受注者）</option>
+              <option selected>発注者のみ</option>
+              <option>受注者のみ</option>
+              <option>有料会員のみ</option>
+              <option>特定ユーザーを指定...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>重要度</label>
+            <select class="input-box">
+              <option selected>通常</option>
+              <option>重要（強調表示）</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="max-width:200px;">
+            <label>配信日<span class="req">*</span></label>
+            <input type="date" class="input-box" value="2026-07-01">
+          </div>
+          <div class="form-group" style="max-width:160px;">
+            <label>配信時刻<span class="req">*</span></label>
+            <input type="time" class="input-box" value="02:00">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>配信方法<span class="req">*</span></label>
+            <div style="display:flex;gap:20px;margin-top:4px;">
+              <div class="check-row"><div class="check-box checked"></div>アプリ内通知（S23 通知一覧に表示）</div>
+              <div class="check-row"><div class="check-box"></div>メール送信</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>タイトル<span class="req">*</span></label>
+            <div class="input-box">GW期間中のサポート対応時間変更について</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>本文<span class="req">*</span></label>
+            <textarea class="input-box" style="height:120px;">2026年7月1日〜7月6日のGW期間中、サポート対応時間を10:00〜16:00に短縮いたします。お急ぎのご用件はメールにてご連絡ください。</textarea>
+          </div>
+        </div>
+        <div class="btn-group" style="justify-content:space-between;">
+          <button class="btn btn-danger">この配信予約を取消す</button>
+          <div class="btn-group" style="margin:0;">
+            <button class="btn btn-secondary" onclick="show('broadcast')">キャンセル</button>
+            <button class="btn btn-primary">変更を保存する</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ========== S21 パスワードリセット ========== -->
     <div class="screen" id="s-pw-reset">
       <div style="max-width:500px;margin:0 auto;">
@@ -1264,7 +1500,7 @@ tr:hover td { background: #f9fafb; }
             メール：support@jobguild.net<br>
             URL：https://jobguild.net
           </div>
-          <div style="margin-top:16px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+          
         </div>
       </div>
     </div>
@@ -1355,7 +1591,7 @@ tr:hover td { background: #f9fafb; }
 
           <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
           <div style="font-size:13px;color:#555;">アスインベストメント株式会社</div>
-          <div style="margin-top:12px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+          
         </div>
       </div>
     </div>
@@ -1505,6 +1741,12 @@ tr:hover td { background: #f9fafb; }
             <text x="840" y="307" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S20 マスタ設定</text>
             <text x="840" y="322" fill="#dc2626" text-anchor="middle" font-size="10">管理者</text>
           </g>
+          <g onclick="show('broadcast')" style="cursor:pointer;">
+            <rect x="730" y="350" width="220" height="44" rx="6" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <text x="840" y="367" fill="#374151" text-anchor="middle" font-size="11" font-weight="bold">S25 お知らせ配信 ✦NEW</text>
+            <text x="840" y="382" fill="#ca8a04" text-anchor="middle" font-size="10">管理者</text>
+          </g>
+          <line x1="840" y1="334" x2="840" y2="348" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-r)"/>
           <!-- Arrows -->
           <line x1="120" y1="94" x2="120" y2="108" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
           <line x1="120" y1="154" x2="120" y2="168" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
@@ -1574,6 +1816,9 @@ const meta = {
   'archive':        { title: 'S19 条件・契約モニタリング・アーカイブ', role: '管理者' },
   'archive-detail': { title: 'S19-01 案件詳細（管理者）',            role: '管理者' },
   'master':         { title: 'S20 システムマスタ設定',              role: '管理者' },
+  'broadcast':      { title: 'S25 お知らせ配信',                    role: '管理者' },
+  'broadcast-detail': { title: 'S25-01 配信詳細',                   role: '管理者' },
+  'broadcast-edit': { title: 'S25-02 配信予約の編集',                role: '管理者' },
   'flow':           { title: '画面遷移図',                          role: '全ロール' },
   'terms':          { title: '利用規約',                            role: '共通' },
   'privacy':        { title: 'プライバシーポリシー',                role: '共通' },
@@ -1586,6 +1831,10 @@ function showArchiveTab(idx) {
   document.querySelectorAll('#s-archive .archive-tab-content').forEach((c, i) => {
     c.style.display = i === idx ? 'block' : 'none';
   });
+}
+function toggleScheduleInput() {
+  const v = document.getElementById('broadcast-schedule-select').value;
+  document.getElementById('schedule-datetime-row').style.display = v === 'scheduled' ? 'flex' : 'none';
 }
 function showMasterTab(idx) {
   document.querySelectorAll('#s-master .tab').forEach((t, i) => {
