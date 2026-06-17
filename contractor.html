@@ -442,27 +442,7 @@ tr:hover td { background: #f9fafb; }
       <div class="page-header"><h2>ダッシュボード</h2></div>
       <div class="alert alert-success">🔔 新しい選定通知が2件届いています。<span style="color:#16a34a;cursor:pointer;margin-left:8px;font-weight:700;" onclick="show('order-manage')">受注管理を確認する →</span></div>
 
-      <!-- ① 全期間サマリーバー -->
-      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計受注案件</div>
-          <div style="font-size:24px;font-weight:700;color:#374151;">68<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
-        </div>
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計完了案件</div>
-          <div style="font-size:24px;font-weight:700;color:#16a34a;">54<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
-        </div>
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">取引発注者（累計）</div>
-          <div style="font-size:24px;font-weight:700;color:#7c3aed;">23<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">社</span></div>
-        </div>
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">完了率（全期間）</div>
-          <div style="font-size:24px;font-weight:700;color:#f59e0b;">79<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">%</span></div>
-        </div>
-      </div>
-
-      <!-- ② 月別ビュー -->
+      <!-- ①②統合パネル：月別／全期間切り替え ＋ 累計サマリー（1段目）／月別KPI（2段目） -->
       <div class="card" style="margin-bottom:16px;">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
           <div style="display:flex;border:1.5px solid #e5e7eb;border-radius:6px;overflow:hidden;">
@@ -475,6 +455,26 @@ tr:hover td { background: #f9fafb; }
             <button style="padding:6px 14px;font-size:14px;border:1.5px solid #e5e7eb;border-radius:5px;background:#fff;cursor:pointer;color:#9ca3af;">→</button>
           </div>
         </div>
+        <!-- 1段目: 全期間サマリー -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計受注案件</div>
+            <div style="font-size:24px;font-weight:700;color:#374151;">68<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計完了案件</div>
+            <div style="font-size:24px;font-weight:700;color:#16a34a;">54<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">取引発注者（累計）</div>
+            <div style="font-size:24px;font-weight:700;color:#7c3aed;">23<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">社</span></div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">完了率（全期間）</div>
+            <div style="font-size:24px;font-weight:700;color:#f59e0b;">79<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">%</span></div>
+          </div>
+        </div>
+        <!-- 2段目: 月別KPIカード -->
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <div style="flex:1;min-width:100px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px;text-align:center;">
             <div style="font-size:11px;color:#d97706;font-weight:600;margin-bottom:6px;">選定結果待ち</div>
@@ -1550,6 +1550,24 @@ tr:hover td { background: #f9fafb; }
         <div class="notif-row unread">
           <div class="unread-dot"></div>
           <div class="notif-body">
+            <div class="notif-title">受注がキャンセルされました</div>
+            <div class="notif-text">「廃油・廃液 △△工場」の受注について、発注者により業者変更が行われました。詳しくは受注管理をご確認ください。</div>
+            <div class="notif-time">2026-04-29 10:00</div>
+          </div>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('order-manage')">確認する</button>
+        </div>
+        <div class="notif-row unread">
+          <div class="unread-dot"></div>
+          <div class="notif-body">
+            <div class="notif-title">エントリー中の案件が再選定中です</div>
+            <div class="notif-text">「廃油・廃液 △△工場」について、受注者変更のため再選定が開始されました。引き続き選定をお待ちください。</div>
+            <div class="notif-time">2026-04-29 10:01</div>
+          </div>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('order-manage')">確認する</button>
+        </div>
+        <div class="notif-row unread">
+          <div class="unread-dot"></div>
+          <div class="notif-body">
             <div class="notif-title">エントリー結果が届きました</div>
             <div class="notif-text">「廃プラスチック 東京・月2回」のエントリー結果が届きました。内容を確認してください。</div>
             <div class="notif-time">2026-04-28 09:15</div>
@@ -1756,7 +1774,7 @@ tr:hover td { background: #f9fafb; }
             メール：support@jobguild.net<br>
             URL：https://jobguild.net
           </div>
-          <div style="margin-top:16px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+          
         </div>
       </div>
     </div>
@@ -1847,7 +1865,7 @@ tr:hover td { background: #f9fafb; }
 
           <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
           <div style="font-size:13px;color:#555;">アスインベストメント株式会社</div>
-          <div style="margin-top:12px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+          
         </div>
       </div>
     </div>
