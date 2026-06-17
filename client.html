@@ -438,27 +438,7 @@ tr:hover td { background: #f9fafb; }
       <div class="page-header"><h2>ダッシュボード</h2></div>
       <div class="alert alert-info">🔔 新しいエントリーが3件届いています。<span style="color:#2563eb;cursor:pointer;margin-left:8px;font-weight:700;" onclick="show('condition-detail')">確認する →</span></div>
 
-      <!-- ① 全期間サマリーバー（常時表示） -->
-      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計登録案件</div>
-          <div style="font-size:24px;font-weight:700;color:#374151;">47<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
-        </div>
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計完了案件</div>
-          <div style="font-size:24px;font-weight:700;color:#16a34a;">31<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
-        </div>
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">取引業者（累計）</div>
-          <div style="font-size:24px;font-weight:700;color:#7c3aed;">12<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">社</span></div>
-        </div>
-        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
-          <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">完了率（全期間）</div>
-          <div style="font-size:24px;font-weight:700;color:#f59e0b;">66<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">%</span></div>
-        </div>
-      </div>
-
-      <!-- ② 月別ビュー（タブ切り替え ＋ 月ナビゲーター） -->
+      <!-- ①②統合パネル：月別／全期間切り替え ＋ 累計サマリー（1段目）／月別KPI（2段目） -->
       <div class="card" style="margin-bottom:16px;">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
           <!-- タブ: 月別 / 全期間 -->
@@ -473,7 +453,26 @@ tr:hover td { background: #f9fafb; }
             <button style="padding:6px 14px;font-size:14px;border:1.5px solid #e5e7eb;border-radius:5px;background:#fff;cursor:pointer;color:#9ca3af;">→</button>
           </div>
         </div>
-        <!-- 月別KPIカード -->
+        <!-- 1段目: 全期間サマリー -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計登録案件</div>
+            <div style="font-size:24px;font-weight:700;color:#374151;">47<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">累計完了案件</div>
+            <div style="font-size:24px;font-weight:700;color:#16a34a;">31<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">件</span></div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">取引業者（累計）</div>
+            <div style="font-size:24px;font-weight:700;color:#7c3aed;">12<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">社</span></div>
+          </div>
+          <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px 20px;">
+            <div style="font-size:11px;color:#6b7280;margin-bottom:4px;">完了率（全期間）</div>
+            <div style="font-size:24px;font-weight:700;color:#f59e0b;">66<span style="font-size:13px;font-weight:400;color:#6b7280;margin-left:2px;">%</span></div>
+          </div>
+        </div>
+        <!-- 2段目: 月別KPIカード -->
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <div style="flex:1;min-width:100px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px;text-align:center;">
             <div style="font-size:11px;color:#3b82f6;font-weight:600;margin-bottom:6px;">公開中</div>
@@ -1448,7 +1447,7 @@ tr:hover td { background: #f9fafb; }
             メール：support@jobguild.net<br>
             URL：https://jobguild.net
           </div>
-          <div style="margin-top:16px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+          
         </div>
       </div>
     </div>
@@ -1539,7 +1538,7 @@ tr:hover td { background: #f9fafb; }
 
           <hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
           <div style="font-size:13px;color:#555;">アスインベストメント株式会社</div>
-          <div style="margin-top:12px;font-size:12px;color:#9ca3af;background:#f8fafc;border:1px solid #e5e7eb;border-radius:6px;padding:10px;">※ 本ひな形は参考用です。実際のご使用の際は法律の専門家にご確認ください。</div>
+          
         </div>
       </div>
     </div>
@@ -1596,6 +1595,15 @@ tr:hover td { background: #f9fafb; }
       </div>
       <div class="card" style="padding:0;overflow:hidden;">
         <!-- 未読 -->
+        <div class="notif-row unread">
+          <div class="unread-dot"></div>
+          <div class="notif-body">
+            <div class="notif-title">業者変更が完了しました</div>
+            <div class="notif-text">「廃油・廃液 △△工場（#019）」の業者変更が完了しました。案件はエントリー受付中に戻りました。エントリー一覧から再選定を行ってください。</div>
+            <div class="notif-time">2026-04-29 10:00</div>
+          </div>
+          <button class="btn btn-outline" style="font-size:11px;white-space:nowrap;" onclick="show('order-manage')">案件を確認する</button>
+        </div>
         <div class="notif-row unread">
           <div class="unread-dot"></div>
           <div class="notif-body">
